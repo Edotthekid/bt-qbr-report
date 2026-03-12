@@ -147,12 +147,31 @@ h1,h2,h3,.chart-title,.kpi-value{font-family:'Poppins',sans-serif;}
 .ad-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F64FF,#49CEDE);flex-shrink:0;}
 .ad-name{font-size:13px;font-weight:700;color:#1c1e21;}
 .ad-sponsored{font-size:11px;color:#65676b;}
-.ad-image-wrap{border-radius:6px;overflow:hidden;margin-bottom:8px;background:#e4e6ea;aspect-ratio:1.91/1;display:flex;align-items:center;justify-content:center;}
-.ad-image-wrap img{width:100%;height:100%;object-fit:cover;}
+.ad-image-wrap{border-radius:6px;overflow:hidden;margin-bottom:8px;background:#e4e6ea;display:flex;align-items:center;justify-content:center;}
+.ad-image-wrap img{width:100%;height:auto;display:block;}
 .img-placeholder{color:#90949c;font-size:12px;text-align:center;padding:20px;}
 .ad-body{padding:4px 0 8px;}
 .ad-headline{font-size:14px;font-weight:700;color:#1c1e21;margin-bottom:4px;}
 .ad-copy-preview{font-size:12px;color:#65676b;line-height:1.4;}
+.ad-copy-full{font-size:12px;color:#65676b;line-height:1.5;white-space:pre-line;display:none;margin-top:4px;}
+.ad-copy-full.open{display:block;}
+.ad-copy-toggle{font-size:11px;font-weight:600;color:var(--blue);cursor:pointer;border:none;background:none;padding:2px 0;margin-top:4px;display:inline-block;}
+.ad-copy-toggle:hover{text-decoration:underline;}
+.video-badge{display:inline-block;background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;position:absolute;top:8px;left:8px;z-index:2;letter-spacing:0.5px;}
+.ad-image-wrap{position:relative;}
+.view-script-btn{background:linear-gradient(135deg,var(--blue),#6366f1);color:#fff;border:none;border-radius:6px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;width:100%;margin-top:6px;letter-spacing:0.3px;transition:opacity .2s;}
+.view-script-btn:hover{opacity:0.85;}
+.script-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+.script-modal-overlay.open{display:flex;}
+.script-modal{background:#fff;border-radius:12px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;padding:28px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+body.dark .script-modal{background:var(--card-bg);color:var(--text);}
+.script-modal-title{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:16px;}
+.script-modal-content{font-size:13px;line-height:1.7;white-space:pre-line;color:#444;}
+body.dark .script-modal-content{color:var(--text2);}
+.script-modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#999;line-height:1;}
+.script-modal-close:hover{color:#333;}
+body.dark .script-modal-close{color:var(--muted);}
+body.dark .script-modal-close:hover{color:var(--text);}
 .ad-cta-row{border-top:1px solid #dadde1;padding-top:8px;margin-top:4px;}
 .ad-cta-btn{background:#e4e6ea;border:none;border-radius:4px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c1e21;cursor:pointer;width:100%;}
 .card-meta{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap;}
@@ -232,11 +251,86 @@ body.present .present-nav{display:flex;}
 .present-exit{border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:12px;font-weight:600;cursor:pointer;padding:4px 10px;border-radius:8px;transition:background .15s;}
 .present-exit:hover{background:rgba(255,255,255,.2);color:white;}
 
+/* DARK MODE */
+body.dark{
+  --light-blue:#0B1120; --white:#141B2D; --navy:#E8EDF5; --text:#D1D9E6; --text2:#8A9AB5; --muted:#5A6B82;
+  --border:#1E2A45; --light-grey:#1A2338; --shadow-sm:0 1px 3px rgba(0,0,0,.3); --shadow-md:0 4px 12px rgba(0,0,0,.4);
+  --shadow-lg:0 10px 30px rgba(0,0,0,.5); --shadow-card:0 2px 8px rgba(0,0,0,.25);
+  background:var(--light-blue);color:var(--text);
+}
+body.dark .report-header h1{color:var(--navy);}
+body.dark .report-header h1 span{color:var(--sky);}
+body.dark .report-header .brand{color:var(--sky);}
+body.dark .nav-tabs{background:rgba(20,27,45,.92);border-color:var(--border);}
+body.dark .nav-tab{color:var(--muted);}
+body.dark .nav-tab:hover{color:var(--sky);background:rgba(47,100,255,.1);}
+body.dark .nav-tab.active{background:var(--blue);color:white;}
+body.dark .kpi-card, body.dark .chart-card, body.dark .mom-table-wrap, body.dark .data-table-wrap,
+body.dark .conv-card, body.dark .rep-card, body.dark .pf-wrap, body.dark .gallery-card{
+  background:var(--white);border-color:var(--border);
+}
+body.dark .kpi-value{color:var(--navy);}
+body.dark .kpi-label{color:var(--muted);}
+body.dark .kpi-sub{color:var(--text2);}
+body.dark .chart-title{color:var(--navy);}
+body.dark .chart-sub{color:var(--muted);}
+body.dark .section-title{color:var(--navy);}
+body.dark .section-desc{color:var(--text2);}
+body.dark .mom-table th{color:var(--muted);border-color:var(--border);}
+body.dark .mom-table td{color:var(--text);border-color:var(--border);}
+body.dark .mom-table td:first-child{color:var(--navy);}
+body.dark .data-table th{color:var(--muted);border-color:var(--border);}
+body.dark .data-table td{color:var(--text);border-color:var(--border);}
+body.dark .data-table tr:hover td{background:rgba(47,100,255,.06);}
+body.dark .action-btn{background:var(--white);border-color:var(--border);color:var(--text2);}
+body.dark .action-btn:hover{border-color:var(--blue);color:var(--sky);}
+body.dark .action-btn.dark-active{background:var(--blue);color:white;border-color:var(--blue);}
+body.dark .month-btn{background:var(--white);border-color:var(--border);color:var(--text2);}
+body.dark .month-btn:hover{border-color:var(--blue);color:var(--sky);}
+body.dark .month-btn.active{background:var(--blue);color:white;border-color:var(--blue);}
+body.dark .toggle-btn{color:var(--text2);}
+body.dark .toggle-btn:hover{color:var(--sky);}
+body.dark .toggle-btn.active{background:var(--white);color:var(--navy);}
+body.dark .view-toggle{background:var(--light-grey);}
+body.dark .takeaways-box{background:linear-gradient(135deg,rgba(47,100,255,.08),rgba(73,206,222,.06));border-color:rgba(47,100,255,.25);}
+body.dark .takeaways-title{color:var(--navy);}
+body.dark .takeaways-list li{color:var(--text);}
+body.dark .win-rate-callout{background:linear-gradient(135deg,rgba(115,189,76,.08),rgba(23,120,76,.06));border-color:rgba(115,189,76,.3);}
+body.dark .win-rate-value{color:var(--green);}
+body.dark .win-rate-rep{background:rgba(20,27,45,.8);border-color:var(--border);}
+body.dark .wrr-name{color:var(--navy);}
+body.dark .rep-name{color:var(--navy);}
+body.dark .rep-revenue{color:var(--navy);}
+body.dark .conv-rate{color:var(--navy);}
+body.dark .pf-count{color:var(--navy);}
+body.dark .pf-rate{color:var(--sky);background:rgba(47,100,255,.15);}
+body.dark .pf-line{background:var(--border);}
+body.dark .note-box{background:rgba(253,158,36,.1);border-color:rgba(253,158,36,.3);color:#E8A84C;}
+body.dark .gallery-filter-btn{background:var(--white);border-color:var(--border);color:var(--text2);}
+body.dark .gallery-filter-btn:hover{border-color:var(--blue);color:var(--sky);}
+body.dark .gallery-filter-btn.active{background:var(--blue);color:white;border-color:var(--blue);}
+body.dark .ad-preview{background:#1A2338;}
+body.dark .ad-name{color:var(--navy);}
+body.dark .ad-sponsored{color:var(--muted);}
+body.dark .ad-headline{color:var(--navy);}
+body.dark .ad-copy-preview{color:var(--text2);}
+body.dark .ad-copy-full{color:var(--text2);}
+body.dark .ad-cta-row{border-color:var(--border);}
+body.dark .ad-cta-btn{background:var(--border);color:var(--text);}
+body.dark .card-title{color:var(--navy);}
+body.dark .card-desc{color:var(--text2);}
+body.dark .badge.good{background:rgba(115,189,76,.15);color:#8CD65E;}
+body.dark .badge.bad{background:rgba(220,53,69,.15);color:#F06070;}
+body.dark .badge.neutral{background:rgba(165,165,164,.15);color:#999;}
+body.dark .divider{background:var(--border);}
+body.dark .funnel-bar-outer{background:var(--light-grey);}
+body.dark select{background:var(--white);color:var(--text);border-color:var(--border);}
+
 /* PRINT */
 @media print {
   .nav-tabs,.action-bar,.present-nav{display:none!important;}
   .section:not(.active){display:none!important;}
-  body{background:white!important;}
+  body,body.dark{background:white!important;color:#00274F!important;--light-blue:#fff;--white:#fff;--navy:#00274F;--text:#00274F;--text2:#4A6484;--muted:#7A8FA6;--border:#E2E8F0;--light-grey:#E8E8E8;}
   .report-header::after{display:none;}
   .kpi-card,.chart-card,.mom-table-wrap,.data-table-wrap,.win-rate-callout,.takeaways-box,.conv-card{box-shadow:none!important;break-inside:avoid;}
   .chart-wrap{height:220px!important;}
@@ -258,6 +352,7 @@ body.present .present-nav{display:flex;}
 
 <!-- ACTION BAR -->
 <div class="action-bar">
+  <button class="action-btn" id="darkBtn" onclick="toggleDark()">&#x1F319; Dark Mode</button>
   <button class="action-btn" onclick="window.print()">&#x1F5A8; Print / PDF</button>
   <button class="action-btn" id="presentBtn" onclick="togglePresent()">&#x26F6; Present</button>
 </div>
@@ -566,7 +661,7 @@ body.present .present-nav{display:flex;}
     </div>
     <div style="flex:1;min-width:160px;background:linear-gradient(135deg,#7A4500,#FD9E24);border-radius:16px;padding:28px 32px;color:white;box-shadow:0 8px 32px rgba(253,158,36,.25);">
       <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.7;margin-bottom:8px;">ROAS</div>
-      <div style="font-size:36px;font-weight:800;line-height:1.1;">2.521693064858513×</div>
+      <div style="font-size:36px;font-weight:800;line-height:1.1;">2.52×</div>
       <div style="font-size:13px;opacity:.7;margin-top:6px;">Return on ad spend</div>
     </div>
   </div>
@@ -950,6 +1045,20 @@ body.present .present-nav{display:flex;}
       <div class="ad-copy-preview">Here's the math nobody wants to show you.
 
 You're spending $2K–$5K a month on Facebook ads…</div>
+      <div class="ad-copy-full">Here's the math nobody wants to show you.
+
+You're spending $2K–$5K a month on Facebook ads. Your agency sends you a PDF that says you got 200 leads. Sounds great, right?
+
+But how many of those leads actually became patients? How many ghosted after the first call? How many booked an eval and never showed up?
+
+If you're like most practice owners, you have no idea. And that gap between 'leads' and 'patients' is where $10K–$20K in revenue disappears every single month.
+
+The average PT patient is worth $2,000–$5,000 in lifetime value. If you're losing even 10 patients a month to broken follow-up, invisible drop-off, and ads you can't track past the click — that's $20K–$50K walking out the door.
+
+Every. Single. Month.
+
+The practices that figured this out are adding 31 new patients/month on average — on the same budget you're spending right now. The difference isn't more money. It's more visibility.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
   </div>
@@ -973,6 +1082,22 @@ You're spending $2K–$5K a month on Facebook ads…</div>
     <div class="ad-body">
       <div class="ad-headline">The Practice Down the Street Has a Full Schedule. Yours Doesn't.</div>
       <div class="ad-copy-preview">It's 10:30 AM on a Tuesday — prime appointment time — and your waiting room has empty chai…</div>
+      <div class="ad-copy-full">It's 10:30 AM on a Tuesday — prime appointment time — and your waiting room has empty chairs.
+
+Meanwhile, the corporate chain two miles away is fully booked. Not because they're better clinicians. Not because they have better outcomes. They just know exactly which marketing dollars produce patients — and which ones are wasted.
+
+Here's what that gap actually costs you:
+
+→ 5 empty slots per week × $250 average visit = $5,000/month in lost revenue
+→ $60,000/year walking out the door
+→ While you're paying $2K–$5K/month in ads you can't even track
+
+The practices filling their schedules aren't spending more on marketing. They're spending smarter. They can see which ad brought in which patient, which campaign is burning cash, and where every dollar goes from the click to the booked eval.
+
+847 practice owners already have this visibility. They average 31 new patients per month — many on the exact same budget you're spending right now.
+
+The only difference? They stopped guessing.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
   </div>
@@ -996,6 +1121,23 @@ You're spending $2K–$5K a month on Facebook ads…</div>
     <div class="ad-body">
       <div class="ad-headline">You're Not Getting 'Bad Leads.' You're Losing Good Ones.</div>
       <div class="ad-copy-preview">73% of your ad leads will never become patients. Not because the leads are bad. Because th…</div>
+      <div class="ad-copy-full">73% of your ad leads will never become patients. Not because the leads are bad. Because they're dying in the gap between the click and the appointment — and you can't even see where.
+
+Here's what's actually happening:
+
+→ A lead fills out your form at 2:47 PM
+→ Your front desk calls back at 5:15 PM — voicemail
+→ They try again tomorrow — nothing
+→ That lead cost you $55. They're already booked with the practice that called back in 2 minutes.
+
+Multiply that by 30 lost leads a month. That's $1,650 in wasted ad spend and $60,000–$150,000 in lost patient lifetime value. Every month.
+
+The practice owners who fixed this aren't working harder. They just plugged into a system that shows them exactly where leads drop off — so they could fix the leaks instead of pouring more money into a broken funnel.
+
+Result? Their cost per patient dropped from $200+ to $68. They went from 8 new patients a month to 31 — without spending a dollar more on ads.
+
+Same leads. Same budget. Completely different outcome.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
   </div>
@@ -1019,6 +1161,24 @@ You're spending $2K–$5K a month on Facebook ads…</div>
     <div class="ad-body">
       <div class="ad-headline">31 New Patients/Month — Without Spending More on Ads</div>
       <div class="ad-copy-preview">BEFORE: Dr. Mike was spending $3K/month on Facebook ads. His agency said he was getting 15…</div>
+      <div class="ad-copy-full">BEFORE: Dr. Mike was spending $3K/month on Facebook ads. His agency said he was getting 150 leads. But he couldn't name a single patient that came from those ads. Not one.
+
+He was working late, doing his own marketing, staring at dashboards full of numbers that didn't connect to revenue. He was 6 months from shutting down his second location.
+
+AFTER: Within 60 days, he could see exactly which ads produced patients — not just clicks. He killed 3 campaigns that looked good on paper but generated zero evals. He doubled down on the one that was quietly producing 80% of his revenue.
+
+→ 31 new patients/month (up from 8)
+→ $78K pipeline from a single campaign
+→ Cost per patient: $68 (down from $375)
+→ Home by 5:30 PM instead of 8 PM
+→ Zero extra ad spend
+
+The dream outcome? A predictable patient pipeline that runs without you babysitting it.
+
+The catch? There isn't one. It took one afternoon to set up. No new staff. No new budget. Just visibility into where the money was already going.
+
+847 practice owners are already doing this. The average result: 31 new patients per month.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">See How It Works</button></div>
   </div>
@@ -1044,6 +1204,26 @@ You're spending $2K–$5K a month on Facebook ads…</div>
       <div class="ad-copy-preview">Picture this. It's Monday morning.
 
 You check your phone before your first patient. 4 new …</div>
+      <div class="ad-copy-full">Picture this. It's Monday morning.
+
+You check your phone before your first patient. 4 new evals already booked for this week. Your best campaign is running at a $68 cost per patient. Your schedule is full through Friday. Your front desk isn't chasing leads — they're confirming appointments.
+
+Your Sunday nights? No more anxiety about tomorrow's schedule. No more wondering if the ads are working. No more spreadsheets.
+
+This isn't a fantasy. This is what 847 practice owners experience every single week.
+
+Here's the math that makes it real:
+→ Average: 31 new patients/month
+→ Average patient lifetime value: $2,000–$5,000
+→ That's $62K–$155K in new revenue per month
+→ On the same ad budget you're already spending
+→ Set up in one afternoon — not weeks, not months
+→ No new staff. No agency fees. No learning curve.
+
+You didn't become a clinician to be your own marketing department. The practices that are growing right now aren't working harder — they plugged into a system that does the tracking for them.
+
+So they can go back to treating patients. And go home on time.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">See How It Works</button></div>
   </div>
@@ -1069,6 +1249,25 @@ You check your phone before your first patient. 4 new …</div>
       <div class="ad-copy-preview">Dr. Sarah was the first one in and last one out. Every day.
 
 She answered leads at 9 PM fr…</div>
+      <div class="ad-copy-full">Dr. Sarah was the first one in and last one out. Every day.
+
+She answered leads at 9 PM from her kitchen table. She spent Sundays reviewing spreadsheets, trying to figure out if her $3,500/month in ads was doing anything. She was exhausted, her team was burning out, and her second location was bleeding money.
+
+Then she made one change. Not a new agency. Not a bigger budget. She plugged into a system that showed her exactly where every ad dollar went — from the click to the booked eval to the paying patient.
+
+Within 60 days:
+→ She found out 2 of her 5 campaigns produced zero patients — killed them instantly
+→ She doubled budget on the one campaign producing 80% of her revenue
+→ New patients jumped from 11/month to 34/month
+→ Cost per patient dropped from $318 to $71
+→ She stopped answering leads at night because the system tracked them automatically
+
+Now she walks out at 5 PM. Checks her phone once — 3 new evals booked while she was treating patients — and drives home.
+
+Her revenue didn't just recover. It doubled. On less ad spend than before.
+
+No extra hours. No new staff. No marketing degree required. Just visibility into what was already happening — and the ability to fix it in an afternoon.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">See How It Works</button></div>
   </div>
@@ -1094,6 +1293,30 @@ She answered leads at 9 PM fr…</div>
       <div class="ad-copy-preview">PT practice owners spending $1K+ on ads — this is for you.
 
 You didn't go to school for ma…</div>
+      <div class="ad-copy-full">PT practice owners spending $1K+ on ads — this is for you.
+
+You didn't go to school for marketing. You went to school to help people move better, live pain-free, and get back to the life they love.
+
+But right now you're spending 10+ hours a week staring at ad dashboards you don't fully understand. Chasing leads that go cold. Arguing with agencies that send you PDFs full of vanity metrics.
+
+Here's what that costs you:
+→ 10 hours/week × $150/hour (your real value) = $6,000/month in lost clinical time
+→ Plus $2K–$5K/month in ad spend you can't trace to a single patient
+→ Plus the burnout tax — the Sunday anxiety, the 8 PM emails, the constant second-guessing
+
+847 practice owners decided they were done.
+
+They plugged into Breakthrough — a system that tracks every lead from the ad click to the booked eval to the paying patient. Automatically. No spreadsheets. No agency middleman. No marketing degree.
+
+The result?
+→ Average: 31 new patients/month
+→ Cost per patient: $68 (industry average is $200+)
+→ Setup time: one afternoon
+→ Extra staff needed: zero
+→ Hours per week managing marketing: under 1
+
+They went back to doing what they actually do best. And their practices grew faster than when they were grinding 60 hours a week trying to figure out Facebook ads.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">See the Results</button></div>
   </div>
@@ -1117,6 +1340,31 @@ You didn't go to school for ma…</div>
     <div class="ad-body">
       <div class="ad-headline">The Practices Adding 30+ Patients/Month Aren't Running Better Ads</div>
       <div class="ad-copy-preview">You invested $500K+ in your clinic. Premium equipment. A team you hand-picked. An experien…</div>
+      <div class="ad-copy-full">You invested $500K+ in your clinic. Premium equipment. A team you hand-picked. An experience patients rave about.
+
+But your marketing? It's a patchwork of boosted posts, an agency that can't show ROI, and a gut feeling about what's working.
+
+Here's what most practice owners don't realize:
+
+The clinics adding 30+ new patients per month aren't spending more on ads. They're not running fancier campaigns. They're not using some secret creative strategy.
+
+They can just SEE what's happening.
+
+→ Which ads produce patients (not just clicks)
+→ Which campaigns are burning cash
+→ Where leads drop off between the click and the appointment
+→ Exactly how much revenue each dollar of ad spend generates
+
+That visibility changes everything. Because once you can see it, you can fix it. And once you fix it, the same $3K/month in ads that used to produce 8 patients suddenly produces 31.
+
+Here's what 847 practice owners got when they plugged in:
+→ 31 new patients/month (average)
+→ $68 cost per patient (down from $200+)
+→ $78K pipeline from a single campaign (real result)
+→ Setup: one afternoon. No new staff. No agency. Works with your existing budget.
+
+Your practice already delivers a premium patient experience. Your marketing should match.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">See the Results</button></div>
   </div>
@@ -1140,6 +1388,27 @@ You didn't go to school for ma…</div>
     <div class="ad-body">
       <div class="ad-headline">Chiropractors: Add 25+ New Patients/Month on Your Current Ad Budget</div>
       <div class="ad-copy-preview">If you're a chiropractor spending $1K+ on ads and you can't trace a single new patient bac…</div>
+      <div class="ad-copy-full">If you're a chiropractor spending $1K+ on ads and you can't trace a single new patient back to a specific campaign — you're leaving money on the table.
+
+Here's the problem most chiro practices face:
+
+Your agency says you got 100 leads last month. Great. But how many of those people actually walked through your door? How many booked adjustments? How many became recurring patients worth $3,000+ each?
+
+If you're honest? You have no idea. And that gap is costing you $15K–$40K every single month.
+
+Breakthrough was built specifically for practice owners like you — not agencies, not marketing teams — who want to know exactly which marketing dollars turn into patients on the table. Not leads. Not clicks. Patients.
+
+What chiropractors who use Breakthrough see:
+→ 25–40 new patients/month (on existing budget)
+→ $68 average cost per patient (industry average: $200+)
+→ Setup in one afternoon — no tech skills needed
+→ No new staff, no agency required
+→ Every ad dollar tracked from click to first adjustment
+
+You built your practice to help people. Stop spending your nights trying to figure out which Facebook ads work.
+
+847 practice owners already have this. The math speaks for itself.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">See the Results</button></div>
   </div>
@@ -1163,6 +1432,32 @@ You didn't go to school for ma…</div>
     <div class="ad-body">
       <div class="ad-headline">$78,000 From One Campaign. Here's the Breakdown.</div>
       <div class="ad-copy-preview">This isn't a case study we cherry-picked. This is what happens when you can actually see w…</div>
+      <div class="ad-copy-full">This isn't a case study we cherry-picked. This is what happens when you can actually see where your money goes.
+
+One practice owner. One campaign. 60 days.
+
+→ 47 new patients booked
+→ $78,000 in attributed revenue pipeline
+→ Cost per patient: $68 (was $200+ before)
+→ ROI on that single campaign: 11.4x
+→ Time spent managing it: under 1 hour/week
+
+Here's what he did differently:
+
+He didn't hire a better agency. He didn't increase his budget. He didn't learn Facebook ads.
+
+He plugged into Breakthrough and saw — for the first time — which ads actually produced patients. Not leads. Not clicks. Patients in the chair.
+
+Turns out 2 of his 5 campaigns were generating 90% of his patients. The other 3? Looked great on the agency report. Zero patients. He killed them immediately and reallocated the budget.
+
+60 days later: $78K pipeline.
+
+This is what visibility does. And it took one afternoon to set up.
+
+847 practice owners are already doing this. The average? 31 new patients/month.
+
+Not leads. Patients.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Get Your Growth Plan</button></div>
   </div>
@@ -1186,6 +1481,32 @@ You didn't go to school for ma…</div>
     <div class="ad-body">
       <div class="ad-headline">His Front Desk Was Chasing 200 Dead Leads/Month. Now They Book 31 Real Patients.</div>
       <div class="ad-copy-preview">'I used to dread Monday mornings. Now my whole team gathers around the dashboard like it's…</div>
+      <div class="ad-copy-full">'I used to dread Monday mornings. Now my whole team gathers around the dashboard like it's game day.'
+
+Here's where this practice was 90 days ago:
+→ $3,000/month on ads
+→ 200 'leads' per month (according to the agency)
+→ 8 patients actually booked
+→ Front desk spending 15+ hours/week chasing people who never picked up
+→ Cost per patient: $375
+→ Team morale: rock bottom
+
+The owner was 6 months from cutting his marketing budget entirely. He thought ads 'just didn't work' for PT.
+
+Then he plugged into Breakthrough. One afternoon setup. No new staff. No new budget.
+
+Within 90 days:
+→ He could see which of those 200 'leads' actually became patients
+→ Discovered 3 campaigns producing zero patients — killed them
+→ Found 1 campaign quietly generating $78K in pipeline — tripled its budget
+→ Front desk stopped chasing dead leads and started booking real evals
+→ 31 new patients in a single month
+→ Cost per patient: $68
+
+His team went from dreading Mondays to celebrating wins. His front desk went from frustrated to efficient. His revenue? Up 287% in one quarter.
+
+Same budget. Same team. Same ads. Just visibility.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Get Your Growth Plan</button></div>
   </div>
@@ -1213,6 +1534,41 @@ You didn't go to school for ma…</div>
 Completely different results.
 
 BEFORE (w…</div>
+      <div class="ad-copy-full">Same practice. Same budget. Same ads. Same team.
+
+Completely different results.
+
+BEFORE (without visibility):
+→ $3,000/month on Facebook ads
+→ No idea which campaigns worked
+→ 8 new patients/month
+→ $375 cost per patient
+→ 10+ hours/week managing marketing
+→ Sunday night anxiety about Monday's schedule
+
+AFTER (with visibility):
+→ Same $3,000/month
+→ Every dollar tracked from click to patient
+→ 31 new patients/month
+→ $68 cost per patient
+→ Under 1 hour/week managing marketing
+→ Schedule full through next week
+
+She didn't spend more. She didn't hire a new agency. She didn't learn Facebook ads.
+
+She plugged into Breakthrough — one afternoon setup — and for the first time could see which ads produced patients. Not leads. Not clicks. Actual patients in chairs.
+
+She killed the campaigns that looked good on paper but generated zero revenue. She scaled the one campaign that was quietly producing 80% of her patients.
+
+The math:
+→ 287% more patients
+→ 82% lower cost per patient
+→ $78K pipeline from a single campaign
+→ Zero extra ad spend
+→ Zero extra staff
+
+847 practice owners have done this. The budget didn't change. The visibility did.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Get Your Growth Plan</button></div>
   </div>
@@ -1236,6 +1592,29 @@ BEFORE (w…</div>
     <div class="ad-body">
       <div class="ad-headline">Free Custom Growth Plan: Add 20–40 Patients/Month on Your Current Budget</div>
       <div class="ad-copy-preview">We're opening 10 spots this month for practice owners who want a custom growth plan. Here'…</div>
+      <div class="ad-copy-full">We're opening 10 spots this month for practice owners who want a custom growth plan. Here's exactly what you get:
+
+On a 15-minute call, we'll build you a custom plan showing:
+→ Which of your current ads are actually producing patients (not just leads — we'll show you the difference)
+→ Exactly where you're losing money you don't know about
+→ The specific campaigns to kill and the ones to scale
+→ A roadmap to add 20–40 new patients/month on your current budget
+
+This is a $500 growth audit — yours free. No catch. No 45-minute sales pitch. 15 minutes.
+
+Why do we give this away? Because 73% of the practice owners who see their real numbers decide to use Breakthrough. The data sells itself.
+
+Here's what 847 practice owners have already seen after plugging in:
+→ Average: 31 new patients/month
+→ Average cost per patient: $68 (down from $200+)
+→ Setup time: one afternoon
+→ No new staff. No new budget. No agency required.
+→ $78K pipeline from a single campaign (real result, not cherry-picked)
+
+Only 10 spots this month. We cap it because each plan is built custom — not a template.
+
+If your practice is spending $1K+ on ads and you can't tell exactly which dollars produced patients — this call will change that in 15 minutes.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
   </div>
@@ -1259,6 +1638,31 @@ BEFORE (w…</div>
     <div class="ad-body">
       <div class="ad-headline">15 Minutes to Set Up. 14 Days to See Results. No New Staff Required.</div>
       <div class="ad-copy-preview">What if you could check your patient pipeline between appointments — the same way you chec…</div>
+      <div class="ad-copy-full">What if you could check your patient pipeline between appointments — the same way you check your email?
+
+Quick glance at your phone: 3 new evals booked today. Your best campaign running at $55 per lead. Schedule full through Friday. One campaign underperforming — pause it with one tap.
+
+That's Breakthrough. One dashboard. Every ad dollar tracked from click to patient. On your phone, updated in real time.
+
+No logging into 5 different platforms. No waiting for your agency's monthly PDF. No spreadsheets. No guessing.
+
+Here's what makes this different from everything else you've tried:
+→ Setup: 15 minutes, not weeks. Plug in your ad accounts and your data flows automatically.
+→ Results timeline: most practice owners see actionable insights within 14 days
+→ Staff needed: zero. It runs itself.
+→ Budget needed: your existing one. No extra ad spend required.
+→ Technical skill needed: if you can check email, you can use this.
+
+The numbers from 847 practice owners who already plugged in:
+→ 31 new patients/month (average)
+→ $68 cost per patient
+→ Under 1 hour/week managing marketing
+→ $78K pipeline from a single campaign
+
+We're opening 10 demo spots this month. The call takes 15 minutes — the same time it takes to set up.
+
+If you're spending $1K+ on ads and can't trace a dollar to a patient, this changes that today.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
   </div>
@@ -1284,6 +1688,32 @@ BEFORE (w…</div>
       <div class="ad-copy-preview">If you're a practice owner spending $1K+ on Facebook ads, here's what I can guarantee:
 
 Yo…</div>
+      <div class="ad-copy-full">If you're a practice owner spending $1K+ on Facebook ads, here's what I can guarantee:
+
+You're wasting at least 30% of that budget on campaigns that produce zero patients. You just can't see which 30% yet.
+
+On this free 15-minute call, we'll show you:
+→ Exactly which ads are producing patients and which are burning cash
+→ Where your leads are dropping off (the gap most agencies completely ignore)
+→ A custom plan to add 20–40 new patients/month — on your current budget
+→ The specific number your practice is leaving on the table every month
+
+This is a $500 growth audit. We're giving away 10 this month because the math does the selling for us — 73% of practice owners who see their real numbers choose to use Breakthrough.
+
+Here's what that looks like:
+→ 31 new patients/month (average across 847 practices)
+→ $68 cost per patient (down from $200+ industry average)
+→ Setup: one afternoon. Literally plug in your accounts and go.
+→ Extra staff needed: none
+→ Extra budget needed: none — works with what you're already spending
+→ Time managing marketing: under 1 hour/week
+
+The dream outcome: a predictable patient pipeline that fills your schedule without you babysitting it. So you can go back to treating patients and leave by 5 PM.
+
+10 spots. 15 minutes. No pitch. Just your numbers.
+
+If they don't shock you, you'll be the first.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
   </div>
@@ -1309,6 +1739,31 @@ Yo…</div>
       <div class="ad-copy-preview">Real talk from a PT practice owner in Denver.
 
 Six months ago I was spending $2K/month on …</div>
+      <div class="ad-copy-full">Real talk from a PT practice owner in Denver.
+
+Six months ago I was spending $2K/month on Facebook ads and I honestly thought they weren't working. I'd get leads, call them back hours later, most never picked up. My agency said I was getting 'great results.' I couldn't name one patient that came from an ad.
+
+I was about to cut my entire marketing budget.
+
+Then a friend told me about Breakthrough. Set it up on a Tuesday afternoon — literally took 20 minutes. By Friday I could see something that blew my mind:
+
+One campaign I was about to turn off? It had quietly produced 80% of my revenue. $47K in patient lifetime value from a single ad.
+
+The other 4 campaigns my agency said were 'performing well'? Two of them had generated zero patients. ZERO. In 6 months. I killed them immediately.
+
+In 30 days:
+→ Went from 12 patients/month to 40
+→ Cost per patient dropped from $167 to $50
+→ Saved $1,200/month in wasted ad spend
+→ Stopped chasing leads — the system tracks them automatically
+→ Fired my agency (sorry, guys)
+
+I didn't change my ads. I didn't increase my budget. I just finally saw where the money was going.
+
+If you own a practice and you're spending money on ads without tracking to patients — you're flying blind. I was. For 2 years.
+
+Check it out. Link below.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
   </div>
@@ -1334,6 +1789,30 @@ Six months ago I was spending $2K/month on …</div>
       <div class="ad-copy-preview">That face when you see the real numbers for the first time.
 
 This chiropractor was about t…</div>
+      <div class="ad-copy-full">That face when you see the real numbers for the first time.
+
+This chiropractor was about to pause her best campaign. Her agency said it had a 'low click-through rate' and recommended killing it.
+
+Then she plugged into Breakthrough and saw something her agency never showed her: that 'failing' campaign had produced 14 patients worth $25,500 in closed revenue. It was her single best-performing ad.
+
+Meanwhile, the campaign her agency called a 'top performer'? Great clicks. Great CTR. Zero patients.
+
+She almost scaled the wrong ad and killed the one making her money.
+
+This is what happens when you track clicks vs. when you track patients.
+
+Here's what she saw after 60 days with Breakthrough:
+→ 28 new patients/month (up from 9)
+→ Cost per patient: $72 (down from $333)
+→ Killed 2 campaigns that looked good but produced nothing
+→ Scaled 1 campaign from $500/month to $1,500/month — tripled her best results
+→ Total setup time: 25 minutes on a Wednesday afternoon
+→ No new staff. No new tools. Same budget.
+
+The data was always there. She just couldn't see it before. Now she can.
+
+847 practice owners already have this visibility. If you're spending money on ads and trusting click metrics to tell you what's working — you might be scaling the wrong ads too.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
   </div>
@@ -1352,13 +1831,46 @@ This chiropractor was about t…</div>
       <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
     </div>
     <div class="ad-image-wrap">
+      <span class="video-badge">VIDEO</span>
       <img src="../reports/creatives/test-video-01.png" alt="Patient Success Story — Video Script" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
     </div>
     <div class="ad-body">
       <div class="ad-headline">'60-Hour Weeks and $4K/Month in Ads. Zero Idea What Worked. Then This.'</div>
       <div class="ad-copy-preview">Watch this practice owner's story. 90 seconds that might change how you think about market…</div>
+      <div class="ad-copy-full">Watch this practice owner's story. 90 seconds that might change how you think about marketing your practice.
+
+BEFORE:
+→ Working 60-hour weeks
+→ Spending $4,000/month on Facebook ads
+→ Couldn't name a single patient that came from those ads
+→ Agency said 'results look great' — his schedule said otherwise
+→ Barely breaking even
+→ Considering shutting down his second location
+
+AFTER (60 days with Breakthrough):
+→ 47 new patients/month (up from 11)
+→ $32K monthly revenue increase
+→ Cost per patient: $85 (was $364)
+→ Killed 3 campaigns that produced zero patients
+→ Found 1 campaign producing $78K in pipeline — scaled it immediately
+→ Home by 5 PM for the first time in 3 years
+
+Here's what he didn't do:
+→ Didn't increase his ad budget
+→ Didn't hire new staff
+→ Didn't switch agencies
+→ Didn't learn Facebook ads
+→ Didn't spend weeks setting things up
+
+He plugged in Breakthrough on a Tuesday afternoon. By Friday he could see which ads produced patients and which ones were burning cash.
+
+If you're a practice owner still doing it the old way — spending money on ads you can't track past the click — book a 15-minute demo. It's free. No pitch.
+
+847 practice owners already did. The average result: 31 new patients/month.</div>
+      <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
+    <div style="padding:0 0 4px;"><button class="view-script-btn" onclick="openScriptModal()">View Video Script</button></div>
   </div>
   <div class="card-meta">
     <span class="funnel-tag mofubofu">MOFU-BOFU</span>
@@ -1370,6 +1882,28 @@ This chiropractor was about t…</div>
   </div>
 </div>
 
+<!-- Video Script Modal -->
+<div class="script-modal-overlay" id="scriptModal" onclick="if(event.target===this)closeScriptModal()">
+  <div class="script-modal">
+    <button class="script-modal-close" onclick="closeScriptModal()">&times;</button>
+    <div class="script-modal-title">Video Script — Patient Success Story (0:30)</div>
+    <div class="script-modal-content">[0:00–0:03] HOOK
+Close-up of practice owner looking at camera — "I was working 60-hour weeks and barely breaking even..."
+
+[0:03–0:08] PROBLEM
+B-roll of empty waiting room, owner at desk late at night, looking stressed at spreadsheets.
+
+[0:08–0:15] TURNING POINT
+"Then I found Breakthrough and everything changed." Cut to dashboard showing upward metrics, phone notifications of new patient bookings.
+
+[0:15–0:25] RESULTS
+Quick cuts — full waiting room, happy patients, owner leaving clinic at 5pm, spending time with family. Text overlay: "47 new patients/month" → "$32K monthly revenue increase"
+
+[0:25–0:30] CTA
+Owner back on camera: "If you're a practice owner still doing it the old way — book a demo. Seriously." End card with Breakthrough logo + "Book Your Free Demo" button.</div>
+  </div>
+</div>
+
 </div><!-- /container -->
 
 <!-- ══════════════════════════════════════════════════════════════════
@@ -1378,7 +1912,7 @@ This chiropractor was about t…</div>
 <script>
 const D = {
   "meta": {
-    "generated": "2026-03-12T14:35:26.447Z",
+    "generated": "2026-03-12T14:54:42.463Z",
     "sqoOldMqlCount": 12,
     "salesOutsideQ1": 0,
     "totalDemos": 73,
@@ -2089,7 +2623,7 @@ const D = {
     "costPerBook": 1739.9093103448276,
     "costPerSqo": 2193.798695652174,
     "costPerSale": 6307.17125,
-    "roas": 2.521693064858513,
+    "roas": "2.52",
     "paidDemos": 41,
     "paidBookDemos": 29,
     "paidSqos": 23,
@@ -2883,6 +3417,12 @@ function mkDataset(label, data, color, opts = {}) {
 }
 
 // ── Chart helpers ──
+function isDark() { return document.body.classList.contains('dark'); }
+function gridColor() { return isDark() ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.04)'; }
+function tickColor() { return isDark() ? '#8A9AB5' : undefined; }
+function legendColor() { return isDark() ? '#D1D9E6' : undefined; }
+function doughnutBorder() { return isDark() ? '#141B2D' : '#fff'; }
+
 function destroyChart(id) {
   const existing = Chart.getChart(id);
   if (existing) existing.destroy();
@@ -2895,10 +3435,10 @@ function barChart(id, labels, datasets, opts = {}) {
     data: { labels, datasets },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true, padding: 16 } }, tooltip: { mode: 'index' } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true, padding: 16 } }, tooltip: { mode: 'index' } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
-        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } }, beginAtZero: true }
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() } },
+        y: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() }, beginAtZero: true }
       },
       ...opts
     }
@@ -2912,10 +3452,10 @@ function lineChart(id, labels, datasets) {
     data: { labels, datasets },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true, padding: 16 } }, tooltip: { mode: 'index', intersect: false } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true, padding: 16 } }, tooltip: { mode: 'index', intersect: false } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
-        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } }, beginAtZero: true }
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() } },
+        y: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() }, beginAtZero: true }
       }
     }
   });
@@ -2927,12 +3467,12 @@ function doughnutChart(id, labels, data, colors) {
     type: 'doughnut',
     data: {
       labels,
-      datasets: [{ data, backgroundColor: colors || COLORS, borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
+      datasets: [{ data, backgroundColor: colors || COLORS, borderWidth: 2, borderColor: doughnutBorder(), hoverOffset: 8 }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
-        legend: { position: 'right', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true, padding: 14 } },
+        legend: { position: 'right', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true, padding: 14 } },
         tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed } }
       }
     }
@@ -2954,8 +3494,8 @@ function hbarChart(id, labels, data, opts) {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => isDollar ? ' $' + Math.round(ctx.parsed.x).toLocaleString() : ' ' + ctx.parsed.x } } },
       scales: {
-        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: isDollar ? (v => '$'+v.toLocaleString()) : undefined }, beginAtZero: true },
-        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } }
+        x: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor(), callback: isDollar ? (v => '$'+v.toLocaleString()) : undefined }, beginAtZero: true },
+        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() } }
       }
     }
   });
@@ -3310,11 +3850,11 @@ function initPaid() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } }, tooltip: { mode: 'index', intersect: false } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true } }, tooltip: { mode: 'index', intersect: false } },
       scales: {
-        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } },
-        y:  { position: 'left',  grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true },
-        y2: { position: 'right', grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true }
+        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() } },
+        y:  { position: 'left',  grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor(), callback: v => '$'+v.toLocaleString() }, beginAtZero: true },
+        y2: { position: 'right', grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() }, beginAtZero: true }
       }
     }
   });
@@ -3332,11 +3872,11 @@ function initPaid() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true } },
         tooltip: { mode: 'index', callbacks: { footer: items => 'Total: $'+items.reduce((s,i)=>s+i.parsed.y,0).toLocaleString(undefined,{maximumFractionDigits:0}) } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
-        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() } },
+        y: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor(), callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
       }
     }
   });
@@ -3446,10 +3986,10 @@ function initAdPerf() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } }, tooltip: { mode: 'index' } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true } }, tooltip: { mode: 'index' } },
       scales: {
         x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 10 }, maxRotation: 30 } },
-        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
+        y: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor(), callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
       }
     }
   });
@@ -3494,11 +4034,11 @@ function initAdPerf() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true } },
         tooltip: { mode: 'index', callbacks: { footer: items => 'Total: $'+items.reduce((s,i)=>s+i.parsed.y,0).toLocaleString(undefined,{maximumFractionDigits:0}) } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
-        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() } },
+        y: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor(), callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
       }
     }
   });
@@ -3519,11 +4059,11 @@ function initAdPerf() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true } } },
       scales: {
-        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
-        y:  { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true, position: 'left' },
-        y2: { ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true, position: 'right', grid: { display: false } }
+        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 }, color: tickColor() } },
+        y:  { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() }, beginAtZero: true, position: 'left' },
+        y2: { ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() }, beginAtZero: true, position: 'right', grid: { display: false } }
       }
     }
   });
@@ -3547,11 +4087,11 @@ function initAdPerf() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } }, tooltip: { mode: 'index', intersect: false } },
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, color: legendColor(), usePointStyle: true } }, tooltip: { mode: 'index', intersect: false } },
       scales: {
-        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } },
-        y:  { position: 'left',  grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true },
-        y2: { position: 'right', grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true }
+        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() } },
+        y:  { position: 'left',  grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor(), callback: v => '$'+v.toLocaleString() }, beginAtZero: true },
+        y2: { position: 'right', grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() }, beginAtZero: true }
       }
     }
   });
@@ -3572,8 +4112,8 @@ function initAdPerf() {
       indexAxis: 'y', responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' Avg frequency: '+ctx.parsed.x+'×' } } },
       scales: {
-        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true, title: { display: true, text: 'Avg Frequency (× = times seen)', font: { size: 11 } } },
-        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } }
+        x: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() }, beginAtZero: true, title: { display: true, text: 'Avg Frequency (× = times seen)', font: { size: 11 } } },
+        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() } }
       }
     }
   });
@@ -3589,8 +4129,8 @@ function initAdPerf() {
       indexAxis: 'y', responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true },
-        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } }
+        x: { grid: { color: gridColor() }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() }, beginAtZero: true },
+        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, color: tickColor() } }
       }
     }
   });
@@ -3666,6 +4206,27 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   presentPrev();
 });
 
+// ── Ad copy toggle ──
+function toggleAdCopy(btn) {
+  const body = btn.closest('.ad-body');
+  const full = body.querySelector('.ad-copy-full');
+  const preview = body.querySelector('.ad-copy-preview');
+  const isOpen = full.classList.toggle('open');
+  preview.style.display = isOpen ? 'none' : '';
+  btn.textContent = isOpen ? 'View less' : 'View more';
+}
+
+// ── Video script modal ──
+function openScriptModal() {
+  document.getElementById('scriptModal').classList.add('open');
+}
+function closeScriptModal() {
+  document.getElementById('scriptModal').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeScriptModal();
+});
+
 // ── Gallery filter ──
 function filterGallery(stage, btn) {
   document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
@@ -3675,8 +4236,34 @@ function filterGallery(stage, btn) {
   });
 }
 
+// ── Dark mode ──
+function toggleDark() {
+  const on = document.body.classList.toggle('dark');
+  localStorage.setItem('bt_report_dark', on ? '1' : '0');
+  const btn = document.getElementById('darkBtn');
+  btn.innerHTML = on ? '&#x2600; Light Mode' : '&#x1F319; Dark Mode';
+  btn.classList.toggle('dark-active', on);
+  window._sectionInited = {};
+  const activeSection = document.querySelector('.section.active');
+  if (activeSection) {
+    window._sectionInited[activeSection.id] = true;
+    initSection(activeSection.id);
+  }
+}
+
+function applyDarkOnLoad() {
+  const saved = localStorage.getItem('bt_report_dark');
+  if (saved === '1') {
+    document.body.classList.add('dark');
+    const btn = document.getElementById('darkBtn');
+    btn.innerHTML = '&#x2600; Light Mode';
+    btn.classList.add('dark-active');
+  }
+}
+
 // ── Init on load ──
 window.addEventListener('DOMContentLoaded', () => {
+  applyDarkOnLoad();
   window._sectionInited = { overview: true };
   initOverview();
 });
