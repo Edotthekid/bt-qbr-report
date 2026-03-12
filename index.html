@@ -1,0 +1,3685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breakthrough | Q1 2026 Marketing Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#2F64FF; --blue-dark:#1E63AF; --navy:#00274F; --light-blue:#F2F5FE; --white:#FFFFFF;
+  --green:#73BD4C; --dark-green:#17784C; --orange:#FD9E24; --teal:#0089A7; --sky:#7DBBFF; --aqua:#49CEDE;
+  --grey:#A5A5A4; --light-grey:#E8E8E8; --red:#DC3545;
+  --border:#E2E8F0; --text:#00274F; --text2:#4A6484; --muted:#7A8FA6;
+  --g1:linear-gradient(135deg,#2F64FF,#49CEDE); --g2:linear-gradient(135deg,#2F64FF,#5990FF);
+  --shadow-sm:0 1px 3px rgba(0,39,79,.06); --shadow-md:0 4px 12px rgba(0,39,79,.08);
+  --shadow-lg:0 10px 30px rgba(0,39,79,.1); --shadow-card:0 2px 8px rgba(0,39,79,.05);
+}
+body{font-family:'IBM Plex Sans',-apple-system,sans-serif;background:var(--light-blue);color:var(--text);line-height:1.6;overflow-x:hidden;}
+h1,h2,h3,.chart-title,.kpi-value{font-family:'Poppins',sans-serif;}
+
+/* HEADER */
+.report-header{text-align:center;padding:40px 24px 36px;margin-bottom:32px;position:relative;}
+.report-header::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:3px;background:var(--g1);border-radius:2px;}
+.report-header .brand{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-dark);margin-bottom:12px;}
+.report-header h1{font-size:38px;font-weight:800;color:var(--navy);margin-bottom:4px;line-height:1.2;}
+.report-header h1 span{color:var(--blue);}
+.report-header .subtitle{font-size:16px;color:var(--text2);}
+.report-header .meta-info{margin-top:12px;font-size:12px;color:var(--muted);}
+
+/* NAV */
+.nav-tabs{display:flex;gap:4px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;padding:6px;margin-bottom:32px;overflow-x:auto;box-shadow:var(--shadow-sm);position:sticky;top:12px;z-index:100;}
+.nav-tab{flex:1;min-width:110px;padding:11px 16px;border:none;background:transparent;color:var(--muted);font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;border-radius:12px;cursor:pointer;transition:all .3s;white-space:nowrap;text-align:center;}
+.nav-tab:hover{color:var(--blue);background:rgba(47,100,255,.06);}
+.nav-tab.active{background:var(--blue);color:white;box-shadow:0 4px 15px rgba(47,100,255,.35);}
+.container{max-width:1400px;margin:0 auto;padding:24px;}
+.section{display:none;}.section.active{display:block;animation:fadeUp .35s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px;}
+.kpi-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 24px;position:relative;overflow:hidden;transition:all .3s;box-shadow:var(--shadow-card);}
+.kpi-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--blue);}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
+.kpi-card.blue::before{background:var(--g1);}
+.kpi-card.green::before{background:linear-gradient(135deg,var(--green),var(--dark-green));}
+.kpi-card.teal::before{background:linear-gradient(135deg,var(--teal),var(--aqua));}
+.kpi-card.orange::before{background:linear-gradient(135deg,var(--orange),#E8890A);}
+.kpi-card.purple::before{background:linear-gradient(135deg,#6C63FF,var(--blue));}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:8px;}
+.kpi-value{font-size:32px;font-weight:800;color:var(--navy);line-height:1.1;}
+.kpi-sub{font-size:13px;color:var(--text2);margin-top:5px;}
+.kpi-sub .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;margin-left:4px;}
+.badge.good{background:rgba(115,189,76,.12);color:var(--dark-green);}
+.badge.bad{background:rgba(220,53,69,.1);color:var(--red);}
+.badge.neutral{background:rgba(165,165,164,.12);color:var(--grey);}
+
+/* CHART CONTAINERS */
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(480px,1fr));gap:24px;margin-bottom:32px;}
+.chart-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow-card);}
+.chart-card.full{grid-column:1/-1;}
+.chart-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.chart-sub{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.chart-wrap{position:relative;height:280px;}
+.chart-wrap.tall{height:340px;}
+
+/* SECTION HEADER */
+.section-header{margin-bottom:28px;}
+.section-title{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+.section-desc{font-size:14px;color:var(--text2);}
+
+/* MoM TABLE */
+.mom-table-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow-card);margin-bottom:32px;overflow-x:auto;}
+.mom-table{width:100%;border-collapse:collapse;font-size:14px;}
+.mom-table th{text-align:left;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);}
+.mom-table td{padding:14px 16px;border-bottom:1px solid var(--light-grey);vertical-align:middle;}
+.mom-table tr:last-child td{border-bottom:none;}
+.mom-table td:first-child{font-weight:600;color:var(--navy);}
+.mom-table td:nth-child(2),.mom-table td:nth-child(3){font-weight:500;}
+.mom-table .mtd{color:var(--text2);}
+.stage-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:10px;vertical-align:middle;}
+.stage-dot.blue{background:var(--blue);}
+.stage-dot.aqua{background:var(--aqua);}
+.stage-dot.teal{background:var(--teal);}
+.stage-dot.green{background:var(--green);}
+.stage-dot.orange{background:var(--orange);}
+
+/* MONTH FILTER */
+.month-filter{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.month-btn{padding:8px 18px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);color:var(--text2);font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.month-btn:hover{border-color:var(--blue);color:var(--blue);}
+.month-btn.active{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 4px 12px rgba(47,100,255,.3);}
+
+/* CONVERSION CARDS */
+.conv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px;}
+.conv-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px 24px;box-shadow:var(--shadow-card);text-align:center;}
+.conv-arrow{font-size:20px;color:var(--muted);margin-bottom:4px;}
+.conv-stages{font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;}
+.conv-rate{font-family:'Poppins',sans-serif;font-size:36px;font-weight:800;color:var(--navy);}
+.conv-breakdown{display:flex;justify-content:center;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.conv-item{font-size:11px;color:var(--muted);text-align:center;}
+.conv-item span{display:block;font-weight:700;color:var(--text);font-size:13px;}
+
+/* DATA TABLES */
+.data-table-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow-card);overflow-x:auto;}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--light-grey);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(47,100,255,.02);}
+.bar-inline{display:inline-block;height:8px;border-radius:4px;background:var(--blue);vertical-align:middle;margin-left:8px;opacity:.7;}
+
+/* NOTE BOX */
+.note-box{background:rgba(253,158,36,.08);border:1px solid rgba(253,158,36,.3);border-radius:12px;padding:14px 18px;font-size:13px;color:#7A5000;margin-bottom:24px;display:flex;gap:10px;align-items:flex-start;}
+.note-box .note-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+
+/* FUNNEL BARS */
+.funnel-stage-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.funnel-label{width:130px;font-size:13px;font-weight:600;color:var(--text2);flex-shrink:0;text-align:right;}
+.funnel-bar-outer{flex:1;background:var(--light-grey);border-radius:8px;height:32px;overflow:hidden;position:relative;}
+.funnel-bar-inner{height:100%;border-radius:8px;transition:width .8s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;padding-left:12px;}
+.funnel-bar-inner span{color:white;font-size:13px;font-weight:700;white-space:nowrap;}
+.funnel-conv-arrow{font-size:11px;color:var(--muted);text-align:center;margin-bottom:6px;margin-left:142px;}
+
+/* REP CARDS */
+.rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:32px;}
+.rep-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow-card);}
+.rep-name{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.rep-deals{font-size:13px;color:var(--text2);margin-bottom:12px;}
+.rep-revenue{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;color:var(--navy);}
+.rep-revenue-label{font-size:12px;color:var(--muted);margin-top:2px;}
+.rep-revenue-gross{font-size:13px;color:var(--text2);margin-top:4px;}
+
+/* GALLERY */
+.gallery-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.gallery-filter-btn{padding:8px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.gallery-filter-btn:hover{border-color:var(--blue);color:var(--blue);}
+.gallery-filter-btn.active{background:var(--blue);color:white;border-color:var(--blue);}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.gallery-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;box-shadow:var(--shadow-card);}
+.gallery-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.gallery-card.hidden{display:none;}
+.ad-preview{background:#f0f2f5;padding:12px;border-radius:8px;margin:12px;}
+.ad-preview-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.ad-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F64FF,#49CEDE);flex-shrink:0;}
+.ad-name{font-size:13px;font-weight:700;color:#1c1e21;}
+.ad-sponsored{font-size:11px;color:#65676b;}
+.ad-image-wrap{border-radius:6px;overflow:hidden;margin-bottom:8px;background:#e4e6ea;aspect-ratio:1.91/1;display:flex;align-items:center;justify-content:center;}
+.ad-image-wrap img{width:100%;height:100%;object-fit:cover;}
+.img-placeholder{color:#90949c;font-size:12px;text-align:center;padding:20px;}
+.ad-body{padding:4px 0 8px;}
+.ad-headline{font-size:14px;font-weight:700;color:#1c1e21;margin-bottom:4px;}
+.ad-copy-preview{font-size:12px;color:#65676b;line-height:1.4;}
+.ad-cta-row{border-top:1px solid #dadde1;padding-top:8px;margin-top:4px;}
+.ad-cta-btn{background:#e4e6ea;border:none;border-radius:4px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c1e21;cursor:pointer;width:100%;}
+.card-meta{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap;}
+.funnel-tag{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.funnel-tag.tofu{background:rgba(115,189,76,.15);color:#17784C;}
+.funnel-tag.tofumofu{background:rgba(73,206,222,.15);color:#006B7A;}
+.funnel-tag.mofu{background:rgba(47,100,255,.12);color:#1E63AF;}
+.funnel-tag.mofubofu{background:rgba(108,99,255,.12);color:#4B44C2;}
+.funnel-tag.bofu{background:rgba(253,158,36,.15);color:#8B5A00;}
+.funnel-tag.ugc{background:rgba(220,53,69,.1);color:#9B1C2A;}
+.archetype-tag{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(0,39,79,.06);color:var(--text2);}
+.card-title{padding:0 12px 4px;font-size:13px;font-weight:700;color:var(--navy);}
+.card-desc{padding:0 12px 16px;font-size:12px;color:var(--text2);line-height:1.5;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--light-grey);margin:32px 0;}
+
+/* KEY TAKEAWAYS BOX */
+.takeaways-box{background:linear-gradient(135deg,rgba(47,100,255,.05),rgba(73,206,222,.05));border:1.5px solid rgba(47,100,255,.18);border-radius:16px;padding:22px 28px;margin-bottom:28px;}
+.takeaways-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.takeaways-icon{font-size:18px;}
+.takeaways-title{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;color:var(--navy);}
+.takeaways-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+.takeaways-list li{font-size:14px;color:var(--text);line-height:1.5;padding-left:18px;position:relative;}
+.takeaways-list li::before{content:'→';position:absolute;left:0;color:var(--blue);font-weight:700;}
+
+/* COMPACT PIPELINE FLOW */
+.pf-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px 24px;margin-bottom:32px;box-shadow:var(--shadow-card);overflow-x:auto;}
+.pf-inner{display:flex;align-items:center;gap:0;min-width:600px;}
+.pf-node{text-align:center;flex-shrink:0;padding:0 4px;}
+.pf-count{font-family:'Poppins',sans-serif;font-size:30px;font-weight:800;line-height:1.1;}
+.pf-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px;}
+.pf-arrow{flex:1;display:flex;flex-direction:column;align-items:center;padding:0 6px;min-width:70px;}
+.pf-rate{font-size:13px;font-weight:700;color:var(--blue);background:rgba(47,100,255,.08);border-radius:20px;padding:2px 10px;white-space:nowrap;}
+.pf-line{width:100%;height:2px;background:var(--border);margin-top:6px;border-radius:1px;}
+.pf-revenue{text-align:center;flex-shrink:0;padding:0 8px;}
+.pf-revenue-val{font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:var(--orange);}
+.pf-revenue-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px;}
+
+/* VIEW TOGGLE */
+.view-toggle{display:flex;gap:4px;background:var(--light-grey);border-radius:12px;padding:4px;margin-bottom:24px;width:fit-content;}
+.toggle-btn{padding:8px 20px;border:none;background:transparent;color:var(--text2);font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;}
+.toggle-btn:hover{color:var(--blue);}
+.toggle-btn.active{background:var(--white);color:var(--navy);box-shadow:var(--shadow-sm);}
+
+/* WIN RATE CALLOUT */
+.win-rate-callout{background:linear-gradient(135deg,rgba(115,189,76,.06),rgba(23,120,76,.04));border:1.5px solid rgba(115,189,76,.25);border-radius:16px;padding:24px 28px;margin-bottom:28px;display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;}
+.win-rate-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:6px;}
+.win-rate-value{font-family:'Poppins',sans-serif;font-size:48px;font-weight:800;color:var(--dark-green);line-height:1;}
+.win-rate-sub{font-size:13px;color:var(--text2);margin-top:6px;}
+.win-rate-right{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;padding-top:8px;}
+.win-rate-rep{background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:12px;padding:14px 18px;}
+.wrr-name{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.wrr-stats{font-size:13px;color:var(--text2);}
+
+/* ACTION BAR */
+.action-bar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px;}
+.action-btn{padding:8px 16px;border:1.5px solid var(--border);background:var(--white);color:var(--text2);font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.action-btn:hover{border-color:var(--blue);color:var(--blue);}
+.action-btn.present-active{background:var(--navy);color:white;border-color:var(--navy);}
+
+/* PRESENTATION MODE */
+body.present .nav-tabs{display:none;}
+body.present .action-bar{display:none;}
+body.present .container{max-width:100%;padding:16px 48px 80px;}
+body.present .kpi-value{font-size:40px!important;}
+body.present .chart-title{font-size:18px!important;}
+body.present .section-title{font-size:34px!important;}
+body.present .takeaways-list li{font-size:16px;}
+body.present .kpi-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+.present-nav{display:none;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:rgba(0,39,79,.92);border-radius:16px;padding:12px 20px;gap:16px;align-items:center;z-index:1000;backdrop-filter:blur(16px);box-shadow:0 8px 32px rgba(0,39,79,.3);}
+body.present .present-nav{display:flex;}
+.present-nav-btn{border:none;background:transparent;color:white;font-size:22px;cursor:pointer;padding:4px 10px;border-radius:8px;line-height:1;transition:background .15s;}
+.present-nav-btn:hover{background:rgba(255,255,255,.15);}
+.present-tab-name{color:white;font-weight:700;font-size:14px;min-width:150px;text-align:center;}
+.present-counter{color:rgba(255,255,255,.5);font-size:12px;min-width:36px;text-align:center;}
+.present-exit{border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:12px;font-weight:600;cursor:pointer;padding:4px 10px;border-radius:8px;transition:background .15s;}
+.present-exit:hover{background:rgba(255,255,255,.2);color:white;}
+
+/* PRINT */
+@media print {
+  .nav-tabs,.action-bar,.present-nav{display:none!important;}
+  .section:not(.active){display:none!important;}
+  body{background:white!important;}
+  .report-header::after{display:none;}
+  .kpi-card,.chart-card,.mom-table-wrap,.data-table-wrap,.win-rate-callout,.takeaways-box,.conv-card{box-shadow:none!important;break-inside:avoid;}
+  .chart-wrap{height:220px!important;}
+  .kpi-grid{grid-template-columns:repeat(3,1fr)!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="present-nav" id="presentNav">
+  <button class="present-nav-btn" onclick="presentPrev()">&#8592;</button>
+  <span class="present-tab-name" id="presentTabName">Overview</span>
+  <span class="present-counter" id="presentCounter">1 / 7</span>
+  <button class="present-nav-btn" onclick="presentNext()">&#8594;</button>
+  <button class="present-exit" onclick="togglePresent()">&#x2715; Exit</button>
+</div>
+
+<div class="container">
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <button class="action-btn" onclick="window.print()">&#x1F5A8; Print / PDF</button>
+  <button class="action-btn" id="presentBtn" onclick="togglePresent()">&#x26F6; Present</button>
+</div>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="brand">Breakthrough Marketing</div>
+  <h1>Q1 <span>2026</span> Marketing Report</h1>
+  <div class="subtitle">January 1 – March 10, 2026 &nbsp;·&nbsp; All Pipeline Stages</div>
+  <div class="meta-info">Generated March 12, 2026 &nbsp;·&nbsp; v3.6</div>
+</div>
+
+<!-- NAV (7 tabs) -->
+<div class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" onclick="showSection('overview',this)">Overview</button>
+  <button class="nav-tab" onclick="showSection('pipeline',this)">Pipeline</button>
+  <button class="nav-tab" onclick="showSection('channels',this)">Channels</button>
+  <button class="nav-tab" onclick="showSection('paid',this)">Paid Media</button>
+  <button class="nav-tab" onclick="showSection('campaigns',this)">Campaigns</button>
+  <button class="nav-tab" onclick="showSection('salesrep',this)">Sales</button>
+  <button class="nav-tab" onclick="showSection('adperf',this)">Ad Performance</button>
+  <button class="nav-tab" onclick="showSection('gallery',this)">Creative Gallery</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     OVERVIEW
+══════════════════════════════════════════════════════════════════ -->
+<div id="overview" class="section active">
+  <div class="section-header">
+    <div class="section-title">Q1 2026 Overview</div>
+    <div class="section-desc">Executive snapshot — January 1 through March 10, 2026</div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways-box">
+    <div class="takeaways-header">
+      <span class="takeaways-icon">📊</span>
+      <span class="takeaways-title">Key Takeaways</span>
+    </div>
+    <ul class="takeaways-list"><li><strong>February</strong> was the strongest revenue month: <strong>$116,574</strong> net, <strong>12 deals</strong> closed.</li><li>SQO → Sale conversion peaked in <strong>Feb</strong> at <strong>39%</strong> (12 of 31 SQOs closed).</li><li>Best ROAS campaign: "<strong>Direct To Demo - Testimonial Campaign - PTs</strong>" at <strong>7.34×</strong>.</li><li>⚠ <strong>1 campaign</strong> with avg frequency >3× — consider refreshing creative or expanding audience.</li><li><strong>12</strong> of 72 SQOs have pre-2026 MQL dates — long-cycle leads that converted to appointments this quarter.</li><li>Google brand search: <strong>$6,097</strong> spend · <strong>563 clicks</strong> · $10.83 avg CPC (Search - Brand campaign).</li></ul>
+  </div>
+
+  <!-- Month Filter -->
+  <div class="month-filter" id="ovMonthFilter">
+    <button class="month-btn active" onclick="setOvMonth('all',this)">All Q1</button>
+    <button class="month-btn" onclick="setOvMonth(0,this)">January</button>
+    <button class="month-btn" onclick="setOvMonth(1,this)">February</button>
+    <button class="month-btn" onclick="setOvMonth(2,this)">Mar MTD</button>
+  </div>
+
+  <!-- 5 KPI Cards (rendered by JS) -->
+  <div class="kpi-grid" id="ovKpis"></div>
+
+  <!-- Revenue by Channel -->
+  <div class="chart-card" style="margin-bottom:24px;">
+    <div class="chart-title">Revenue by Channel</div>
+    <div class="chart-sub">Net revenue attributed to each channel — Q1 2026</div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;">
+      <div style="flex:1;min-width:140px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Paid Social</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);">$127,238</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px;">55% of total</div>
+        </div>
+      <div style="flex:1;min-width:140px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Partner / Referral</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);">$45,350</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px;">20% of total</div>
+        </div>
+      <div style="flex:1;min-width:140px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Email</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);">$26,388</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px;">11% of total</div>
+        </div>
+      <div style="flex:1;min-width:140px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Other</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);">$16,791</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px;">7% of total</div>
+        </div>
+      <div style="flex:1;min-width:140px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">PPC</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);">$14,799</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px;">6% of total</div>
+        </div>
+      <div style="flex:1;min-width:140px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Direct</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);">$599</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px;">0% of total</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Compact Pipeline Flow (rendered by JS) -->
+  <div id="ovFunnelFlow"></div>
+
+  <!-- MoM Table -->
+  <div class="mom-table-wrap">
+    <div class="chart-title" style="margin-bottom:16px;">Month-over-Month Comparison</div>
+    <table class="mom-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>January</th>
+          <th>February <span style="font-weight:400;font-size:10px;color:var(--muted)">(vs Jan)</span></th>
+          <th>Mar MTD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+    <td><span class="stage-dot blue"></span>Demo Requests</td>
+    <td>39</td>
+    <td>25 <span class="badge bad">▼ 36%</span></td>
+    <td class="mtd">9</td>
+  </tr>
+        <tr>
+    <td><span class="stage-dot aqua"></span>Booked Demos</td>
+    <td>37</td>
+    <td>30 <span class="badge bad">▼ 19%</span></td>
+    <td class="mtd">9</td>
+  </tr>
+        <tr>
+    <td><span class="stage-dot teal"></span>SQOs</td>
+    <td>25</td>
+    <td>31 <span class="badge good">▲ 24%</span></td>
+    <td class="mtd">16</td>
+  </tr>
+        <tr>
+    <td><span class="stage-dot green"></span>Sales Closed</td>
+    <td>3</td>
+    <td>12 <span class="badge good">▲ 300%</span></td>
+    <td class="mtd">4</td>
+  </tr>
+        <tr>
+    <td><span class="stage-dot orange"></span>Revenue (Net)</td>
+    <td>$27,991</td>
+    <td>$116,574 <span class="badge good">▲ 316%</span></td>
+    <td class="mtd">$86,600</td>
+  </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Conversion Rate Cards -->
+  <div class="chart-title" style="margin-bottom:16px;">Funnel Conversion Rates</div>
+  <div class="conv-grid">
+    <div class="conv-card">
+      <div class="conv-arrow">→</div>
+      <div class="conv-stages">Demo → Booked</div>
+      <div class="conv-rate">104%</div>
+      <div class="conv-sub" style="font-size:12px;color:var(--muted);margin-top:4px;">Q1 Overall</div>
+      <div class="conv-breakdown">
+        <div class="conv-item"><span>95%</span>Jan</div>
+        <div class="conv-item"><span>120%</span>Feb</div>
+        <div class="conv-item"><span>100%</span>Mar</div>
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-arrow">→</div>
+      <div class="conv-stages">Booked → SQO</div>
+      <div class="conv-rate">95%</div>
+      <div class="conv-sub" style="font-size:12px;color:var(--muted);margin-top:4px;">Q1 Overall</div>
+      <div class="conv-breakdown">
+        <div class="conv-item"><span>68%</span>Jan</div>
+        <div class="conv-item"><span>103%</span>Feb</div>
+        <div class="conv-item"><span>178%</span>Mar</div>
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-arrow">→</div>
+      <div class="conv-stages">SQO → Sale</div>
+      <div class="conv-rate">26%</div>
+      <div class="conv-sub" style="font-size:12px;color:var(--muted);margin-top:4px;">Q1 Overall</div>
+      <div class="conv-breakdown">
+        <div class="conv-item"><span>12%</span>Jan</div>
+        <div class="conv-item"><span>39%</span>Feb</div>
+        <div class="conv-item"><span>25%</span>Mar</div>
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-arrow">→</div>
+      <div class="conv-stages">Demo → Sale</div>
+      <div class="conv-rate">26%</div>
+      <div class="conv-sub" style="font-size:12px;color:var(--muted);margin-top:4px;">Q1 Overall</div>
+      <div class="conv-breakdown">
+        <div class="conv-item"><span>8%</span>Jan</div>
+        <div class="conv-item"><span>48%</span>Feb</div>
+        <div class="conv-item"><span>44%</span>Mar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PIPELINE (Funnel + Trends merged)
+══════════════════════════════════════════════════════════════════ -->
+<div id="pipeline" class="section">
+  <div class="section-header">
+    <div class="section-title">Pipeline</div>
+    <div class="section-desc">Monthly funnel performance and week-over-week trends</div>
+  </div>
+
+  <!-- View Toggle -->
+  <div class="view-toggle" id="pipelineToggle">
+    <button class="toggle-btn active" onclick="setPipelineView('monthly',this)">Monthly Funnel</button>
+    <button class="toggle-btn" onclick="setPipelineView('weekly',this)">Weekly Trends</button>
+  </div>
+
+  <!-- Monthly Funnel View -->
+  <div id="pipelineMonthly">
+    <div class="month-filter">
+      <button class="month-btn active" onclick="setFunnelMonth('all',this)">All Q1</button>
+      <button class="month-btn" onclick="setFunnelMonth(0,this)">January</button>
+      <button class="month-btn" onclick="setFunnelMonth(1,this)">February</button>
+      <button class="month-btn" onclick="setFunnelMonth(2,this)">Mar MTD</button>
+    </div>
+    <div id="funnelDisplay"><!-- rendered by JS --></div>
+  </div>
+
+  <!-- Weekly Trends View (hidden by default) -->
+  <div id="pipelineWeekly" style="display:none;">
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Full Funnel — Weekly Volume</div>
+        <div class="chart-sub">All pipeline stages by week; weeks start on Monday</div>
+        <div class="chart-wrap tall"><canvas id="wowAllChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Demo Requests — Weekly</div>
+        <div class="chart-wrap"><canvas id="wowDemoChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Booked Demos — Weekly</div>
+        <div class="chart-wrap"><canvas id="wowBookChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">SQOs — Weekly</div>
+        <div class="chart-wrap"><canvas id="wowSqoChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Sales — Weekly</div>
+        <div class="chart-wrap"><canvas id="wowSalesChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CHANNELS
+══════════════════════════════════════════════════════════════════ -->
+<div id="channels" class="section">
+  <div class="section-header">
+    <div class="section-title">Channel Performance</div>
+    <div class="section-desc">How leads are coming in across each funnel stage</div>
+  </div>
+
+  <div class="month-filter">
+    <button class="month-btn active" onclick="setChannelMonth('all',this)">All Q1</button>
+    <button class="month-btn" onclick="setChannelMonth('jan',this)">January</button>
+    <button class="month-btn" onclick="setChannelMonth('feb',this)">February</button>
+    <button class="month-btn" onclick="setChannelMonth('mar',this)">Mar MTD</button>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Demo Requests by Channel</div>
+      <div class="chart-wrap"><canvas id="chDemoChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Booked Demos by Channel</div>
+      <div class="chart-wrap"><canvas id="chBookChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">SQOs by Channel</div>
+      <div class="chart-wrap"><canvas id="chSqoChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Sales by Channel</div>
+      <div class="chart-wrap"><canvas id="chSalesChart"></canvas></div>
+    </div>
+    <div class="chart-card" style="grid-column: 1 / -1;">
+      <div class="chart-title">Revenue (Net) by Channel</div>
+      <div class="chart-wrap"><canvas id="chRevChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PAID MEDIA
+══════════════════════════════════════════════════════════════════ -->
+<div id="paid" class="section">
+  <div class="section-header">
+    <div class="section-title">Paid Media Performance</div>
+    <div class="section-desc">Cost efficiency across the full funnel — includes Meta (Paid Social) + Google PPC</div>
+  </div>
+
+  <!-- Hero: Spend → Revenue at a glance -->
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:28px;">
+    <div style="flex:1;min-width:260px;background:linear-gradient(135deg,#1B2A5C,#2F64FF);border-radius:16px;padding:28px 32px;color:white;box-shadow:0 8px 32px rgba(47,100,255,.25);">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.7;margin-bottom:8px;">Total Paid Spend</div>
+      <div style="font-size:36px;font-weight:800;line-height:1.1;">$56,555</div>
+      <div style="font-size:13px;opacity:.7;margin-top:6px;">Meta/Facebook $50,457 · Google PPC $6,097</div>
+    </div>
+    <div style="flex:1;min-width:260px;background:linear-gradient(135deg,#1B5C2A,#73BD4C);border-radius:16px;padding:28px 32px;color:white;box-shadow:0 8px 32px rgba(115,189,76,.25);">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.7;margin-bottom:8px;">Paid Revenue (Net)</div>
+      <div style="font-size:36px;font-weight:800;line-height:1.1;">$127,238</div>
+      <div style="font-size:13px;opacity:.7;margin-top:6px;">8 closed deals from Paid Social + PPC</div>
+    </div>
+    <div style="flex:1;min-width:160px;background:linear-gradient(135deg,#7A4500,#FD9E24);border-radius:16px;padding:28px 32px;color:white;box-shadow:0 8px 32px rgba(253,158,36,.25);">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.7;margin-bottom:8px;">ROAS</div>
+      <div style="font-size:36px;font-weight:800;line-height:1.1;">2.521693064858513×</div>
+      <div style="font-size:13px;opacity:.7;margin-top:6px;">Return on ad spend</div>
+    </div>
+  </div>
+
+  <!-- KPI row: CPL, Cost per SQO, Cost per Sale, Paid Revenue, ROAS -->
+  <div id="paidKpis" class="kpi-row"></div>
+
+  <!-- Monthly efficiency breakdown -->
+  <div class="chart-card" style="margin:24px 0;">
+    <div class="chart-title">Monthly Paid Funnel Efficiency</div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th>January</th><th>February</th><th>Mar MTD</th></tr></thead>
+        <tbody id="paidMonthBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Spend vs Pipeline overlay -->
+  <div class="chart-card" style="margin:24px 0;">
+    <div class="chart-title">Weekly: Ad Spend vs Paid Pipeline</div>
+    <div class="chart-sub">Ad spend (bars) overlaid with paid demo requests and SQOs (lines)</div>
+    <div class="chart-wrap tall"><canvas id="paidSpendPipelineChart"></canvas></div>
+  </div>
+
+  <!-- Meta vs Google spend comparison -->
+  <div class="chart-card" style="margin:24px 0;">
+    <div class="chart-title">Meta vs Google — Monthly Spend</div>
+    <div class="chart-wrap"><canvas id="paidPlatformChart"></canvas></div>
+  </div>
+
+  <!-- Campaign attribution table -->
+  <div class="chart-card" style="margin:24px 0;">
+    <div class="chart-title">Campaign Attribution — Full Funnel</div>
+    <div class="chart-sub">Meta campaigns matched to HubSpot pipeline data via UTM parameters</div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Campaign</th><th>Spend</th><th>Demos</th><th>SQOs</th><th>Sales</th><th>Revenue</th><th>ROAS</th><th>CPL</th></tr></thead>
+        <tbody id="paidAttrBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROAS by campaign + CPL by campaign charts -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">ROAS by Campaign</div>
+      <div class="chart-wrap tall"><canvas id="paidRoasChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Cost Per Lead by Campaign</div>
+      <div class="chart-wrap tall"><canvas id="paidCplChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CAMPAIGNS
+══════════════════════════════════════════════════════════════════ -->
+<div id="campaigns" class="section">
+  <div class="section-header">
+    <div class="section-title">Campaign Performance</div>
+    <div class="section-desc">Top campaigns by volume at each funnel stage (Q1 2026)</div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Demo Requests — Top Campaigns</div>
+      <div class="chart-wrap tall"><canvas id="campDemoChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Booked Demos — Top Campaigns</div>
+      <div class="chart-wrap tall"><canvas id="campBookChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">SQOs — Top Campaigns</div>
+      <div class="chart-wrap tall"><canvas id="campSqoChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Sales — Top Campaigns</div>
+      <div class="chart-wrap tall"><canvas id="campSalesChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SALES & REVENUE
+══════════════════════════════════════════════════════════════════ -->
+<div id="salesrep" class="section">
+  <div class="section-header">
+    <div class="section-title">Sales &amp; Revenue</div>
+    <div class="section-desc">Closed deals, revenue by rep and product — Q1 2026</div>
+  </div>
+
+  <!-- Win Rate Callout -->
+  <div class="win-rate-callout">
+    <div class="win-rate-left">
+      <div class="win-rate-label">SQO → Sale Win Rate</div>
+      <div class="win-rate-value">26%</div>
+      <div class="win-rate-sub">19 of 72 SQOs closed this quarter</div>
+    </div>
+    <div class="win-rate-right">
+      <div class="win-rate-rep">
+          <div class="wrr-name">Kaleb Gebrewold</div>
+          <div class="wrr-stats">14 deals &nbsp;·&nbsp; $15,300 avg deal</div>
+        </div><div class="win-rate-rep">
+          <div class="wrr-name">James Nasworthy</div>
+          <div class="wrr-stats">5 deals &nbsp;·&nbsp; $3,392 avg deal</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Revenue KPIs + Avg Deal -->
+  <div class="kpi-grid">
+    
+    <div class="kpi-card orange">
+      <div class="kpi-label">Jan Revenue (Net)</div>
+      <div class="kpi-value" style="font-size:26px;">$27,991</div>
+      <div class="kpi-sub">3 deals closed</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">Feb Revenue (Net)</div>
+      <div class="kpi-value" style="font-size:26px;">$116,574</div>
+      <div class="kpi-sub">12 deals closed</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">Mar MTD Revenue (Net)</div>
+      <div class="kpi-value" style="font-size:26px;">$86,600</div>
+      <div class="kpi-sub">4 deals closed</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Avg Deal Size (Net)</div>
+      <div class="kpi-value" style="font-size:26px;">$12,167</div>
+      <div class="kpi-sub">Q1 average across 19 deals</div>
+    </div>
+  </div>
+
+  <!-- Rep Cards -->
+  <div class="chart-title" style="margin-bottom:16px;">Sales Rep Performance</div>
+  <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Kaleb Gebrewold</div>
+      <div class="rep-deals">14 deals closed in Q1</div>
+      <div class="rep-revenue">$214,203</div>
+      <div class="rep-revenue-label">Net Revenue (Minus Setup)</div>
+      <div class="rep-revenue-gross">Gross: $224,553 &nbsp;·&nbsp; Avg deal: $15,300</div>
+    </div><div class="rep-card">
+      <div class="rep-name">James Nasworthy</div>
+      <div class="rep-deals">5 deals closed in Q1</div>
+      <div class="rep-revenue">$16,962</div>
+      <div class="rep-revenue-label">Net Revenue (Minus Setup)</div>
+      <div class="rep-revenue-gross">Gross: $18,962 &nbsp;·&nbsp; Avg deal: $3,392</div>
+    </div>
+  </div>
+
+  <!-- Charts: Revenue by Month + Product Mix -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Revenue by Month</div>
+      <div class="chart-sub">Net (minus setup) vs gross contract value</div>
+      <div class="chart-wrap"><canvas id="revMonthChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Product Mix — Net Revenue</div>
+      <div class="chart-wrap"><canvas id="productChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Sales by Rep — Deals Closed</div>
+      <div class="chart-wrap"><canvas id="repDealsChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Sales by Rep — Net Revenue</div>
+      <div class="chart-wrap"><canvas id="repRevChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Product table -->
+  <div class="divider"></div>
+  <div class="chart-title" style="margin-bottom:16px;">Product Breakdown</div>
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Product</th><th>Deals</th><th>Net Revenue</th><th>Gross Revenue</th><th>Avg Deal (Net)</th></tr></thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>GrowthX</strong></td>
+          <td>4</td>
+          <td>$119,600</td>
+          <td>$125,950</td>
+          <td>$29,900</td>
+        </tr>
+        <tr>
+          <td><strong>Premium</strong></td>
+          <td>9</td>
+          <td>$85,003</td>
+          <td>$88,003</td>
+          <td>$9,445</td>
+        </tr>
+        <tr>
+          <td><strong>Pro</strong></td>
+          <td>2</td>
+          <td>$15,988</td>
+          <td>$17,488</td>
+          <td>$7,994</td>
+        </tr>
+        <tr>
+          <td><strong>Core</strong></td>
+          <td>4</td>
+          <td>$10,574</td>
+          <td>$12,074</td>
+          <td>$2,644</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     AD PERFORMANCE (Meta Spend + Attribution merged)
+══════════════════════════════════════════════════════════════════ -->
+<div id="adperf" class="section">
+  <div class="section-header">
+    <div class="section-title">Ad Performance</div>
+    <div class="section-desc">Meta paid social + Google PPC · spend, attribution, and audience health · Q1 2026</div>
+  </div>
+
+  <!-- 1. ROAS + Efficiency KPIs (most important — top of page) -->
+  <div class="kpi-grid" id="roasKpis"><!-- rendered by JS --></div>
+
+  <!-- 2. Attribution note -->
+  <div class="note-box"><span class="note-icon">ℹ️</span><span>Attribution is matched by campaign name keywords between Meta and HubSpot. Campaigns with no keyword match show 0 pipeline — they may still drive results through unmapped UTM values.</span></div>
+
+  <!-- 3. Campaign Attribution Table -->
+  <div class="data-table-wrap" style="margin-bottom:32px;">
+    <div class="chart-title" style="margin-bottom:16px;">Campaign Attribution</div>
+    <table class="data-table">
+      <thead><tr><th>Campaign</th><th>Spend</th><th>Demos</th><th>SQOs</th><th>Sales</th><th>Revenue (Net)</th><th>ROAS</th><th>CPL</th></tr></thead>
+      <tbody id="attributionBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 4. Revenue vs Spend chart -->
+  <div class="chart-grid">
+    <div class="chart-card full">
+      <div class="chart-title">Revenue vs Spend by Campaign</div>
+      <div class="chart-sub">Compare attributed revenue to spend for each campaign</div>
+      <div class="chart-wrap tall"><canvas id="roasCampChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">ROAS by Campaign</div>
+      <div class="chart-sub">Revenue per $1 spent (matched campaigns only)</div>
+      <div class="chart-wrap tall"><canvas id="roasBarChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">CPL by Campaign</div>
+      <div class="chart-sub">Cost per demo request from paid social</div>
+      <div class="chart-wrap tall"><canvas id="cplCampChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 5. Monthly paid social efficiency table -->
+  <div class="mom-table-wrap">
+    <div class="chart-title" style="margin-bottom:16px;">Monthly Paid Social Efficiency</div>
+    <table class="mom-table">
+      <thead><tr><th>Metric</th><th>January</th><th>February</th><th>Mar MTD</th></tr></thead>
+      <tbody id="costPerStageBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 6. Cost per pipeline stage KPIs -->
+  <div class="chart-title" style="margin-bottom:8px;">Cost Per Pipeline Stage</div>
+  <div class="chart-sub" style="margin-bottom:16px;">How much does it cost to move a paid-social lead through each funnel stage?</div>
+  <div class="kpi-grid" id="costPerStageKpis"><!-- rendered by JS --></div>
+
+  <!-- 7. Monthly spend + impressions/clicks -->
+  <div class="chart-grid">
+    <div class="chart-card full">
+      <div class="chart-title">Total Paid Media Spend by Month</div>
+      <div class="chart-sub">Meta (paid social) vs Google PPC (brand search) · monthly comparison</div>
+      <div class="chart-wrap"><canvas id="totalSpendChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Meta Monthly Spend</div>
+      <div class="chart-sub">Total Meta ad spend by month</div>
+      <div class="chart-wrap"><canvas id="spendMonthChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Meta Monthly Impressions &amp; Clicks</div>
+      <div class="chart-wrap"><canvas id="impClickChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 8. Weekly spend vs pipeline -->
+  <div class="chart-grid">
+    <div class="chart-card full">
+      <div class="chart-title">Weekly Spend vs Paid Social Pipeline</div>
+      <div class="chart-sub">Ad spend (bars) overlaid with paid demo requests and SQOs (lines)</div>
+      <div class="chart-wrap tall"><canvas id="spendPipelineChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 9. Top campaigns / ads by spend -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Top Campaigns by Spend</div>
+      <div class="chart-wrap tall"><canvas id="campSpendChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Top Ads by Spend</div>
+      <div class="chart-wrap tall"><canvas id="adSpendChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 10. Frequency & Reach (audience saturation — most tactical, last) -->
+  <div class="divider"></div>
+  <div class="chart-title" style="margin-bottom:8px;">Audience Saturation — Frequency &amp; Reach</div>
+  <div class="chart-sub" style="margin-bottom:16px;">High frequency (&gt;3×) signals the same audience is seeing your ads repeatedly — time to expand audiences or refresh creative.</div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Avg Frequency by Campaign</div>
+      <div class="chart-wrap tall"><canvas id="freqCampChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Frequency by Ad (Top 10)</div>
+      <div class="chart-wrap tall"><canvas id="freqAdChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="chart-title" style="margin-bottom:16px;">Ad Performance by Creative</div>
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Ad Name</th><th>Spend</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>CPC</th><th>Frequency</th></tr></thead>
+      <tbody id="adPerfBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Google PPC section -->
+  <div class="divider"></div>
+  <div class="chart-title" style="margin-bottom:4px;">Google PPC — Brand Search</div>
+  <div class="chart-sub" style="margin-bottom:16px;">Search - Brand campaign · Jan 1 – Mar 10, 2026</div>
+  <div class="kpi-grid" id="googleKpis"><!-- rendered by JS --></div>
+  <div class="mom-table-wrap" style="margin-top:24px;" id="googleMonthlyWrap">
+    <div class="chart-title" style="margin-bottom:16px;">Monthly Google PPC Performance</div>
+    <table class="mom-table">
+      <thead><tr><th>Metric</th><th>January</th><th>February</th><th>Mar MTD</th></tr></thead>
+      <tbody id="googleMonthBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CREATIVE GALLERY
+══════════════════════════════════════════════════════════════════ -->
+<div id="gallery" class="section">
+  <div class="section-header">
+    <div class="section-title">Creative Gallery</div>
+    <div class="section-desc">Q1 2026 ad creative assets — Meta ad preview format</div>
+  </div>
+  <div class="gallery-filters">
+    <button class="gallery-filter-btn active" onclick="filterGallery('all',this)">All</button>
+    <button class="gallery-filter-btn" onclick="filterGallery('TOFU',this)">TOFU</button>
+    <button class="gallery-filter-btn" onclick="filterGallery('TOFU-MOFU',this)">TOFU-MOFU</button>
+    <button class="gallery-filter-btn" onclick="filterGallery('MOFU',this)">MOFU</button>
+    <button class="gallery-filter-btn" onclick="filterGallery('MOFU-BOFU',this)">MOFU-BOFU</button>
+    <button class="gallery-filter-btn" onclick="filterGallery('BOFU',this)">BOFU</button>
+    <button class="gallery-filter-btn" onclick="filterGallery('UGC',this)">UGC</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    
+<div class="gallery-card" data-stage="TOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/a-01-pain-point-late-night.png" alt="Late Night Practice Owner" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">Your Practice Is Leaving $20K/Month on the Table</div>
+      <div class="ad-copy-preview">Here's the math nobody wants to show you.
+
+You're spending $2K–$5K a month on Facebook ads…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag tofu">TOFU</span>
+    <span class="archetype-tag">Pain Point Awareness</span>
+  </div>
+  <div class="card-title">Late Night Practice Owner</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="TOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/a-02-pain-point-empty-clinic.png" alt="Empty Waiting Room" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">The Practice Down the Street Has a Full Schedule. Yours Doesn't.</div>
+      <div class="ad-copy-preview">It's 10:30 AM on a Tuesday — prime appointment time — and your waiting room has empty chai…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag tofu">TOFU</span>
+    <span class="archetype-tag">Pain Point Awareness</span>
+  </div>
+  <div class="card-title">Empty Waiting Room</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="TOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/a-03-pain-point-phone-overwhelm.png" alt="Phone Notification Overwhelm" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">You're Not Getting 'Bad Leads.' You're Losing Good Ones.</div>
+      <div class="ad-copy-preview">73% of your ad leads will never become patients. Not because the leads are bad. Because th…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag tofu">TOFU</span>
+    <span class="archetype-tag">Pain Point Awareness</span>
+  </div>
+  <div class="card-title">Phone Notification Overwhelm</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="TOFU-MOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/b-01-transformation-dashboard.png" alt="Dashboard Victory" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">31 New Patients/Month — Without Spending More on Ads</div>
+      <div class="ad-copy-preview">BEFORE: Dr. Mike was spending $3K/month on Facebook ads. His agency said he was getting 15…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">See How It Works</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag tofumofu">TOFU-MOFU</span>
+    <span class="archetype-tag">Transformation / Hope</span>
+  </div>
+  <div class="card-title">Dashboard Victory</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="TOFU-MOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/b-02-transformation-thriving.png" alt="Thriving Practice" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">What 31 New Patients Per Month Actually Looks Like</div>
+      <div class="ad-copy-preview">Picture this. It's Monday morning.
+
+You check your phone before your first patient. 4 new …</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">See How It Works</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag tofumofu">TOFU-MOFU</span>
+    <span class="archetype-tag">Transformation / Hope</span>
+  </div>
+  <div class="card-title">Thriving Practice</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="TOFU-MOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/b-03-transformation-golden-hour.png" alt="Golden Hour Confidence" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">She Went From 60-Hour Weeks to Home by 5. Her Revenue Doubled.</div>
+      <div class="ad-copy-preview">Dr. Sarah was the first one in and last one out. Every day.
+
+She answered leads at 9 PM fr…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">See How It Works</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag tofumofu">TOFU-MOFU</span>
+    <span class="archetype-tag">Transformation / Hope</span>
+  </div>
+  <div class="card-title">Golden Hour Confidence</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/c-01-trust-therapist-action.png" alt="Therapist in Action" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">847 Practice Owners Stopped Running Their Own Marketing. Here's What Happened.</div>
+      <div class="ad-copy-preview">PT practice owners spending $1K+ on ads — this is for you.
+
+You didn't go to school for ma…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">See the Results</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofu">MOFU</span>
+    <span class="archetype-tag">Clinical Trust & Credibility</span>
+  </div>
+  <div class="card-title">Therapist in Action</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/c-02-trust-clinic-interior.png" alt="Modern Clinic Interior" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">The Practices Adding 30+ Patients/Month Aren't Running Better Ads</div>
+      <div class="ad-copy-preview">You invested $500K+ in your clinic. Premium equipment. A team you hand-picked. An experien…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">See the Results</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofu">MOFU</span>
+    <span class="archetype-tag">Clinical Trust & Credibility</span>
+  </div>
+  <div class="card-title">Modern Clinic Interior</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/c-03-trust-chiro-adjustment.png" alt="Chiropractor Adjustment" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">Chiropractors: Add 25+ New Patients/Month on Your Current Ad Budget</div>
+      <div class="ad-copy-preview">If you're a chiropractor spending $1K+ on ads and you can't trace a single new patient bac…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">See the Results</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofu">MOFU</span>
+    <span class="archetype-tag">Clinical Trust & Credibility</span>
+  </div>
+  <div class="card-title">Chiropractor Adjustment</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU-BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/d-01-proof-growth-display.png" alt="Proud Owner with Growth Display" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">$78,000 From One Campaign. Here's the Breakdown.</div>
+      <div class="ad-copy-preview">This isn't a case study we cherry-picked. This is what happens when you can actually see w…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Get Your Growth Plan</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofubofu">MOFU-BOFU</span>
+    <span class="archetype-tag">Social Proof / Results</span>
+  </div>
+  <div class="card-title">Proud Owner with Growth Display</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU-BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/d-02-proof-team-celebration.png" alt="Team Celebration" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">His Front Desk Was Chasing 200 Dead Leads/Month. Now They Book 31 Real Patients.</div>
+      <div class="ad-copy-preview">'I used to dread Monday mornings. Now my whole team gathers around the dashboard like it's…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Get Your Growth Plan</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofubofu">MOFU-BOFU</span>
+    <span class="archetype-tag">Social Proof / Results</span>
+  </div>
+  <div class="card-title">Team Celebration</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU-BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/d-03-proof-before-after.png" alt="Before/After Practice Split" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">Same $3K/Month in Ads. 287% More Patients. Here's the Difference.</div>
+      <div class="ad-copy-preview">Same practice. Same budget. Same ads. Same team.
+
+Completely different results.
+
+BEFORE (w…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Get Your Growth Plan</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofubofu">MOFU-BOFU</span>
+    <span class="archetype-tag">Social Proof / Results</span>
+  </div>
+  <div class="card-title">Before/After Practice Split</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/e-01-showcase-dashboard-ots.png" alt="Dashboard Over-the-Shoulder" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">Free Custom Growth Plan: Add 20–40 Patients/Month on Your Current Budget</div>
+      <div class="ad-copy-preview">We're opening 10 spots this month for practice owners who want a custom growth plan. Here'…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag bofu">BOFU</span>
+    <span class="archetype-tag">Service/Product Showcase</span>
+  </div>
+  <div class="card-title">Dashboard Over-the-Shoulder</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/e-02-showcase-mobile-check.png" alt="Mobile Dashboard Between Patients" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">15 Minutes to Set Up. 14 Days to See Results. No New Staff Required.</div>
+      <div class="ad-copy-preview">What if you could check your patient pipeline between appointments — the same way you chec…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag bofu">BOFU</span>
+    <span class="archetype-tag">Service/Product Showcase</span>
+  </div>
+  <div class="card-title">Mobile Dashboard Between Patients</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/e-03-showcase-focused-desk.png" alt="Focused Productivity at Desk" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">10 Spots Left: Free Growth Audit Worth $500 (15-Min Call)</div>
+      <div class="ad-copy-preview">If you're a practice owner spending $1K+ on Facebook ads, here's what I can guarantee:
+
+Yo…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag bofu">BOFU</span>
+    <span class="archetype-tag">Service/Product Showcase</span>
+  </div>
+  <div class="card-title">Focused Productivity at Desk</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="ALL">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/f-01-ugc-selfie-testimonial.png" alt="Selfie Video Testimonial" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">'I Almost Turned Off the Ad That Was Making Me $47K/Month'</div>
+      <div class="ad-copy-preview">Real talk from a PT practice owner in Denver.
+
+Six months ago I was spending $2K/month on …</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag all">ALL</span>
+    <span class="archetype-tag">UGC-Style / Authentic</span>
+  </div>
+  <div class="card-title">Selfie Video Testimonial</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="ALL">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/f-02-ugc-phone-reaction.png" alt="Candid Phone Reaction" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">'My Agency Said This Campaign Was Failing. It Made Me $25K.'</div>
+      <div class="ad-copy-preview">That face when you see the real numbers for the first time.
+
+This chiropractor was about t…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Learn More</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag all">ALL</span>
+    <span class="archetype-tag">UGC-Style / Authentic</span>
+  </div>
+  <div class="card-title">Candid Phone Reaction</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+
+<div class="gallery-card" data-stage="MOFU-BOFU">
+  <div class="ad-preview">
+    <div class="ad-preview-header">
+      <div class="ad-avatar"></div>
+      <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
+    </div>
+    <div class="ad-image-wrap">
+      <img src="../reports/creatives/test-video-01.png" alt="Patient Success Story — Video Script" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
+    </div>
+    <div class="ad-body">
+      <div class="ad-headline">'60-Hour Weeks and $4K/Month in Ads. Zero Idea What Worked. Then This.'</div>
+      <div class="ad-copy-preview">Watch this practice owner's story. 90 seconds that might change how you think about market…</div>
+    </div>
+    <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
+  </div>
+  <div class="card-meta">
+    <span class="funnel-tag mofubofu">MOFU-BOFU</span>
+    <span class="archetype-tag">Social Proof / Results</span>
+  </div>
+  <div class="card-title">Patient Success Story — Video Script</div>
+  <div class="card-desc">getbreakthrough.com</div>
+</div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════════════ -->
+<script>
+const D = {
+  "meta": {
+    "generated": "2026-03-12T14:35:26.447Z",
+    "sqoOldMqlCount": 12,
+    "salesOutsideQ1": 0,
+    "totalDemos": 73,
+    "totalBookDemos": 76,
+    "totalSqos": 72,
+    "totalSales": 19,
+    "totalRevNet": 231165,
+    "totalRevGross": 243515
+  },
+  "monthly": {
+    "labels": [
+      "Jan",
+      "Feb",
+      "Mar MTD"
+    ],
+    "fullLabels": [
+      "January",
+      "February",
+      "Mar (MTD)"
+    ],
+    "demos": [
+      39,
+      25,
+      9
+    ],
+    "bookDemos": [
+      37,
+      30,
+      9
+    ],
+    "sqos": [
+      25,
+      31,
+      16
+    ],
+    "sales": [
+      3,
+      12,
+      4
+    ],
+    "revNet": [
+      27991,
+      116574,
+      86600
+    ],
+    "revGross": [
+      29491,
+      123474,
+      90550
+    ]
+  },
+  "conversions": {
+    "demoToBook": [
+      95,
+      120,
+      100
+    ],
+    "bookToSqo": [
+      68,
+      103,
+      178
+    ],
+    "sqoToSale": [
+      12,
+      39,
+      25
+    ]
+  },
+  "mom": {
+    "demo": -36,
+    "book": -19,
+    "sqo": 24,
+    "sale": 300,
+    "rev": 316
+  },
+  "weeks": {
+    "labels": [
+      "Jan 5",
+      "Jan 6",
+      "Jan 12",
+      "Jan 13",
+      "Jan 19",
+      "Jan 20",
+      "Jan 26",
+      "Jan 27",
+      "Feb 2",
+      "Feb 3",
+      "Feb 9",
+      "Feb 10",
+      "Feb 16",
+      "Feb 17",
+      "Feb 23",
+      "Feb 24",
+      "Mar 2",
+      "Mar 3",
+      "Mar 9",
+      "Mar 10"
+    ],
+    "demos": [
+      0,
+      14,
+      0,
+      12,
+      0,
+      6,
+      0,
+      5,
+      0,
+      7,
+      0,
+      6,
+      0,
+      5,
+      0,
+      10,
+      0,
+      5,
+      0,
+      0
+    ],
+    "bookDemos": [
+      0,
+      8,
+      0,
+      7,
+      0,
+      12,
+      0,
+      10,
+      0,
+      5,
+      0,
+      5,
+      0,
+      11,
+      0,
+      10,
+      0,
+      5,
+      0,
+      3
+    ],
+    "sqos": [
+      4,
+      0,
+      1,
+      0,
+      13,
+      0,
+      7,
+      0,
+      11,
+      0,
+      6,
+      0,
+      4,
+      0,
+      10,
+      0,
+      15,
+      0,
+      1,
+      0
+    ],
+    "sales": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      2,
+      0,
+      7,
+      0,
+      4,
+      0,
+      0
+    ]
+  },
+  "channels": {
+    "all": {
+      "demos": {
+        "labels": [
+          "Paid Social",
+          "Other",
+          "Email",
+          "PPC"
+        ],
+        "data": [
+          41,
+          15,
+          14,
+          3
+        ]
+      },
+      "bookDemos": {
+        "labels": [
+          "Paid Social",
+          "Email",
+          "Other",
+          "Direct Mail",
+          "Partner / Referral",
+          "Organic",
+          "PPC",
+          "SME",
+          "Direct"
+        ],
+        "data": [
+          29,
+          12,
+          12,
+          9,
+          4,
+          4,
+          2,
+          2,
+          2
+        ]
+      },
+      "sqos": {
+        "labels": [
+          "Paid Social",
+          "Other",
+          "Email",
+          "Direct Mail",
+          "Partner / Referral",
+          "Organic",
+          "Direct",
+          "PPC",
+          "SME"
+        ],
+        "data": [
+          23,
+          17,
+          10,
+          9,
+          4,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      "sales": {
+        "labels": [
+          "Paid Social",
+          "Partner / Referral",
+          "Email",
+          "Other",
+          "PPC",
+          "Direct"
+        ],
+        "data": [
+          8,
+          3,
+          3,
+          2,
+          2,
+          1
+        ]
+      },
+      "revNet": {
+        "labels": [
+          "Paid Social",
+          "Partner / Referral",
+          "Email",
+          "Other",
+          "PPC",
+          "Direct"
+        ],
+        "data": [
+          127238,
+          45350,
+          26388,
+          16791,
+          14799,
+          599
+        ]
+      }
+    },
+    "jan": {
+      "demos": {
+        "labels": [
+          "Paid Social",
+          "Other",
+          "Email",
+          "PPC"
+        ],
+        "data": [
+          26,
+          9,
+          3,
+          1
+        ]
+      },
+      "bookDemos": {
+        "labels": [
+          "Paid Social",
+          "Direct Mail",
+          "Organic",
+          "Partner / Referral",
+          "Email",
+          "Other",
+          "SME",
+          "PPC",
+          "Direct"
+        ],
+        "data": [
+          14,
+          6,
+          4,
+          3,
+          3,
+          3,
+          2,
+          1,
+          1
+        ]
+      },
+      "sqos": {
+        "labels": [
+          "Paid Social",
+          "Other",
+          "Direct Mail",
+          "Organic",
+          "Email",
+          "Partner / Referral",
+          "Direct"
+        ],
+        "data": [
+          12,
+          3,
+          3,
+          3,
+          2,
+          1,
+          1
+        ]
+      },
+      "sales": {
+        "labels": [
+          "Other",
+          "Partner / Referral",
+          "Paid Social"
+        ],
+        "data": [
+          1,
+          1,
+          1
+        ]
+      },
+      "revNet": {
+        "labels": [
+          "Other",
+          "Partner / Referral",
+          "Paid Social"
+        ],
+        "data": [
+          12003,
+          9600,
+          6388
+        ]
+      }
+    },
+    "feb": {
+      "demos": {
+        "labels": [
+          "Paid Social",
+          "Email",
+          "Other",
+          "PPC"
+        ],
+        "data": [
+          10,
+          8,
+          6,
+          1
+        ]
+      },
+      "bookDemos": {
+        "labels": [
+          "Paid Social",
+          "Email",
+          "Other",
+          "Direct Mail",
+          "PPC",
+          "Partner / Referral",
+          "Direct"
+        ],
+        "data": [
+          13,
+          7,
+          4,
+          3,
+          1,
+          1,
+          1
+        ]
+      },
+      "sqos": {
+        "labels": [
+          "Paid Social",
+          "Direct Mail",
+          "Email",
+          "Partner / Referral",
+          "PPC",
+          "SME",
+          "Other",
+          "Direct"
+        ],
+        "data": [
+          9,
+          6,
+          6,
+          3,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "sales": {
+        "labels": [
+          "Paid Social",
+          "PPC",
+          "Partner / Referral",
+          "Direct",
+          "Email",
+          "Other"
+        ],
+        "data": [
+          5,
+          2,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      "revNet": {
+        "labels": [
+          "Paid Social",
+          "Partner / Referral",
+          "PPC",
+          "Email",
+          "Other",
+          "Direct"
+        ],
+        "data": [
+          55850,
+          35750,
+          14799,
+          4788,
+          4788,
+          599
+        ]
+      }
+    },
+    "mar": {
+      "demos": {
+        "labels": [
+          "Paid Social",
+          "Email",
+          "PPC"
+        ],
+        "data": [
+          5,
+          3,
+          1
+        ]
+      },
+      "bookDemos": {
+        "labels": [
+          "Other",
+          "Email",
+          "Paid Social"
+        ],
+        "data": [
+          5,
+          2,
+          2
+        ]
+      },
+      "sqos": {
+        "labels": [
+          "Other",
+          "Email",
+          "Paid Social"
+        ],
+        "data": [
+          12,
+          2,
+          2
+        ]
+      },
+      "sales": {
+        "labels": [
+          "Paid Social",
+          "Email"
+        ],
+        "data": [
+          2,
+          2
+        ]
+      },
+      "revNet": {
+        "labels": [
+          "Paid Social",
+          "Email"
+        ],
+        "data": [
+          65000,
+          21600
+        ]
+      }
+    }
+  },
+  "campaigns": {
+    "demos": [
+      [
+        "DEMO-2022-Hubspot Meeting Booked",
+        24
+      ],
+      [
+        "LM-2025-09-AI Checklist",
+        21
+      ],
+      [
+        "DEMO - Testimonial Landing Pages",
+        12
+      ],
+      [
+        "WBN-2026-01-06-PT Marketing System",
+        4
+      ],
+      [
+        "LM-2025-12-Cash Pay Services Guide",
+        3
+      ],
+      [
+        "Unknown",
+        2
+      ],
+      [
+        "Demo-Main Website-Strategy Form",
+        2
+      ]
+    ],
+    "bookDemos": [
+      [
+        "Marketing - Main Contact Form - Website",
+        14
+      ],
+      [
+        "LM-2025-09-AI Checklist",
+        10
+      ],
+      [
+        "DM-Cookie Campaign",
+        9
+      ],
+      [
+        "DEMO - Testimonial Landing Pages",
+        9
+      ],
+      [
+        "LM-2025-12-Cash Pay Services Guide",
+        5
+      ],
+      [
+        "Unknown",
+        5
+      ],
+      [
+        "Cold Outbound",
+        5
+      ]
+    ],
+    "sqos": [
+      [
+        "Unknown",
+        13
+      ],
+      [
+        "Marketing - Main Contact Form - Website",
+        12
+      ],
+      [
+        "DM-Cookie Campaign",
+        9
+      ],
+      [
+        "LM-2025-09-AI Checklist",
+        7
+      ],
+      [
+        "Partner Referral",
+        5
+      ],
+      [
+        "DEMO - Testimonial Landing Pages",
+        5
+      ],
+      [
+        "LM-2025-12-Cash Pay Services Guide",
+        4
+      ]
+    ],
+    "sales": [
+      [
+        "Marketing - Main Contact Form - Website",
+        6
+      ],
+      [
+        "DEMO - Testimonial Landing Pages",
+        3
+      ],
+      [
+        "Demo-Main Website-Strategy Form",
+        2
+      ],
+      [
+        "LM-2025-09-AI Checklist",
+        2
+      ],
+      [
+        "WBN-2026-01-06-PT Marketing System",
+        2
+      ],
+      [
+        "Partner Referral",
+        2
+      ],
+      [
+        "Unknown",
+        1
+      ]
+    ]
+  },
+  "reps": [
+    [
+      "Kaleb Gebrewold",
+      {
+        "count": 14,
+        "gross": 224553,
+        "net": 214203
+      }
+    ],
+    [
+      "James Nasworthy",
+      {
+        "count": 5,
+        "gross": 18962,
+        "net": 16962
+      }
+    ]
+  ],
+  "products": [
+    [
+      "GrowthX",
+      {
+        "count": 4,
+        "gross": 125950,
+        "net": 119600
+      }
+    ],
+    [
+      "Premium",
+      {
+        "count": 9,
+        "gross": 88003,
+        "net": 85003
+      }
+    ],
+    [
+      "Pro",
+      {
+        "count": 2,
+        "gross": 17488,
+        "net": 15988
+      }
+    ],
+    [
+      "Core",
+      {
+        "count": 4,
+        "gross": 12074,
+        "net": 10574
+      }
+    ]
+  ],
+  "adSpend": {
+    "hasData": true,
+    "totalSpend": 50457.37,
+    "totalImpressions": 1261439,
+    "totalClicks": 10005,
+    "avgCpc": 5.043215392303848,
+    "cpm": 39.99984937836867,
+    "cpl": 1230.6675609756098,
+    "costPerBook": 1739.9093103448276,
+    "costPerSqo": 2193.798695652174,
+    "costPerSale": 6307.17125,
+    "roas": 2.521693064858513,
+    "paidDemos": 41,
+    "paidBookDemos": 29,
+    "paidSqos": 23,
+    "paidSales": 8,
+    "paidRevNet": 127238,
+    "monthlySpend": [
+      21389,
+      22235,
+      6833
+    ],
+    "monthlyImpressions": [
+      376322,
+      772245,
+      112872
+    ],
+    "monthlyClicks": [
+      3912,
+      5047,
+      1046
+    ],
+    "monthlyCpl": [
+      823,
+      2224,
+      1367
+    ],
+    "monthlyCostPerSale": [
+      21389,
+      4447,
+      3417
+    ],
+    "monthlyROAS": [
+      "0.30",
+      "2.51",
+      "9.51"
+    ],
+    "monthlyPaidDemos": [
+      26,
+      10,
+      5
+    ],
+    "monthlyPaidSqos": [
+      12,
+      9,
+      2
+    ],
+    "monthlyPaidSales": [
+      1,
+      5,
+      2
+    ],
+    "monthlyPaidRevNet": [
+      6388,
+      55850,
+      65000
+    ],
+    "weeklySpendMap": {
+      "2026-01-05": 6469.08,
+      "2026-01-12": 5415.9800000000005,
+      "2026-01-19": 3414.6500000000005,
+      "2026-01-26": 3832.8099999999995,
+      "2026-02-02": 4691.67,
+      "2026-02-09": 5415.54,
+      "2026-02-16": 5237.4400000000005,
+      "2026-02-23": 6822.94,
+      "2026-03-02": 4852.9,
+      "2026-03-09": 1254.1100000000001
+    },
+    "weeklyPipelineMap": {
+      "2026-03-03": {
+        "demos": 0,
+        "bookDemos": 1,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-02-24": {
+        "demos": 0,
+        "bookDemos": 6,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-02-10": {
+        "demos": 0,
+        "bookDemos": 1,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-02-03": {
+        "demos": 0,
+        "bookDemos": 4,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-01-27": {
+        "demos": 0,
+        "bookDemos": 1,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-01-13": {
+        "demos": 0,
+        "bookDemos": 4,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-01-20": {
+        "demos": 0,
+        "bookDemos": 5,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-01-06": {
+        "demos": 0,
+        "bookDemos": 4,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2025-12-30": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-02-17": {
+        "demos": 0,
+        "bookDemos": 3,
+        "sqos": 0,
+        "sales": 0
+      },
+      "2026-01-05": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 4,
+        "sales": 0
+      },
+      "2026-01-19": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 6,
+        "sales": 0
+      },
+      "2026-01-26": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 2,
+        "sales": 0
+      },
+      "2026-02-02": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 2,
+        "sales": 0
+      },
+      "2026-02-09": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 5,
+        "sales": 0
+      },
+      "2026-02-23": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 2,
+        "sales": 0
+      },
+      "2026-03-02": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 1,
+        "sales": 0
+      },
+      "2026-03-09": {
+        "demos": 0,
+        "bookDemos": 0,
+        "sqos": 1,
+        "sales": 0
+      }
+    },
+    "topCampaignsBySpend": [
+      [
+        "[COLD] Direct To Demo - Testimonial Campaign - PTs - Copy V2",
+        13322.23
+      ],
+      [
+        "[COLD] AI Checklist - PTs",
+        12997.55
+      ],
+      [
+        "[COLD] Direct To Demo - Testimonial Campaign - PTs -  Copy V2 2/23 Relaunched",
+        8680.98
+      ],
+      [
+        "[COLD] ABO - Direct To Demo - Testimonial Campaign",
+        4941.849999999999
+      ],
+      [
+        "[COLD] Direct To Demo - Testimonial Campaign - PTs",
+        3271.36
+      ],
+      [
+        "[COLD] Cash Pay Guide and Training",
+        2848.45
+      ],
+      [
+        "[COLD] Webinar - 2026 Marketing System",
+        2841.58
+      ],
+      [
+        "[COLD] Webinar - 2026 Marketing System - Feb - 6",
+        1553.37
+      ]
+    ],
+    "topAdsBySpend": [
+      {
+        "name": "PT-LM-Ai Checklist Before after - Reactivate",
+        "spend": 9372.01,
+        "impressions": 143121,
+        "clicks": 1665,
+        "ctr": 1.163351,
+        "cpc": 5.628835,
+        "freq": 3.628185
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  Mike Hyde FullCopyV2",
+        "spend": 4062.84,
+        "impressions": 81823,
+        "clicks": 797,
+        "ctr": 0.974054,
+        "cpc": 5.097666,
+        "freq": 2.160286
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  SeanWeatherstonAltitude PT 1 - IntoBreakthrough HelpCopyV2",
+        "spend": 3325.13,
+        "impressions": 101325,
+        "clicks": 766,
+        "ctr": 0.755983,
+        "cpc": 4.340901,
+        "freq": 1.751452
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  LanceIntroResultsCopyV2",
+        "spend": 3151.51,
+        "impressions": 190383,
+        "clicks": 1020,
+        "ctr": 0.535762,
+        "cpc": 3.089716,
+        "freq": 2.349276
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  LanceFullWorkshopsCopyV2",
+        "spend": 2225.57,
+        "impressions": 100513,
+        "clicks": 512,
+        "ctr": 0.509387,
+        "cpc": 4.346816,
+        "freq": 2.299806
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  Alex Part 1 - intro and Results with Breakthrough - V2 Copy",
+        "spend": 2102.37,
+        "impressions": 33696,
+        "clicks": 305,
+        "ctr": 0.905152,
+        "cpc": 6.893016,
+        "freq": 2.232854
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  LanceFullWorkshopsCopyV2",
+        "spend": 1988.67,
+        "impressions": 27827,
+        "clicks": 280,
+        "ctr": 1.006217,
+        "cpc": 7.102393,
+        "freq": 1.875261
+      },
+      {
+        "name": "PT-LM-S-3WaysCashPayChad1",
+        "spend": 1917.04,
+        "impressions": 35821,
+        "clicks": 296,
+        "ctr": 0.826331,
+        "cpc": 6.476486,
+        "freq": 2.163496
+      }
+    ],
+    "campaignFrequency": [
+      {
+        "name": "[COLD] Direct To Demo - Testimonial Campaign - PTs - Copy V2",
+        "avgFreq": "3.10",
+        "reach": 192706
+      },
+      {
+        "name": "[COLD] AI Checklist - PTs",
+        "avgFreq": "2.93",
+        "reach": 61212
+      },
+      {
+        "name": "[COLD] Webinar - 2026 Marketing System",
+        "avgFreq": "2.68",
+        "reach": 21307
+      },
+      {
+        "name": "[COLD] Cash Pay Guide and Training",
+        "avgFreq": "2.47",
+        "reach": 20214
+      },
+      {
+        "name": "[COLD] Webinar - 2026 Marketing System - Feb - 6",
+        "avgFreq": "2.42",
+        "reach": 14709
+      },
+      {
+        "name": "[COLD] Direct To Demo - Testimonial Campaign - PTs",
+        "avgFreq": "2.40",
+        "reach": 21722
+      },
+      {
+        "name": "[COLD] Direct To Demo - Testimonial Campaign - PTs -  Copy V2 2/23 Relaunched",
+        "avgFreq": "2.30",
+        "reach": 67441
+      },
+      {
+        "name": "[COLD] ABO - Direct To Demo - Testimonial Campaign",
+        "avgFreq": "2.03",
+        "reach": 62575
+      }
+    ],
+    "adFrequency": [
+      {
+        "name": "PT-LM-Ai Checklist Before after - Reactivate",
+        "freq": 3.628185,
+        "reach": 39447,
+        "spend": 9372.01
+      },
+      {
+        "name": "PT-WBN-S-ChadMarketingSystemPayermixProfitCartoonFeb6",
+        "freq": 2.847516,
+        "reach": 9660,
+        "spend": 1112.15
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  LanceIntroResultsCopyV2",
+        "freq": 2.349276,
+        "reach": 81039,
+        "spend": 3151.51
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  LanceFullWorkshopsCopyV2",
+        "freq": 2.299806,
+        "reach": 43705,
+        "spend": 2225.57
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  Alex Part 1 - intro and Results with Breakthrough - V2 Copy",
+        "freq": 2.232854,
+        "reach": 15091,
+        "spend": 2102.37
+      },
+      {
+        "name": "PT-LM-Ai Checklist - Reactivate - 16 Appointments",
+        "freq": 2.200787,
+        "reach": 5593,
+        "spend": 941.4
+      },
+      {
+        "name": "PT-LM-S-3WaysCashPayChad1",
+        "freq": 2.163496,
+        "reach": 16557,
+        "spend": 1917.04
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  Mike Hyde FullCopyV2",
+        "freq": 2.160286,
+        "reach": 37876,
+        "spend": 4062.84
+      },
+      {
+        "name": "PT-LM-AI Marketing Checklist - Testimonial Lance AI",
+        "freq": 2.003735,
+        "reach": 12316,
+        "spend": 1820.08
+      },
+      {
+        "name": "PT-DEMO-Breakthrough System - Testimonial -  Sean Weatherston Altitude PT 2 - Not  a marketer BT helpedCopyV2",
+        "freq": 1.990856,
+        "reach": 47464,
+        "spend": 1417.23
+      }
+    ],
+    "campaignAttribution": [
+      {
+        "name": "[COLD] Direct To Demo - Testimonial Campaign - PTs - Copy V2",
+        "spend": 13322,
+        "demos": 12,
+        "bookDemos": 9,
+        "sqos": 5,
+        "sales": 3,
+        "revenue": 24000,
+        "roas": "1.80",
+        "cpl": 1110
+      },
+      {
+        "name": "[COLD] AI Checklist - PTs",
+        "spend": 12998,
+        "demos": 21,
+        "bookDemos": 10,
+        "sqos": 7,
+        "sales": 2,
+        "revenue": 65000,
+        "roas": "5.00",
+        "cpl": 619
+      },
+      {
+        "name": "[COLD] Direct To Demo - Testimonial Campaign - PTs -  Copy V2 2/23 Relaunched",
+        "spend": 8681,
+        "demos": 12,
+        "bookDemos": 9,
+        "sqos": 5,
+        "sales": 3,
+        "revenue": 24000,
+        "roas": "2.76",
+        "cpl": 723
+      },
+      {
+        "name": "[COLD] ABO - Direct To Demo - Testimonial Campaign",
+        "spend": 4942,
+        "demos": 12,
+        "bookDemos": 9,
+        "sqos": 5,
+        "sales": 3,
+        "revenue": 24000,
+        "roas": "4.86",
+        "cpl": 412
+      },
+      {
+        "name": "[COLD] Direct To Demo - Testimonial Campaign - PTs",
+        "spend": 3271,
+        "demos": 12,
+        "bookDemos": 9,
+        "sqos": 5,
+        "sales": 3,
+        "revenue": 24000,
+        "roas": "7.34",
+        "cpl": 273
+      },
+      {
+        "name": "[COLD] Cash Pay Guide and Training",
+        "spend": 2848,
+        "demos": 3,
+        "bookDemos": 5,
+        "sqos": 5,
+        "sales": 0,
+        "revenue": 0,
+        "roas": null,
+        "cpl": 949
+      },
+      {
+        "name": "[COLD] Webinar - 2026 Marketing System",
+        "spend": 2842,
+        "demos": 4,
+        "bookDemos": 5,
+        "sqos": 4,
+        "sales": 2,
+        "revenue": 11176,
+        "roas": "3.93",
+        "cpl": 710
+      },
+      {
+        "name": "[COLD] Webinar - 2026 Marketing System - Feb - 6",
+        "spend": 1553,
+        "demos": 4,
+        "bookDemos": 5,
+        "sqos": 4,
+        "sales": 2,
+        "revenue": 11176,
+        "roas": "7.19",
+        "cpl": 388
+      }
+    ]
+  },
+  "googlePpc": {
+    "hasData": true,
+    "totalSpend": 6097.46,
+    "totalClicks": 563,
+    "totalImpressions": 5491,
+    "totalConversions": 3.71,
+    "avgCpc": 10.83,
+    "avgCpm": 1110.45,
+    "monthlySpend": [
+      2797.81,
+      2474.52,
+      825.13
+    ],
+    "monthlyClicks": [
+      247,
+      239,
+      77
+    ],
+    "monthlyImpressions": [
+      2769,
+      2097,
+      625
+    ],
+    "monthlyCpc": [
+      11.33,
+      10.35,
+      10.72
+    ],
+    "monthlyConversions": [
+      2.71,
+      0,
+      1
+    ]
+  },
+  "gallery": [
+    {
+      "id": "a-01",
+      "name": "Late Night Practice Owner",
+      "filename": "a-01-pain-point-late-night.png",
+      "format": "4:5 Feed",
+      "funnelStage": "TOFU",
+      "archetype": "Pain Point Awareness",
+      "headline": "Your Practice Is Leaving $20K/Month on the Table",
+      "bodyCopy": "Here's the math nobody wants to show you.\n\nYou're spending $2K–$5K a month on Facebook ads. Your agency sends you a PDF that says you got 200 leads. Sounds great, right?\n\nBut how many of those leads actually became patients? How many ghosted after the first call? How many booked an eval and never showed up?\n\nIf you're like most practice owners, you have no idea. And that gap between 'leads' and 'patients' is where $10K–$20K in revenue disappears every single month.\n\nThe average PT patient is worth $2,000–$5,000 in lifetime value. If you're losing even 10 patients a month to broken follow-up, invisible drop-off, and ads you can't track past the click — that's $20K–$50K walking out the door.\n\nEvery. Single. Month.\n\nThe practices that figured this out are adding 31 new patients/month on average — on the same budget you're spending right now. The difference isn't more money. It's more visibility.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Learn More",
+      "prompt": "Editorial photograph of a male physical therapy practice owner in his early 40s sitting at a cluttered desk late at night, staring at a laptop screen showing confusing ad metrics and spreadsheets. His expression is frustrated and overwhelmed, rubbing his temples with one hand. A dim warm desk lamp provides the only light, casting long shadows across stacked paperwork and an empty coffee mug. The rest of the small office is dark. Shot on a 50mm f/2.0 lens with shallow depth of field. Medium close-up composition, subject centered in the upper two-thirds of the frame with open lower portion. Muted cool color palette with warm desk lamp accent. Documentary photography style, like a feature in a healthcare business journal. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "a-02",
+      "name": "Empty Waiting Room",
+      "filename": "a-02-pain-point-empty-clinic.png",
+      "format": "4:5 Feed",
+      "funnelStage": "TOFU",
+      "archetype": "Pain Point Awareness",
+      "headline": "The Practice Down the Street Has a Full Schedule. Yours Doesn't.",
+      "bodyCopy": "It's 10:30 AM on a Tuesday — prime appointment time — and your waiting room has empty chairs.\n\nMeanwhile, the corporate chain two miles away is fully booked. Not because they're better clinicians. Not because they have better outcomes. They just know exactly which marketing dollars produce patients — and which ones are wasted.\n\nHere's what that gap actually costs you:\n\n→ 5 empty slots per week × $250 average visit = $5,000/month in lost revenue\n→ $60,000/year walking out the door\n→ While you're paying $2K–$5K/month in ads you can't even track\n\nThe practices filling their schedules aren't spending more on marketing. They're spending smarter. They can see which ad brought in which patient, which campaign is burning cash, and where every dollar goes from the click to the booked eval.\n\n847 practice owners already have this visibility. They average 31 new patients per month — many on the exact same budget you're spending right now.\n\nThe only difference? They stopped guessing.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Learn More",
+      "prompt": "Professional photograph of an empty physical therapy clinic waiting room on a weekday morning. Rows of modern chairs sit completely unoccupied. A reception desk is visible in the background with a computer screen glowing but no staff present. Harsh overhead fluorescent lighting creates a cold, sterile atmosphere. A wall clock shows 10:30 AM — prime appointment time. The space is clean and modern but feels abandoned and quiet. Shot on a 24mm f/8 wide-angle lens, ISO 100. Everything is tack sharp. The composition places the empty chairs in the foreground with depth leading to the vacant reception area. Cool, desaturated color palette emphasizing blue-gray tones. Architectural interior photography style. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "a-03",
+      "name": "Phone Notification Overwhelm",
+      "filename": "a-03-pain-point-phone-overwhelm.png",
+      "format": "1:1 Square",
+      "funnelStage": "TOFU",
+      "archetype": "Pain Point Awareness",
+      "headline": "You're Not Getting 'Bad Leads.' You're Losing Good Ones.",
+      "bodyCopy": "73% of your ad leads will never become patients. Not because the leads are bad. Because they're dying in the gap between the click and the appointment — and you can't even see where.\n\nHere's what's actually happening:\n\n→ A lead fills out your form at 2:47 PM\n→ Your front desk calls back at 5:15 PM — voicemail\n→ They try again tomorrow — nothing\n→ That lead cost you $55. They're already booked with the practice that called back in 2 minutes.\n\nMultiply that by 30 lost leads a month. That's $1,650 in wasted ad spend and $60,000–$150,000 in lost patient lifetime value. Every month.\n\nThe practice owners who fixed this aren't working harder. They just plugged into a system that shows them exactly where leads drop off — so they could fix the leaks instead of pouring more money into a broken funnel.\n\nResult? Their cost per patient dropped from $200+ to $68. They went from 8 new patients a month to 31 — without spending a dollar more on ads.\n\nSame leads. Same budget. Completely different outcome.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Learn More",
+      "prompt": "Editorial photograph of a female practice owner in her late 30s sitting in a modern clinic break room, staring at her smartphone with an anxious, overwhelmed expression. She is wearing professional medical attire. The phone screen casts a cool blue glow on her face. Scattered papers and an open laptop are visible on the table beside her. Soft overhead lighting mixed with the blue phone glow creates a moody, isolating atmosphere. Shot on a 35mm f/1.8 lens with natural, documentary feel. Square 1:1 composition with the subject tightly framed and centered. Muted earth tones with cool blue accent from the phone. The mood is isolated and uncertain. Healthcare editorial photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "b-01",
+      "name": "Dashboard Victory",
+      "filename": "b-01-transformation-dashboard.png",
+      "format": "4:5 Feed",
+      "funnelStage": "TOFU-MOFU",
+      "archetype": "Transformation / Hope",
+      "headline": "31 New Patients/Month — Without Spending More on Ads",
+      "bodyCopy": "BEFORE: Dr. Mike was spending $3K/month on Facebook ads. His agency said he was getting 150 leads. But he couldn't name a single patient that came from those ads. Not one.\n\nHe was working late, doing his own marketing, staring at dashboards full of numbers that didn't connect to revenue. He was 6 months from shutting down his second location.\n\nAFTER: Within 60 days, he could see exactly which ads produced patients — not just clicks. He killed 3 campaigns that looked good on paper but generated zero evals. He doubled down on the one that was quietly producing 80% of his revenue.\n\n→ 31 new patients/month (up from 8)\n→ $78K pipeline from a single campaign\n→ Cost per patient: $68 (down from $375)\n→ Home by 5:30 PM instead of 8 PM\n→ Zero extra ad spend\n\nThe dream outcome? A predictable patient pipeline that runs without you babysitting it.\n\nThe catch? There isn't one. It took one afternoon to set up. No new staff. No new budget. Just visibility into where the money was already going.\n\n847 practice owners are already doing this. The average result: 31 new patients per month.",
+      "description": "getbreakthrough.com",
+      "ctaText": "See How It Works",
+      "prompt": "Professional lifestyle photograph of a confident male practice owner in his mid-40s reviewing a large monitor displaying upward-trending patient acquisition metrics and green growth charts. He is leaning back in his chair with a satisfied, energized expression, arms relaxed. A team member in the background is on a phone call with a patient, smiling. The office is modern and bright with large windows letting in warm golden hour light. Warm natural tones with blue and teal accents from the monitor display. Shot on Canon EOS R5 with 85mm f/1.4 lens, creating creamy bokeh on the background. Vertical 4:5 composition with the subject positioned in the upper two-thirds. The mood is hopeful, accomplished, and momentum-filled. Healthcare editorial style. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "b-02",
+      "name": "Thriving Practice",
+      "filename": "b-02-transformation-thriving.png",
+      "format": "1:1 Square",
+      "funnelStage": "TOFU-MOFU",
+      "archetype": "Transformation / Hope",
+      "headline": "What 31 New Patients Per Month Actually Looks Like",
+      "bodyCopy": "Picture this. It's Monday morning.\n\nYou check your phone before your first patient. 4 new evals already booked for this week. Your best campaign is running at a $68 cost per patient. Your schedule is full through Friday. Your front desk isn't chasing leads — they're confirming appointments.\n\nYour Sunday nights? No more anxiety about tomorrow's schedule. No more wondering if the ads are working. No more spreadsheets.\n\nThis isn't a fantasy. This is what 847 practice owners experience every single week.\n\nHere's the math that makes it real:\n→ Average: 31 new patients/month\n→ Average patient lifetime value: $2,000–$5,000\n→ That's $62K–$155K in new revenue per month\n→ On the same ad budget you're already spending\n→ Set up in one afternoon — not weeks, not months\n→ No new staff. No agency fees. No learning curve.\n\nYou didn't become a clinician to be your own marketing department. The practices that are growing right now aren't working harder — they plugged into a system that does the tracking for them.\n\nSo they can go back to treating patients. And go home on time.",
+      "description": "getbreakthrough.com",
+      "ctaText": "See How It Works",
+      "prompt": "Professional photograph of a thriving physical therapy clinic at peak hours. The bright, modern waiting room is comfortably full with patients checking in at a welcoming reception desk. Through a glass partition, treatment rooms are visible with therapists actively working with patients. The space has warm wood accents, large windows with natural light streaming in, and a clean white and teal color palette. A digital check-in screen glows on the front desk. The atmosphere is bustling, organized, and professional. Shot on Sony A7R IV with 24-70mm f/2.8 lens. Square 1:1 composition tightly framed to emphasize the full, active space. Warm, inviting tones. Healthcare architectural photography style. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "b-03",
+      "name": "Golden Hour Confidence",
+      "filename": "b-03-transformation-golden-hour.png",
+      "format": "9:16 Story",
+      "funnelStage": "TOFU-MOFU",
+      "archetype": "Transformation / Hope",
+      "headline": "She Went From 60-Hour Weeks to Home by 5. Her Revenue Doubled.",
+      "bodyCopy": "Dr. Sarah was the first one in and last one out. Every day.\n\nShe answered leads at 9 PM from her kitchen table. She spent Sundays reviewing spreadsheets, trying to figure out if her $3,500/month in ads was doing anything. She was exhausted, her team was burning out, and her second location was bleeding money.\n\nThen she made one change. Not a new agency. Not a bigger budget. She plugged into a system that showed her exactly where every ad dollar went — from the click to the booked eval to the paying patient.\n\nWithin 60 days:\n→ She found out 2 of her 5 campaigns produced zero patients — killed them instantly\n→ She doubled budget on the one campaign producing 80% of her revenue\n→ New patients jumped from 11/month to 34/month\n→ Cost per patient dropped from $318 to $71\n→ She stopped answering leads at night because the system tracked them automatically\n\nNow she walks out at 5 PM. Checks her phone once — 3 new evals booked while she was treating patients — and drives home.\n\nHer revenue didn't just recover. It doubled. On less ad spend than before.\n\nNo extra hours. No new staff. No marketing degree required. Just visibility into what was already happening — and the ability to fix it in an afternoon.",
+      "description": "getbreakthrough.com",
+      "ctaText": "See How It Works",
+      "prompt": "Professional portrait of a female practice owner in her early 40s standing confidently in the doorway of her modern clinic at golden hour. Warm sunset light streams through the glass door behind her, creating a rim light effect around her silhouette. She is wearing professional attire with arms crossed confidently, looking directly at the camera with a warm, assured smile. The clinic interior is visible behind her — clean, bright, and premium. Shot on Canon EOS R5 with 85mm f/1.4 lens. Full vertical 9:16 composition with the subject centered in the middle third of the frame, top and bottom kept clear. Golden warm tones with deep blue shadows. The mood is empowering, aspirational, and accomplished. Editorial portrait photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "c-01",
+      "name": "Therapist in Action",
+      "filename": "c-01-trust-therapist-action.png",
+      "format": "4:5 Feed",
+      "funnelStage": "MOFU",
+      "archetype": "Clinical Trust & Credibility",
+      "headline": "847 Practice Owners Stopped Running Their Own Marketing. Here's What Happened.",
+      "bodyCopy": "PT practice owners spending $1K+ on ads — this is for you.\n\nYou didn't go to school for marketing. You went to school to help people move better, live pain-free, and get back to the life they love.\n\nBut right now you're spending 10+ hours a week staring at ad dashboards you don't fully understand. Chasing leads that go cold. Arguing with agencies that send you PDFs full of vanity metrics.\n\nHere's what that costs you:\n→ 10 hours/week × $150/hour (your real value) = $6,000/month in lost clinical time\n→ Plus $2K–$5K/month in ad spend you can't trace to a single patient\n→ Plus the burnout tax — the Sunday anxiety, the 8 PM emails, the constant second-guessing\n\n847 practice owners decided they were done.\n\nThey plugged into Breakthrough — a system that tracks every lead from the ad click to the booked eval to the paying patient. Automatically. No spreadsheets. No agency middleman. No marketing degree.\n\nThe result?\n→ Average: 31 new patients/month\n→ Cost per patient: $68 (industry average is $200+)\n→ Setup time: one afternoon\n→ Extra staff needed: zero\n→ Hours per week managing marketing: under 1\n\nThey went back to doing what they actually do best. And their practices grew faster than when they were grinding 60 hours a week trying to figure out Facebook ads.",
+      "description": "getbreakthrough.com",
+      "ctaText": "See the Results",
+      "prompt": "Clean, modern photograph of a professional physical therapist working one-on-one with an engaged patient in a bright, contemporary rehabilitation clinic. The therapist is demonstrating a shoulder exercise with confidence and warmth, guiding the patient through proper form. The patient is focused and smiling slightly, showing trust and engagement. Natural light pours through large windows. The clinic features white walls, light blue accents, warm wood flooring, and modern rehabilitation equipment in the background. Shot on 35mm f/2.8 lens. Vertical 4:5 composition as a wide environmental portrait with the subject pair in the upper two-thirds, open space below. The mood is professional, warm, and trustworthy. Healthcare editorial photography, like a feature in Physical Therapy Today magazine. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "c-02",
+      "name": "Modern Clinic Interior",
+      "filename": "c-02-trust-clinic-interior.png",
+      "format": "1:1 Square",
+      "funnelStage": "MOFU",
+      "archetype": "Clinical Trust & Credibility",
+      "headline": "The Practices Adding 30+ Patients/Month Aren't Running Better Ads",
+      "bodyCopy": "You invested $500K+ in your clinic. Premium equipment. A team you hand-picked. An experience patients rave about.\n\nBut your marketing? It's a patchwork of boosted posts, an agency that can't show ROI, and a gut feeling about what's working.\n\nHere's what most practice owners don't realize:\n\nThe clinics adding 30+ new patients per month aren't spending more on ads. They're not running fancier campaigns. They're not using some secret creative strategy.\n\nThey can just SEE what's happening.\n\n→ Which ads produce patients (not just clicks)\n→ Which campaigns are burning cash\n→ Where leads drop off between the click and the appointment\n→ Exactly how much revenue each dollar of ad spend generates\n\nThat visibility changes everything. Because once you can see it, you can fix it. And once you fix it, the same $3K/month in ads that used to produce 8 patients suddenly produces 31.\n\nHere's what 847 practice owners got when they plugged in:\n→ 31 new patients/month (average)\n→ $68 cost per patient (down from $200+)\n→ $78K pipeline from a single campaign (real result)\n→ Setup: one afternoon. No new staff. No agency. Works with your existing budget.\n\nYour practice already delivers a premium patient experience. Your marketing should match.",
+      "description": "getbreakthrough.com",
+      "ctaText": "See the Results",
+      "prompt": "Architectural interior photograph of a premium, modern physical therapy clinic. The space features an open treatment area with contemporary rehabilitation equipment, warm wood accents, and a clean white and teal color palette. Large floor-to-ceiling windows flood the space with soft natural light. Treatment stations are neatly organized with adjustable tables and resistance equipment. A digital display screen on the wall shows a clean, professional interface. The floor is polished light wood. Every detail suggests quality, investment, and professionalism. Shot on 24mm f/8 lens, ISO 100 for maximum sharpness throughout. Square 1:1 composition centered on the treatment area. High-key lighting, bright and airy. The mood is aspirational and premium. Healthcare architectural photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "c-03",
+      "name": "Chiropractor Adjustment",
+      "filename": "c-03-trust-chiro-adjustment.png",
+      "format": "4:5 Feed",
+      "funnelStage": "MOFU",
+      "archetype": "Clinical Trust & Credibility",
+      "headline": "Chiropractors: Add 25+ New Patients/Month on Your Current Ad Budget",
+      "bodyCopy": "If you're a chiropractor spending $1K+ on ads and you can't trace a single new patient back to a specific campaign — you're leaving money on the table.\n\nHere's the problem most chiro practices face:\n\nYour agency says you got 100 leads last month. Great. But how many of those people actually walked through your door? How many booked adjustments? How many became recurring patients worth $3,000+ each?\n\nIf you're honest? You have no idea. And that gap is costing you $15K–$40K every single month.\n\nBreakthrough was built specifically for practice owners like you — not agencies, not marketing teams — who want to know exactly which marketing dollars turn into patients on the table. Not leads. Not clicks. Patients.\n\nWhat chiropractors who use Breakthrough see:\n→ 25–40 new patients/month (on existing budget)\n→ $68 average cost per patient (industry average: $200+)\n→ Setup in one afternoon — no tech skills needed\n→ No new staff, no agency required\n→ Every ad dollar tracked from click to first adjustment\n\nYou built your practice to help people. Stop spending your nights trying to figure out which Facebook ads work.\n\n847 practice owners already have this. The math speaks for itself.",
+      "description": "getbreakthrough.com",
+      "ctaText": "See the Results",
+      "prompt": "Professional photograph of a confident chiropractor in a clean, modern adjustment room performing a spinal assessment on a relaxed patient. The chiropractor is wearing professional attire and demonstrating expertise through precise positioning. An anatomical spine model is visible on the desk nearby. The adjustment room features a premium adjustment table, warm lighting, and a deep teal and white color palette. Natural light complements warm overhead clinical lighting. Shot on Canon EOS R5 with 50mm f/2.0 lens. Vertical 4:5 composition with the subject pair in the upper two-thirds, rule of thirds positioning. The mood is expert, reassuring, and professional. Healthcare editorial photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "d-01",
+      "name": "Proud Owner with Growth Display",
+      "filename": "d-01-proof-growth-display.png",
+      "format": "4:5 Feed",
+      "funnelStage": "MOFU-BOFU",
+      "archetype": "Social Proof / Results",
+      "headline": "$78,000 From One Campaign. Here's the Breakdown.",
+      "bodyCopy": "This isn't a case study we cherry-picked. This is what happens when you can actually see where your money goes.\n\nOne practice owner. One campaign. 60 days.\n\n→ 47 new patients booked\n→ $78,000 in attributed revenue pipeline\n→ Cost per patient: $68 (was $200+ before)\n→ ROI on that single campaign: 11.4x\n→ Time spent managing it: under 1 hour/week\n\nHere's what he did differently:\n\nHe didn't hire a better agency. He didn't increase his budget. He didn't learn Facebook ads.\n\nHe plugged into Breakthrough and saw — for the first time — which ads actually produced patients. Not leads. Not clicks. Patients in the chair.\n\nTurns out 2 of his 5 campaigns were generating 90% of his patients. The other 3? Looked great on the agency report. Zero patients. He killed them immediately and reallocated the budget.\n\n60 days later: $78K pipeline.\n\nThis is what visibility does. And it took one afternoon to set up.\n\n847 practice owners are already doing this. The average? 31 new patients/month.\n\nNot leads. Patients.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Get Your Growth Plan",
+      "prompt": "Professional business photograph of a practice owner standing confidently in front of a large wall-mounted display in their modern clinic lobby. The display shows an upward-trending growth chart with blue and green data visualizations. The owner's posture is proud and relaxed, arms at their sides, with a genuine smile of accomplishment. They are wearing business-casual attire. The lobby is modern with clean lines, warm wood reception desk, and bright overhead lighting with natural light from windows. Blue, white, and teal color palette with warm accents. Shot on 24mm wide-angle f/2.8 lens for environmental context. Vertical 4:5 composition with the owner in the left third and the growth display prominently visible. The mood is achievement and professional pride. Business editorial photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "d-02",
+      "name": "Team Celebration",
+      "filename": "d-02-proof-team-celebration.png",
+      "format": "1:1 Square",
+      "funnelStage": "MOFU-BOFU",
+      "archetype": "Social Proof / Results",
+      "headline": "His Front Desk Was Chasing 200 Dead Leads/Month. Now They Book 31 Real Patients.",
+      "bodyCopy": "'I used to dread Monday mornings. Now my whole team gathers around the dashboard like it's game day.'\n\nHere's where this practice was 90 days ago:\n→ $3,000/month on ads\n→ 200 'leads' per month (according to the agency)\n→ 8 patients actually booked\n→ Front desk spending 15+ hours/week chasing people who never picked up\n→ Cost per patient: $375\n→ Team morale: rock bottom\n\nThe owner was 6 months from cutting his marketing budget entirely. He thought ads 'just didn't work' for PT.\n\nThen he plugged into Breakthrough. One afternoon setup. No new staff. No new budget.\n\nWithin 90 days:\n→ He could see which of those 200 'leads' actually became patients\n→ Discovered 3 campaigns producing zero patients — killed them\n→ Found 1 campaign quietly generating $78K in pipeline — tripled its budget\n→ Front desk stopped chasing dead leads and started booking real evals\n→ 31 new patients in a single month\n→ Cost per patient: $68\n\nHis team went from dreading Mondays to celebrating wins. His front desk went from frustrated to efficient. His revenue? Up 287% in one quarter.\n\nSame budget. Same team. Same ads. Just visibility.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Get Your Growth Plan",
+      "prompt": "Candid professional photograph of a small practice team of four people in a bright clinic conference room, gathered around a laptop showing positive results. The practice owner is pointing at the screen with an excited expression while team members lean in with genuine smiles and positive energy. They are wearing a mix of professional and clinical attire. The room has modern furnishings, a whiteboard with goals in the background, and large windows with natural light. Warm, collaborative atmosphere. Shot on 35mm f/1.8 lens with a natural, documentary feel. Square 1:1 composition with the group centered and tightly framed. Warm golden tones with blue accents from the laptop screen. The mood is celebration, teamwork, and shared success. Healthcare business photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "d-03",
+      "name": "Before/After Practice Split",
+      "filename": "d-03-proof-before-after.png",
+      "format": "4:5 Feed",
+      "funnelStage": "MOFU-BOFU",
+      "archetype": "Social Proof / Results",
+      "headline": "Same $3K/Month in Ads. 287% More Patients. Here's the Difference.",
+      "bodyCopy": "Same practice. Same budget. Same ads. Same team.\n\nCompletely different results.\n\nBEFORE (without visibility):\n→ $3,000/month on Facebook ads\n→ No idea which campaigns worked\n→ 8 new patients/month\n→ $375 cost per patient\n→ 10+ hours/week managing marketing\n→ Sunday night anxiety about Monday's schedule\n\nAFTER (with visibility):\n→ Same $3,000/month\n→ Every dollar tracked from click to patient\n→ 31 new patients/month\n→ $68 cost per patient\n→ Under 1 hour/week managing marketing\n→ Schedule full through next week\n\nShe didn't spend more. She didn't hire a new agency. She didn't learn Facebook ads.\n\nShe plugged into Breakthrough — one afternoon setup — and for the first time could see which ads produced patients. Not leads. Not clicks. Actual patients in chairs.\n\nShe killed the campaigns that looked good on paper but generated zero revenue. She scaled the one campaign that was quietly producing 80% of her patients.\n\nThe math:\n→ 287% more patients\n→ 82% lower cost per patient\n→ $78K pipeline from a single campaign\n→ Zero extra ad spend\n→ Zero extra staff\n\n847 practice owners have done this. The budget didn't change. The visibility did.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Get Your Growth Plan",
+      "prompt": "A dramatic split-composition photograph of the same physical therapy clinic from two different perspectives. The left half is cool and muted — showing an empty, quiet waiting room with harsh fluorescent lighting, vacant chairs, and a dim reception area. The right half is warm and vibrant — the same space now bustling with patients, warm golden light streaming through windows, a welcoming receptionist greeting someone, and treatment rooms active in the background. A clean vertical dividing line separates the two halves. The contrast between the cold emptiness and warm abundance is striking. Shot on 24-70mm f/2.8 zoom lens. Vertical 4:5 composition. High contrast for mobile viewing. The left side uses blue-gray desaturated tones, the right uses warm golden and teal tones. Healthcare business transformation photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "e-01",
+      "name": "Dashboard Over-the-Shoulder",
+      "filename": "e-01-showcase-dashboard-ots.png",
+      "format": "4:5 Feed",
+      "funnelStage": "BOFU",
+      "archetype": "Service/Product Showcase",
+      "headline": "Free Custom Growth Plan: Add 20–40 Patients/Month on Your Current Budget",
+      "bodyCopy": "We're opening 10 spots this month for practice owners who want a custom growth plan. Here's exactly what you get:\n\nOn a 15-minute call, we'll build you a custom plan showing:\n→ Which of your current ads are actually producing patients (not just leads — we'll show you the difference)\n→ Exactly where you're losing money you don't know about\n→ The specific campaigns to kill and the ones to scale\n→ A roadmap to add 20–40 new patients/month on your current budget\n\nThis is a $500 growth audit — yours free. No catch. No 45-minute sales pitch. 15 minutes.\n\nWhy do we give this away? Because 73% of the practice owners who see their real numbers decide to use Breakthrough. The data sells itself.\n\nHere's what 847 practice owners have already seen after plugging in:\n→ Average: 31 new patients/month\n→ Average cost per patient: $68 (down from $200+)\n→ Setup time: one afternoon\n→ No new staff. No new budget. No agency required.\n→ $78K pipeline from a single campaign (real result, not cherry-picked)\n\nOnly 10 spots this month. We cap it because each plan is built custom — not a template.\n\nIf your practice is spending $1K+ on ads and you can't tell exactly which dollars produced patients — this call will change that in 15 minutes.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Book Your Free Demo",
+      "prompt": "Over-the-shoulder photograph of a practice owner viewing a clean analytics dashboard on a laptop screen in their modern office. The screen shows a professional interface with campaign performance metrics, patient acquisition charts trending upward, and conversion data with blue and green accent colors. Shallow depth of field — the screen content is slightly soft while the focus is on the overall scene and the owner's engaged, productive posture. They are leaning forward with interest. Warm natural office lighting from a nearby window mixed with the cool glow of the monitor. A coffee mug and notepad sit beside the laptop. Shot on 85mm f/1.4 lens. Vertical 4:5 composition with the laptop screen in the upper two-thirds. The mood is focused, productive, and in-control. Professional business photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "e-02",
+      "name": "Mobile Dashboard Between Patients",
+      "filename": "e-02-showcase-mobile-check.png",
+      "format": "9:16 Story",
+      "funnelStage": "BOFU",
+      "archetype": "Service/Product Showcase",
+      "headline": "15 Minutes to Set Up. 14 Days to See Results. No New Staff Required.",
+      "bodyCopy": "What if you could check your patient pipeline between appointments — the same way you check your email?\n\nQuick glance at your phone: 3 new evals booked today. Your best campaign running at $55 per lead. Schedule full through Friday. One campaign underperforming — pause it with one tap.\n\nThat's Breakthrough. One dashboard. Every ad dollar tracked from click to patient. On your phone, updated in real time.\n\nNo logging into 5 different platforms. No waiting for your agency's monthly PDF. No spreadsheets. No guessing.\n\nHere's what makes this different from everything else you've tried:\n→ Setup: 15 minutes, not weeks. Plug in your ad accounts and your data flows automatically.\n→ Results timeline: most practice owners see actionable insights within 14 days\n→ Staff needed: zero. It runs itself.\n→ Budget needed: your existing one. No extra ad spend required.\n→ Technical skill needed: if you can check email, you can use this.\n\nThe numbers from 847 practice owners who already plugged in:\n→ 31 new patients/month (average)\n→ $68 cost per patient\n→ Under 1 hour/week managing marketing\n→ $78K pipeline from a single campaign\n\nWe're opening 10 demo spots this month. The call takes 15 minutes — the same time it takes to set up.\n\nIf you're spending $1K+ on ads and can't trace a dollar to a patient, this changes that today.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Book Your Free Demo",
+      "prompt": "Candid photograph of a female practice owner in clinical attire checking her smartphone between patient appointments in a bright clinic hallway. The phone screen shows a clean dashboard interface with green upward-trending metrics. Her expression is pleasantly surprised, a slight smile of satisfaction as she glances at the results. The modern clinic hallway stretches behind her with treatment room doors and warm lighting. Shot on 50mm f/2.0 lens with shallow depth of field, hallway softly blurred. Full vertical 9:16 composition with the subject centered in the middle third, top and bottom clear. Warm natural tones with teal and blue accents from the phone screen. The mood is efficient, pleased, and effortless. Documentary-style healthcare photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "e-03",
+      "name": "Focused Productivity at Desk",
+      "filename": "e-03-showcase-focused-desk.png",
+      "format": "1:1 Square",
+      "funnelStage": "BOFU",
+      "archetype": "Service/Product Showcase",
+      "headline": "10 Spots Left: Free Growth Audit Worth $500 (15-Min Call)",
+      "bodyCopy": "If you're a practice owner spending $1K+ on Facebook ads, here's what I can guarantee:\n\nYou're wasting at least 30% of that budget on campaigns that produce zero patients. You just can't see which 30% yet.\n\nOn this free 15-minute call, we'll show you:\n→ Exactly which ads are producing patients and which are burning cash\n→ Where your leads are dropping off (the gap most agencies completely ignore)\n→ A custom plan to add 20–40 new patients/month — on your current budget\n→ The specific number your practice is leaving on the table every month\n\nThis is a $500 growth audit. We're giving away 10 this month because the math does the selling for us — 73% of practice owners who see their real numbers choose to use Breakthrough.\n\nHere's what that looks like:\n→ 31 new patients/month (average across 847 practices)\n→ $68 cost per patient (down from $200+ industry average)\n→ Setup: one afternoon. Literally plug in your accounts and go.\n→ Extra staff needed: none\n→ Extra budget needed: none — works with what you're already spending\n→ Time managing marketing: under 1 hour/week\n\nThe dream outcome: a predictable patient pipeline that fills your schedule without you babysitting it. So you can go back to treating patients and leave by 5 PM.\n\n10 spots. 15 minutes. No pitch. Just your numbers.\n\nIf they don't shock you, you'll be the first.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Book Your Free Demo",
+      "prompt": "Professional photograph of a male practice owner at a clean, minimalist desk in a well-lit modern office, productively working on a laptop displaying campaign analytics. He is wearing business-casual attire, sitting with confident posture, typing while looking at positive metrics on screen. The desk has a clean setup — laptop, single monitor showing growth charts, wireless keyboard, and a small plant. Warm natural light from a window behind the monitor creates soft rim lighting on the subject. The office is modern with white walls and warm wood accents. Shot on Sony A7R IV with 24-70mm f/2.8 lens. Square 1:1 composition with the subject centered. The mood is productive, organized, and empowered. Professional business lifestyle photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "f-01",
+      "name": "Selfie Video Testimonial",
+      "filename": "f-01-ugc-selfie-testimonial.png",
+      "format": "9:16 Story",
+      "funnelStage": "ALL",
+      "archetype": "UGC-Style / Authentic",
+      "headline": "'I Almost Turned Off the Ad That Was Making Me $47K/Month'",
+      "bodyCopy": "Real talk from a PT practice owner in Denver.\n\nSix months ago I was spending $2K/month on Facebook ads and I honestly thought they weren't working. I'd get leads, call them back hours later, most never picked up. My agency said I was getting 'great results.' I couldn't name one patient that came from an ad.\n\nI was about to cut my entire marketing budget.\n\nThen a friend told me about Breakthrough. Set it up on a Tuesday afternoon — literally took 20 minutes. By Friday I could see something that blew my mind:\n\nOne campaign I was about to turn off? It had quietly produced 80% of my revenue. $47K in patient lifetime value from a single ad.\n\nThe other 4 campaigns my agency said were 'performing well'? Two of them had generated zero patients. ZERO. In 6 months. I killed them immediately.\n\nIn 30 days:\n→ Went from 12 patients/month to 40\n→ Cost per patient dropped from $167 to $50\n→ Saved $1,200/month in wasted ad spend\n→ Stopped chasing leads — the system tracks them automatically\n→ Fired my agency (sorry, guys)\n\nI didn't change my ads. I didn't increase my budget. I just finally saw where the money was going.\n\nIf you own a practice and you're spending money on ads without tracking to patients — you're flying blind. I was. For 2 years.\n\nCheck it out. Link below.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Learn More",
+      "prompt": "Candid, unposed photograph of a male practice owner in his late 30s recording a selfie-style video in his physical therapy clinic. Natural warm lighting from overhead clinic lights, slightly imperfect framing that feels authentic and unproduced. He is mid-sentence, gesturing enthusiastically with one hand while holding the phone with the other. His expression is genuine excitement, like he is sharing great news. The clinic is visible in the background — clean but lived-in, treatment tables and exercise equipment slightly out of focus. Shot from a front-camera smartphone perspective, like an iPhone 15 Pro selfie. Warm natural tones with slight film grain for authenticity. Full vertical 9:16 composition. The image should feel like a screenshot from a genuine social media post. No filters, no text, no logos.",
+      "createdAt": ""
+    },
+    {
+      "id": "f-02",
+      "name": "Candid Phone Reaction",
+      "filename": "f-02-ugc-phone-reaction.png",
+      "format": "4:5 Feed",
+      "funnelStage": "ALL",
+      "archetype": "UGC-Style / Authentic",
+      "headline": "'My Agency Said This Campaign Was Failing. It Made Me $25K.'",
+      "bodyCopy": "That face when you see the real numbers for the first time.\n\nThis chiropractor was about to pause her best campaign. Her agency said it had a 'low click-through rate' and recommended killing it.\n\nThen she plugged into Breakthrough and saw something her agency never showed her: that 'failing' campaign had produced 14 patients worth $25,500 in closed revenue. It was her single best-performing ad.\n\nMeanwhile, the campaign her agency called a 'top performer'? Great clicks. Great CTR. Zero patients.\n\nShe almost scaled the wrong ad and killed the one making her money.\n\nThis is what happens when you track clicks vs. when you track patients.\n\nHere's what she saw after 60 days with Breakthrough:\n→ 28 new patients/month (up from 9)\n→ Cost per patient: $72 (down from $333)\n→ Killed 2 campaigns that looked good but produced nothing\n→ Scaled 1 campaign from $500/month to $1,500/month — tripled her best results\n→ Total setup time: 25 minutes on a Wednesday afternoon\n→ No new staff. No new tools. Same budget.\n\nThe data was always there. She just couldn't see it before. Now she can.\n\n847 practice owners already have this visibility. If you're spending money on ads and trusting click metrics to tell you what's working — you might be scaling the wrong ads too.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Learn More",
+      "prompt": "Candid photograph of a female chiropractor in her mid-40s in her clinic, holding her phone toward the camera to show the screen with a genuinely surprised and delighted expression. She is wearing professional clinical attire. The phone screen is angled toward the viewer, showing a notification-style interface with green indicators. Her other hand is raised in a gesture of pleasant disbelief. The chiropractic clinic environment is visible behind her — adjustment table, warm lighting, spine model on a shelf. Shot on 35mm f/1.8 lens with natural documentary feel. Vertical 4:5 composition with the subject in the upper two-thirds, open space below for text overlay. Warm tones, ring light reflection subtle in her eyes. The mood is authentic excitement and genuine surprise. UGC-style photography. No text, no logos, no watermarks.",
+      "createdAt": ""
+    },
+    {
+      "id": "test-video-01",
+      "name": "Patient Success Story — Video Script",
+      "filename": "test-video-01.png",
+      "format": "Video 9:16 Reel",
+      "funnelStage": "MOFU-BOFU",
+      "archetype": "Social Proof / Results",
+      "headline": "'60-Hour Weeks and $4K/Month in Ads. Zero Idea What Worked. Then This.'",
+      "bodyCopy": "Watch this practice owner's story. 90 seconds that might change how you think about marketing your practice.\n\nBEFORE:\n→ Working 60-hour weeks\n→ Spending $4,000/month on Facebook ads\n→ Couldn't name a single patient that came from those ads\n→ Agency said 'results look great' — his schedule said otherwise\n→ Barely breaking even\n→ Considering shutting down his second location\n\nAFTER (60 days with Breakthrough):\n→ 47 new patients/month (up from 11)\n→ $32K monthly revenue increase\n→ Cost per patient: $85 (was $364)\n→ Killed 3 campaigns that produced zero patients\n→ Found 1 campaign producing $78K in pipeline — scaled it immediately\n→ Home by 5 PM for the first time in 3 years\n\nHere's what he didn't do:\n→ Didn't increase his ad budget\n→ Didn't hire new staff\n→ Didn't switch agencies\n→ Didn't learn Facebook ads\n→ Didn't spend weeks setting things up\n\nHe plugged in Breakthrough on a Tuesday afternoon. By Friday he could see which ads produced patients and which ones were burning cash.\n\nIf you're a practice owner still doing it the old way — spending money on ads you can't track past the click — book a 15-minute demo. It's free. No pitch.\n\n847 practice owners already did. The average result: 31 new patients/month.",
+      "description": "getbreakthrough.com",
+      "ctaText": "Book Your Free Demo",
+      "prompt": "[0:00–0:03] HOOK: Close-up of practice owner looking at camera — 'I was working 60-hour weeks and barely breaking even...'\n\n[0:03–0:08] PROBLEM: B-roll of empty waiting room, owner at desk late at night, looking stressed at spreadsheets.\n\n[0:08–0:15] TURNING POINT: 'Then I found Breakthrough and everything changed.' Cut to dashboard showing upward metrics, phone notifications of new patient bookings.\n\n[0:15–0:25] RESULTS: Quick cuts — full waiting room, happy patients, owner leaving clinic at 5pm, spending time with family. Text overlay: '47 new patients/month' → '$32K monthly revenue increase'\n\n[0:25–0:30] CTA: Owner back on camera: 'If you're a practice owner still doing it the old way — book a demo. Seriously.' End card with Breakthrough logo + 'Book Your Free Demo' button.",
+      "createdAt": ""
+    }
+  ]
+};
+
+// ── Navigation ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // Lazy-init charts on first visit
+  if (!window._sectionInited) window._sectionInited = {};
+  if (!window._sectionInited[id]) {
+    window._sectionInited[id] = true;
+    initSection(id);
+  }
+}
+
+// ── Color Palette ──
+const COLORS = ['#2F64FF','#49CEDE','#0089A7','#73BD4C','#FD9E24','#6C63FF','#DC3545','#A5A5A4'];
+const MONTH_COLORS = ['#2F64FF','#73BD4C','#FD9E24'];
+
+function mkDataset(label, data, color, opts = {}) {
+  return { label, data, backgroundColor: color + '22', borderColor: color, borderWidth: 2, tension: .4, fill: true, pointRadius: 4, pointHoverRadius: 6, ...opts };
+}
+
+// ── Chart helpers ──
+function destroyChart(id) {
+  const existing = Chart.getChart(id);
+  if (existing) existing.destroy();
+}
+
+function barChart(id, labels, datasets, opts = {}) {
+  destroyChart(id);
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true, padding: 16 } }, tooltip: { mode: 'index' } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
+        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } }, beginAtZero: true }
+      },
+      ...opts
+    }
+  });
+}
+
+function lineChart(id, labels, datasets) {
+  destroyChart(id);
+  new Chart(document.getElementById(id), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true, padding: 16 } }, tooltip: { mode: 'index', intersect: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
+        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function doughnutChart(id, labels, data, colors) {
+  destroyChart(id);
+  new Chart(document.getElementById(id), {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{ data, backgroundColor: colors || COLORS, borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true, padding: 14 } },
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed } }
+      }
+    }
+  });
+}
+
+function hbarChart(id, labels, data, opts) {
+  destroyChart(id);
+  const isDollar = opts && opts.isDollar;
+  const max = Math.max(...data, 1);
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data, backgroundColor: COLORS.map((_,i) => COLORS[i % COLORS.length]), borderRadius: 6 }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => isDollar ? ' $' + Math.round(ctx.parsed.x).toLocaleString() : ' ' + ctx.parsed.x } } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: isDollar ? (v => '$'+v.toLocaleString()) : undefined }, beginAtZero: true },
+        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } }
+      }
+    }
+  });
+}
+
+// ── Client-side badge helper (mirrors Node.js badge fn for dynamic rendering) ──
+function badge(val, good) {
+  if (val === null || val === undefined) return '';
+  if (good === undefined) good = true;
+  const cls = val === 0 ? 'neutral' : (val > 0) === good ? 'good' : 'bad';
+  const arrow = val > 0 ? '▲' : val < 0 ? '▼' : '→';
+  return `<span class="badge ${cls}">${arrow} ${Math.abs(val)}%</span>`;
+}
+
+// ── Section initializers ──
+function initSection(id) {
+  if (id === 'overview')  initOverview();
+  if (id === 'pipeline')  { initPipeline(); renderFunnel('all'); }
+  if (id === 'channels')  initChannels();
+  if (id === 'paid')      initPaid();
+  if (id === 'campaigns') initCampaigns();
+  if (id === 'salesrep')  initSales();
+  if (id === 'adperf')    initAdPerf();
+}
+
+// ── Overview ──
+let ovMonth = 'all';
+
+function initOverview() {
+  renderOvKpis('all');
+  renderOvFunnel('all');
+}
+
+function setOvMonth(m, btn) {
+  document.querySelectorAll('#ovMonthFilter .month-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ovMonth = m;
+  renderOvKpis(m);
+  renderOvFunnel(m);
+}
+
+function renderOvKpis(m) {
+  const mo = D.monthly;
+  const s = D.adSpend;
+  let demos, sales, revNet, spend, roas, label, isFeb;
+
+  const g = D.googlePpc;
+  if (m === 'all') {
+    demos = D.meta.totalDemos;
+    sales = D.meta.totalSales;
+    revNet = D.meta.totalRevNet;
+    const metaSpend = s.hasData ? s.totalSpend : 0;
+    const gSpend = (g && g.hasData) ? g.totalSpend : 0;
+    spend = (metaSpend + gSpend) || null;
+    roas = s.hasData ? s.roas : null;
+    label = 'Q1 total';
+    isFeb = false;
+  } else {
+    const idx = parseInt(m);
+    demos = mo.demos[idx];
+    sales = mo.sales[idx];
+    revNet = mo.revNet[idx];
+    const metaSpend = s.hasData ? (s.monthlySpend[idx] || 0) : 0;
+    const gSpend = (g && g.hasData) ? (g.monthlySpend[idx] || 0) : 0;
+    spend = (metaSpend + gSpend) || null;
+    const mPaidRev = s.hasData ? s.monthlyPaidRevNet[idx] : 0;
+    roas = (s.hasData && metaSpend > 0) ? (mPaidRev / metaSpend) : null;
+    label = mo.labels[idx];
+    isFeb = idx === 1;
+  }
+
+  const demoToSaleRate = demos > 0 ? Math.round(sales / demos * 100) : 0;
+  const revBadge = isFeb ? badge(D.mom.rev) : '';
+  const saleBadge = isFeb ? badge(D.mom.sale) : '';
+  const demoBadge = isFeb ? badge(D.mom.demo) : '';
+
+  let spendRoasCard = '';
+  if (spend !== null && spend > 0) {
+    const roasStr = roas && roas > 0 ? `<strong>${roas.toFixed(2)}×</strong> Meta ROAS` : '';
+    const channelNote = (g && g.hasData) ? 'Meta + Google PPC' : 'Meta paid social';
+    spendRoasCard = `<div class="kpi-card blue">
+      <div class="kpi-label">Total Paid Spend</div>
+      <div class="kpi-value" style="font-size:24px;">${fmt$(spend)}</div>
+      <div class="kpi-sub">${channelNote}${roasStr ? ' · '+roasStr : ''}</div>
+    </div>`;
+  }
+
+  document.getElementById('ovKpis').innerHTML = `
+    <div class="kpi-card orange">
+      <div class="kpi-label">Revenue (Net)</div>
+      <div class="kpi-value" style="font-size:26px;">${fmt$(revNet)}</div>
+      <div class="kpi-sub">${label} ${revBadge}</div>
+    </div>
+    ${spendRoasCard}
+    <div class="kpi-card green">
+      <div class="kpi-label">Deals Closed</div>
+      <div class="kpi-value">${sales}</div>
+      <div class="kpi-sub">${label} ${saleBadge}</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">Demo Requests</div>
+      <div class="kpi-value">${demos}</div>
+      <div class="kpi-sub">${label} ${demoBadge}</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">Demo → Sale Rate</div>
+      <div class="kpi-value">${demoToSaleRate}%</div>
+      <div class="kpi-sub">End-to-end conversion</div>
+    </div>
+  `;
+}
+
+function renderOvFunnel(m) {
+  const mo = D.monthly;
+  let d, bk, sq, sa, revNet;
+
+  if (m === 'all') {
+    d = mo.demos.reduce((a,b)=>a+b,0);
+    bk = mo.bookDemos.reduce((a,b)=>a+b,0);
+    sq = mo.sqos.reduce((a,b)=>a+b,0);
+    sa = mo.sales.reduce((a,b)=>a+b,0);
+    revNet = mo.revNet.reduce((a,b)=>a+b,0);
+  } else {
+    const idx = parseInt(m);
+    d = mo.demos[idx]; bk = mo.bookDemos[idx];
+    sq = mo.sqos[idx]; sa = mo.sales[idx];
+    revNet = mo.revNet[idx];
+  }
+
+  function fmtPct(a, b) { return b > 0 ? Math.round(a/b*100) + '%' : '—'; }
+
+  document.getElementById('ovFunnelFlow').innerHTML = `
+    <div class="pf-wrap">
+      <div class="pf-inner">
+        <div class="pf-node">
+          <div class="pf-count" style="color:#2F64FF">${d}</div>
+          <div class="pf-label">Demo Requests</div>
+        </div>
+        <div class="pf-arrow">
+          <div class="pf-rate">${fmtPct(bk,d)}</div>
+          <div class="pf-line"></div>
+        </div>
+        <div class="pf-node">
+          <div class="pf-count" style="color:#49CEDE">${bk}</div>
+          <div class="pf-label">Booked Demos</div>
+        </div>
+        <div class="pf-arrow">
+          <div class="pf-rate">${fmtPct(sq,bk)}</div>
+          <div class="pf-line"></div>
+        </div>
+        <div class="pf-node">
+          <div class="pf-count" style="color:#0089A7">${sq}</div>
+          <div class="pf-label">SQOs</div>
+        </div>
+        <div class="pf-arrow">
+          <div class="pf-rate">${fmtPct(sa,sq)}</div>
+          <div class="pf-line"></div>
+        </div>
+        <div class="pf-node">
+          <div class="pf-count" style="color:#73BD4C">${sa}</div>
+          <div class="pf-label">Sales Closed</div>
+        </div>
+        <div class="pf-arrow">
+          <div class="pf-rate">→</div>
+          <div class="pf-line"></div>
+        </div>
+        <div class="pf-revenue">
+          <div class="pf-revenue-val">${fmt$(revNet)}</div>
+          <div class="pf-revenue-label">Net Revenue</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── Pipeline (Funnel + Trends merged) ──
+let pipelineView = 'monthly';
+let weeklyInited = false;
+
+function initPipeline() {
+  renderFunnel('all');
+}
+
+function setPipelineView(view, btn) {
+  document.querySelectorAll('#pipelineToggle .toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  pipelineView = view;
+  document.getElementById('pipelineMonthly').style.display = view === 'monthly' ? '' : 'none';
+  document.getElementById('pipelineWeekly').style.display = view === 'weekly' ? '' : 'none';
+  if (view === 'weekly' && !weeklyInited) {
+    weeklyInited = true;
+    initTrends();
+  }
+}
+
+function initTrends() {
+  const w = D.weeks;
+  lineChart('wowAllChart', w.labels, [
+    mkDataset('Demo Requests', w.demos,     '#2F64FF'),
+    mkDataset('Booked Demos',  w.bookDemos, '#49CEDE'),
+    mkDataset('SQOs',          w.sqos,      '#0089A7'),
+    mkDataset('Sales',         w.sales,     '#73BD4C'),
+  ]);
+  lineChart('wowDemoChart',  w.labels, [mkDataset('Demo Requests', w.demos,     '#2F64FF')]);
+  lineChart('wowBookChart',  w.labels, [mkDataset('Booked Demos',  w.bookDemos, '#49CEDE')]);
+  lineChart('wowSqoChart',   w.labels, [mkDataset('SQOs',          w.sqos,      '#0089A7')]);
+  lineChart('wowSalesChart', w.labels, [mkDataset('Sales',         w.sales,     '#73BD4C')]);
+}
+
+// ── Funnel section ──
+let currentFunnelMonth = 'all';
+function initFunnel() {}
+
+function setFunnelMonth(m, btn) {
+  document.querySelectorAll('#pipelineMonthly .month-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFunnelMonth = m;
+  renderFunnel(m);
+}
+
+function renderFunnel(m) {
+  const mo = D.monthly;
+  let d, bk, sq, sa, revNet, revGross, title;
+  if (m === 'all') {
+    d = mo.demos.reduce((a,b) => a+b, 0);
+    bk = mo.bookDemos.reduce((a,b) => a+b, 0);
+    sq = mo.sqos.reduce((a,b) => a+b, 0);
+    sa = mo.sales.reduce((a,b) => a+b, 0);
+    revNet = mo.revNet.reduce((a,b) => a+b, 0);
+    revGross = mo.revGross.reduce((a,b) => a+b, 0);
+    title = 'Q1 2026 — Full Quarter';
+  } else {
+    d = mo.demos[m]; bk = mo.bookDemos[m]; sq = mo.sqos[m]; sa = mo.sales[m];
+    revNet = mo.revNet[m]; revGross = mo.revGross[m];
+    title = mo.fullLabels[m];
+  }
+  const maxV = Math.max(d, 1);
+  function fmtPct(a, b) { return b > 0 ? Math.round(a/b*100) + '%' : '—'; }
+  function bar(label, val, color) {
+    const w = Math.round(val / maxV * 100);
+    return `<div class="funnel-stage-row">
+      <div class="funnel-label">${label}</div>
+      <div class="funnel-bar-outer">
+        <div class="funnel-bar-inner" style="width:${w}%;background:${color};">
+          <span>${val}</span>
+        </div>
+      </div>
+    </div>`;
+  }
+  function conv(a, b) {
+    return `<div class="funnel-conv-arrow">↓ ${fmtPct(b,a)} conversion</div>`;
+  }
+  const html = `
+    <div class="chart-card" style="margin-bottom:24px;">
+      <div class="chart-title">${title}</div>
+      <div class="chart-sub" style="margin-bottom:24px;">Pipeline stages in sequence</div>
+      ${bar('Demo Requests', d, '#2F64FF')}
+      ${conv(d, bk)}
+      ${bar('Booked Demos', bk, '#49CEDE')}
+      ${conv(bk, sq)}
+      ${bar('SQOs', sq, '#0089A7')}
+      ${conv(sq, sa)}
+      ${bar('Sales', sa, '#73BD4C')}
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card blue"><div class="kpi-label">Demo → Booked</div><div class="kpi-value">${fmtPct(bk,d)}</div><div class="kpi-sub">${bk} of ${d} demos booked</div></div>
+      <div class="kpi-card teal"><div class="kpi-label">Booked → SQO</div><div class="kpi-value">${fmtPct(sq,bk)}</div><div class="kpi-sub">${sq} of ${bk} became SQOs</div></div>
+      <div class="kpi-card green"><div class="kpi-label">SQO → Sale</div><div class="kpi-value">${fmtPct(sa,sq)}</div><div class="kpi-sub">${sa} of ${sq} SQOs closed</div></div>
+      <div class="kpi-card orange"><div class="kpi-label">Net Revenue</div><div class="kpi-value" style="font-size:24px;">${fmt$(revNet)}</div><div class="kpi-sub">Gross: ${fmt$(revGross)}</div></div>
+    </div>
+  `;
+  document.getElementById('funnelDisplay').innerHTML = html;
+}
+
+function fmt$(n) { return '$' + Math.round(n).toLocaleString(); }
+
+// ── Channel charts ──
+let chCharts = {};
+function initChannels() { renderChannels('all'); }
+
+function setChannelMonth(m, btn) {
+  document.querySelectorAll('#channels .month-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChannels(m);
+}
+
+function renderChannels(m) {
+  const c = D.channels[m];
+  hbarChart('chDemoChart',  c.demos.labels,     c.demos.data);
+  hbarChart('chBookChart',  c.bookDemos.labels, c.bookDemos.data);
+  hbarChart('chSqoChart',   c.sqos.labels,      c.sqos.data);
+  hbarChart('chSalesChart', c.sales.labels,     c.sales.data);
+  hbarChart('chRevChart',   c.revNet.labels,    c.revNet.data, { isDollar: true });
+}
+
+// ── Paid Media ──
+function initPaid() {
+  const s = D.adSpend;
+  const gp = D.googlePpc;
+  const m = D.monthly;
+
+  if (!s || !s.hasData) {
+    document.getElementById('paidKpis').innerHTML = '<p style="color:var(--muted);padding:24px;">No paid media data available.</p>';
+    return;
+  }
+
+  // Combined spend (Meta + Google)
+  const gSpend = gp && gp.hasData ? gp.totalSpend : 0;
+  const totalPaidSpend = s.totalSpend + gSpend;
+
+  // KPI row
+  document.getElementById('paidKpis').innerHTML = `
+    <div class="kpi-card blue"><div class="kpi-label">Total Paid Spend</div><div class="kpi-value" style="font-size:26px;">${fmt$(totalPaidSpend)}</div><div class="kpi-sub">Meta ${fmt$(s.totalSpend)} + Google ${fmt$(gSpend)}</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Cost Per Lead</div><div class="kpi-value" style="font-size:26px;">${s.cpl ? fmt$(s.cpl) : '—'}</div><div class="kpi-sub">${s.paidDemos} paid demo requests</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Cost Per SQO</div><div class="kpi-value" style="font-size:26px;">${s.costPerSqo ? fmt$(s.costPerSqo) : '—'}</div><div class="kpi-sub">${s.paidSqos} SQOs from paid</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Cost Per Closed Deal</div><div class="kpi-value" style="font-size:26px;">${s.costPerSale ? fmt$(s.costPerSale) : '—'}</div><div class="kpi-sub">${s.paidSales} sales from paid</div></div>
+    <div class="kpi-card orange"><div class="kpi-label">Paid Revenue (Net)</div><div class="kpi-value" style="font-size:26px;">${fmt$(s.paidRevNet)}</div><div class="kpi-sub">${s.paidSales} closed deals from paid channel</div></div>
+    <div class="kpi-card orange"><div class="kpi-label">ROAS</div><div class="kpi-value" style="font-size:28px;">${s.roas ? s.roas+'×' : '—'}</div><div class="kpi-sub">${fmt$(s.paidRevNet)} rev / ${fmt$(totalPaidSpend)} spend</div></div>
+  `;
+
+  // Monthly efficiency table
+  document.getElementById('paidMonthBody').innerHTML = `
+    <tr><td><strong>Meta Spend</strong></td>${s.monthlySpend.map(v=>`<td>${fmt$(v)}</td>`).join('')}</tr>
+    ${gp && gp.hasData ? `<tr><td><strong>Google Spend</strong></td>${gp.monthlySpend.map(v=>`<td>${fmt$(v)}</td>`).join('')}</tr>` : ''}
+    <tr style="border-top:2px solid var(--border);font-weight:700;"><td>Total Spend</td>${s.monthlySpend.map((v,i)=>`<td>${fmt$(v + (gp && gp.hasData ? (gp.monthlySpend[i]||0) : 0))}</td>`).join('')}</tr>
+    <tr><td>Paid Demos</td>${s.monthlyPaidDemos.map(v=>`<td>${v}</td>`).join('')}</tr>
+    <tr><td>CPL</td>${s.monthlyCpl.map(v=>`<td>${v ? fmt$(v) : '—'}</td>`).join('')}</tr>
+    <tr><td>Paid SQOs</td>${s.monthlyPaidSqos.map(v=>`<td>${v}</td>`).join('')}</tr>
+    <tr><td>Cost / SQO</td>${s.monthlySpend.map((v,i)=>`<td>${s.monthlyPaidSqos[i] > 0 ? fmt$(Math.round(v / s.monthlyPaidSqos[i])) : '—'}</td>`).join('')}</tr>
+    <tr><td>Paid Sales</td>${s.monthlyPaidSales.map(v=>`<td>${v}</td>`).join('')}</tr>
+    <tr><td>Cost / Sale</td>${s.monthlyCostPerSale.map(v=>`<td>${v ? fmt$(v) : '—'}</td>`).join('')}</tr>
+    <tr><td>Revenue (Net)</td>${s.monthlyPaidRevNet.map(v=>`<td>${fmt$(v)}</td>`).join('')}</tr>
+    <tr style="border-top:2px solid var(--border);font-weight:700;"><td>ROAS</td>${s.monthlyROAS.map(v=>`<td>${v ? v+'×' : '—'}</td>`).join('')}</tr>
+  `;
+
+  // Spend vs pipeline overlay chart
+  const weekKeys = Object.keys(s.weeklySpendMap).filter(k => k >= '2026-01-01').sort();
+  const wkLabels = weekKeys.map(k => { const d = new Date(k+'T00:00:00Z'); return ['Jan','Feb','Mar'][d.getUTCMonth()]+' '+d.getUTCDate(); });
+  const wkSpend  = weekKeys.map(k => Math.round(s.weeklySpendMap[k]||0));
+  const wkDemos  = weekKeys.map(k => (s.weeklyPipelineMap[k]||{demos:0}).demos);
+  const wkSqos   = weekKeys.map(k => (s.weeklyPipelineMap[k]||{sqos:0}).sqos);
+
+  destroyChart('paidSpendPipelineChart');
+  new Chart(document.getElementById('paidSpendPipelineChart'), {
+    data: {
+      labels: wkLabels,
+      datasets: [
+        { type: 'bar',  label: 'Ad Spend ($)', data: wkSpend, backgroundColor: '#2F64FF22', borderColor: '#2F64FF', borderWidth: 2, borderRadius: 4, yAxisID: 'y' },
+        { type: 'line', label: 'Paid Demos',   data: wkDemos, borderColor: '#49CEDE', backgroundColor: 'transparent', borderWidth: 2, tension: .4, pointRadius: 4, yAxisID: 'y2' },
+        { type: 'line', label: 'Paid SQOs',    data: wkSqos,  borderColor: '#73BD4C', backgroundColor: 'transparent', borderWidth: 2, tension: .4, pointRadius: 4, yAxisID: 'y2' },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } }, tooltip: { mode: 'index', intersect: false } },
+      scales: {
+        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } },
+        y:  { position: 'left',  grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true },
+        y2: { position: 'right', grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Meta vs Google monthly comparison
+  destroyChart('paidPlatformChart');
+  new Chart(document.getElementById('paidPlatformChart'), {
+    type: 'bar',
+    data: {
+      labels: m.labels,
+      datasets: [
+        { label: 'Meta (Paid Social)', data: s.monthlySpend, backgroundColor: '#2F64FF88', borderColor: '#2F64FF', borderWidth: 2, borderRadius: 4 },
+        { label: 'Google PPC (Brand)', data: gp && gp.hasData ? gp.monthlySpend : [0,0,0], backgroundColor: '#FD9E2488', borderColor: '#FD9E24', borderWidth: 2, borderRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } },
+        tooltip: { mode: 'index', callbacks: { footer: items => 'Total: $'+items.reduce((s,i)=>s+i.parsed.y,0).toLocaleString(undefined,{maximumFractionDigits:0}) } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
+        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Attribution table
+  const camps = s.campaignAttribution;
+  document.getElementById('paidAttrBody').innerHTML = camps.map(c => {
+    const roasCls = !c.roas ? '' : parseFloat(c.roas) >= 3 ? 'style="color:var(--dark-green);font-weight:700;"' : parseFloat(c.roas) >= 1 ? '' : 'style="color:var(--red);"';
+    const shortName = c.name.replace(/\[COLD\]\s*/i,'');
+    return `<tr>
+      <td title="${c.name}">${shortName.length > 45 ? shortName.slice(0,45)+'…' : shortName}</td>
+      <td>${fmt$(c.spend)}</td>
+      <td>${c.demos}</td>
+      <td>${c.sqos}</td>
+      <td>${c.sales}</td>
+      <td>${fmt$(c.revenue)}</td>
+      <td ${roasCls}>${c.roas ? c.roas+'×' : '<span style="color:var(--muted)">—</span>'}</td>
+      <td>${c.cpl ? fmt$(c.cpl) : '<span style="color:var(--muted)">—</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  // ROAS + CPL by campaign charts
+  const roasCamps = camps.filter(c => c.roas);
+  hbarChart('paidRoasChart', roasCamps.map(c => c.name.replace(/\[COLD\]\s*/i,'').slice(0,30)), roasCamps.map(c => parseFloat(c.roas)));
+  const cplCamps = camps.filter(c => c.cpl);
+  hbarChart('paidCplChart', cplCamps.map(c => c.name.replace(/\[COLD\]\s*/i,'').slice(0,30)), cplCamps.map(c => c.cpl), { isDollar: true });
+}
+
+// ── Campaign charts ──
+function initCampaigns() {
+  const c = D.campaigns;
+  hbarChart('campDemoChart',  c.demos.map(x=>x[0]),     c.demos.map(x=>x[1]));
+  hbarChart('campBookChart',  c.bookDemos.map(x=>x[0]), c.bookDemos.map(x=>x[1]));
+  hbarChart('campSqoChart',   c.sqos.map(x=>x[0]),      c.sqos.map(x=>x[1]));
+  hbarChart('campSalesChart', c.sales.map(x=>x[0]),     c.sales.map(x=>x[1]));
+}
+
+// ── Sales ──
+function initSales() {
+  const m = D.monthly;
+  barChart('revMonthChart', m.labels, [
+    { label: 'Net Revenue',   data: m.revNet,   backgroundColor: '#FD9E2444', borderColor: '#FD9E24', borderWidth: 2, borderRadius: 6 },
+    { label: 'Gross Revenue', data: m.revGross, backgroundColor: '#0089A722', borderColor: '#0089A7', borderWidth: 2, borderRadius: 6, borderDash: [4,4] },
+  ]);
+  const prods = D.products;
+  doughnutChart('productChart', prods.map(p=>p[0]), prods.map(p=>p[1].net), COLORS);
+  const reps = D.reps;
+  barChart('repDealsChart', reps.map(r=>r[0]), [{
+    label: 'Deals Closed', data: reps.map(r=>r[1].count),
+    backgroundColor: COLORS, borderRadius: 6
+  }], { plugins: { legend: { display: false } } });
+  barChart('repRevChart', reps.map(r=>r[0]), [{
+    label: 'Net Revenue', data: reps.map(r=>r[1].net),
+    backgroundColor: COLORS, borderRadius: 6
+  }], { plugins: { legend: { display: false } } });
+}
+
+// ── Ad Performance (merged Spend + Attribution) ──
+function initAdPerf() {
+  const s = D.adSpend;
+  if (!s || !s.hasData) {
+    document.getElementById('roasKpis').innerHTML = '<p style="color:var(--muted);padding:24px;">No Meta spend data available.</p>';
+    return;
+  }
+
+  const camps = s.campaignAttribution;
+  const totalAttribRev = camps.reduce((sum,c) => sum + c.revenue, 0);
+  const totalAttribSpend = camps.reduce((sum,c) => sum + c.spend, 0);
+  const overallRoas = totalAttribSpend > 0 && totalAttribRev > 0 ? (totalAttribRev / totalAttribSpend).toFixed(2) : null;
+  const topRoasCamp = [...camps].filter(c => c.roas).sort((a,b) => parseFloat(b.roas)-parseFloat(a.roas))[0];
+
+  // 1. ROAS + efficiency KPIs (top)
+  document.getElementById('roasKpis').innerHTML = `
+    <div class="kpi-card orange"><div class="kpi-label">ROAS</div><div class="kpi-value" style="font-size:28px;">${overallRoas ? overallRoas+'×' : '—'}</div><div class="kpi-sub">${fmt$(totalAttribRev)} revenue attributed</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Total Spend</div><div class="kpi-value" style="font-size:26px;">${fmt$(s.totalSpend)}</div><div class="kpi-sub">Q1 Meta ads · CPM ${fmt$(s.cpm)}</div></div>
+    <div class="kpi-card green"><div class="kpi-label">CPL (Paid Demos)</div><div class="kpi-value" style="font-size:26px;">${s.cpl ? fmt$(s.cpl) : '—'}</div><div class="kpi-sub">${s.paidDemos} paid demo requests</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Cost Per Sale</div><div class="kpi-value" style="font-size:26px;">${s.costPerSale ? fmt$(s.costPerSale) : '—'}</div><div class="kpi-sub">${s.paidSales} sales from paid social</div></div>
+    ${topRoasCamp ? `<div class="kpi-card green"><div class="kpi-label">Best ROAS Campaign</div><div class="kpi-value" style="font-size:16px;line-height:1.3;">${topRoasCamp.roas}×</div><div class="kpi-sub">${topRoasCamp.name.replace(/\[COLD\]\s*/i,'').slice(0,35)}</div></div>` : ''}
+  `;
+
+  // 3. Attribution table
+  document.getElementById('attributionBody').innerHTML = camps.map(c => {
+    const roasCls = !c.roas ? '' : parseFloat(c.roas) >= 3 ? 'style="color:var(--dark-green);font-weight:700;"' : parseFloat(c.roas) >= 1 ? '' : 'style="color:var(--red);"';
+    const shortName = c.name.replace(/\[COLD\]\s*/i,'');
+    return `<tr>
+      <td title="${c.name}">${shortName.length > 45 ? shortName.slice(0,45)+'…' : shortName}</td>
+      <td>${fmt$(c.spend)}</td>
+      <td>${c.demos}</td>
+      <td>${c.sqos}</td>
+      <td>${c.sales}</td>
+      <td>${fmt$(c.revenue)}</td>
+      <td ${roasCls}>${c.roas ? c.roas+'×' : '<span style="color:var(--muted)">—</span>'}</td>
+      <td>${c.cpl ? fmt$(c.cpl) : '<span style="color:var(--muted)">—</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  // 4. Revenue vs Spend chart
+  const campLabels = camps.map(c => c.name.replace(/\[COLD\]\s*/i,'').slice(0,28));
+  destroyChart('roasCampChart');
+  new Chart(document.getElementById('roasCampChart'), {
+    data: {
+      labels: campLabels,
+      datasets: [
+        { type: 'bar', label: 'Spend',   data: camps.map(c=>c.spend),   backgroundColor: '#2F64FF44', borderColor: '#2F64FF', borderWidth: 2, borderRadius: 4, yAxisID: 'y' },
+        { type: 'bar', label: 'Revenue', data: camps.map(c=>c.revenue), backgroundColor: '#73BD4C44', borderColor: '#73BD4C', borderWidth: 2, borderRadius: 4, yAxisID: 'y' },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } }, tooltip: { mode: 'index' } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 10 }, maxRotation: 30 } },
+        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
+      }
+    }
+  });
+
+  const roasCamps = camps.filter(c => c.roas);
+  hbarChart('roasBarChart', roasCamps.map(c => c.name.replace(/\[COLD\]\s*/i,'').slice(0,30)), roasCamps.map(c => parseFloat(c.roas)));
+  const cplCamps = camps.filter(c => c.cpl);
+  hbarChart('cplCampChart', cplCamps.map(c => c.name.replace(/\[COLD\]\s*/i,'').slice(0,30)), cplCamps.map(c => c.cpl));
+
+  // 5. Monthly efficiency table
+  const m = D.monthly;
+  document.getElementById('costPerStageBody').innerHTML = `
+    <tr><td><span class="stage-dot blue"></span>Spend</td>${s.monthlySpend.map(v=>`<td>${fmt$(v)}</td>`).join('')}</tr>
+    <tr><td><span class="stage-dot blue"></span>Paid Demos</td>${s.monthlyPaidDemos.map(v=>`<td>${v}</td>`).join('')}</tr>
+    <tr><td><span class="stage-dot blue"></span>CPL</td>${s.monthlyCpl.map(v=>`<td>${v ? fmt$(v) : '—'}</td>`).join('')}</tr>
+    <tr><td><span class="stage-dot green"></span>Paid Sales</td>${s.monthlyPaidSales.map(v=>`<td>${v}</td>`).join('')}</tr>
+    <tr><td><span class="stage-dot green"></span>Cost Per Sale</td>${s.monthlyCostPerSale.map(v=>`<td>${v ? fmt$(v) : '—'}</td>`).join('')}</tr>
+    <tr><td><span class="stage-dot orange"></span>Revenue (Net)</td>${s.monthlyPaidRevNet.map(v=>`<td>${fmt$(v)}</td>`).join('')}</tr>
+    <tr><td><span class="stage-dot orange"></span>ROAS</td>${s.monthlyROAS.map(v=>`<td>${v ? v+'×' : '—'}</td>`).join('')}</tr>
+  `;
+
+  // 6. Cost per stage KPIs
+  document.getElementById('costPerStageKpis').innerHTML = `
+    <div class="kpi-card blue"><div class="kpi-label">Cost Per Demo</div><div class="kpi-value" style="font-size:26px;">${s.cpl ? fmt$(s.cpl) : '—'}</div><div class="kpi-sub">${s.paidDemos} paid demo requests</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Cost Per Booked Demo</div><div class="kpi-value" style="font-size:26px;">${s.costPerBook ? fmt$(s.costPerBook) : '—'}</div><div class="kpi-sub">${s.paidBookDemos} booked from paid</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Cost Per SQO</div><div class="kpi-value" style="font-size:26px;">${s.costPerSqo ? fmt$(s.costPerSqo) : '—'}</div><div class="kpi-sub">${s.paidSqos} SQOs from paid</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Cost Per Sale</div><div class="kpi-value" style="font-size:26px;">${s.costPerSale ? fmt$(s.costPerSale) : '—'}</div><div class="kpi-sub">${s.paidSales} sales from paid</div></div>
+  `;
+
+  // 7. Total paid media chart (Meta + Google side-by-side) + individual charts
+  const gp2 = D.googlePpc;
+  const totalSpendData = s.monthlySpend.map((v,i) => v + (gp2 && gp2.hasData ? (gp2.monthlySpend[i]||0) : 0));
+  destroyChart('totalSpendChart');
+  new Chart(document.getElementById('totalSpendChart'), {
+    type: 'bar',
+    data: {
+      labels: m.labels,
+      datasets: [
+        { label: 'Meta (Paid Social)', data: s.monthlySpend, backgroundColor: '#2F64FF88', borderColor: '#2F64FF', borderWidth: 2, borderRadius: 4 },
+        { label: 'Google PPC (Brand)', data: gp2 && gp2.hasData ? gp2.monthlySpend : [0,0,0], backgroundColor: '#FD9E2488', borderColor: '#FD9E24', borderWidth: 2, borderRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } },
+        tooltip: { mode: 'index', callbacks: { footer: items => 'Total: $'+items.reduce((s,i)=>s+i.parsed.y,0).toLocaleString(undefined,{maximumFractionDigits:0}) } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
+        y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true }
+      }
+    }
+  });
+
+  barChart('spendMonthChart', m.labels, [{
+    label: 'Ad Spend ($)', data: s.monthlySpend,
+    backgroundColor: '#2F64FF44', borderColor: '#2F64FF', borderWidth: 2, borderRadius: 6
+  }], { plugins: { legend: { display: false } } });
+
+  destroyChart('impClickChart');
+  new Chart(document.getElementById('impClickChart'), {
+    data: {
+      labels: m.labels,
+      datasets: [
+        { type: 'bar',  label: 'Impressions', data: s.monthlyImpressions, backgroundColor: '#49CEDE33', borderColor: '#49CEDE', borderWidth: 2, borderRadius: 6, yAxisID: 'y' },
+        { type: 'line', label: 'Clicks', data: s.monthlyClicks, borderColor: '#FD9E24', backgroundColor: 'transparent', borderWidth: 2, tension: .4, pointRadius: 5, yAxisID: 'y2' },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } } },
+      scales: {
+        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 12 } } },
+        y:  { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true, position: 'left' },
+        y2: { ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true, position: 'right', grid: { display: false } }
+      }
+    }
+  });
+
+  // 8. Weekly spend vs pipeline overlay
+  const weekKeys = Object.keys(s.weeklySpendMap).filter(k => k >= '2026-01-01').sort();
+  const wkLabels = weekKeys.map(k => { const d = new Date(k+'T00:00:00Z'); return ['Jan','Feb','Mar'][d.getUTCMonth()]+' '+d.getUTCDate(); });
+  const wkSpend  = weekKeys.map(k => Math.round(s.weeklySpendMap[k]||0));
+  const wkDemos  = weekKeys.map(k => (s.weeklyPipelineMap[k]||{demos:0}).demos);
+  const wkSqos   = weekKeys.map(k => (s.weeklyPipelineMap[k]||{sqos:0}).sqos);
+
+  destroyChart('spendPipelineChart');
+  new Chart(document.getElementById('spendPipelineChart'), {
+    data: {
+      labels: wkLabels,
+      datasets: [
+        { type: 'bar',  label: 'Ad Spend ($)', data: wkSpend, backgroundColor: '#2F64FF22', borderColor: '#2F64FF', borderWidth: 2, borderRadius: 4, yAxisID: 'y' },
+        { type: 'line', label: 'Paid Demos',   data: wkDemos, borderColor: '#49CEDE', backgroundColor: 'transparent', borderWidth: 2, tension: .4, pointRadius: 4, yAxisID: 'y2' },
+        { type: 'line', label: 'Paid SQOs',    data: wkSqos,  borderColor: '#73BD4C', backgroundColor: 'transparent', borderWidth: 2, tension: .4, pointRadius: 4, yAxisID: 'y2' },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'IBM Plex Sans', size: 12 }, usePointStyle: true } }, tooltip: { mode: 'index', intersect: false } },
+      scales: {
+        x:  { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } },
+        y:  { position: 'left',  grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 }, callback: v => '$'+v.toLocaleString() }, beginAtZero: true },
+        y2: { position: 'right', grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true }
+      }
+    }
+  });
+
+  // 9. Top campaigns / ads
+  hbarChart('campSpendChart', s.topCampaignsBySpend.map(x => x[0].length > 35 ? x[0].slice(0,35)+'…' : x[0]), s.topCampaignsBySpend.map(x => Math.round(x[1])));
+  hbarChart('adSpendChart',   s.topAdsBySpend.map(x => x.name.length > 35 ? x.name.slice(0,35)+'…' : x.name), s.topAdsBySpend.map(x => Math.round(x.spend)));
+
+  // 10. Frequency charts
+  const cfLabels = s.campaignFrequency.map(x => x.name.replace(/\[COLD\]\s*/i,'').slice(0,30));
+  const cfData   = s.campaignFrequency.map(x => parseFloat(x.avgFreq));
+  const cfColors = cfData.map(v => v > 3 ? '#DC354588' : v > 2 ? '#FD9E2488' : '#2F64FF88');
+  destroyChart('freqCampChart');
+  new Chart(document.getElementById('freqCampChart'), {
+    type: 'bar',
+    data: { labels: cfLabels, datasets: [{ data: cfData, backgroundColor: cfColors, borderRadius: 6 }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' Avg frequency: '+ctx.parsed.x+'×' } } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true, title: { display: true, text: 'Avg Frequency (× = times seen)', font: { size: 11 } } },
+        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } }
+      }
+    }
+  });
+
+  const afLabels = s.adFrequency.map(x => x.name.length > 28 ? x.name.slice(0,28)+'…' : x.name);
+  const afData   = s.adFrequency.map(x => x.freq);
+  const afColors = afData.map(v => v > 3 ? '#DC354588' : v > 2 ? '#FD9E2488' : '#2F64FF88');
+  destroyChart('freqAdChart');
+  new Chart(document.getElementById('freqAdChart'), {
+    type: 'bar',
+    data: { labels: afLabels, datasets: [{ data: afData, backgroundColor: afColors, borderRadius: 6 }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } }, beginAtZero: true },
+        y: { grid: { display: false }, ticks: { font: { family: 'IBM Plex Sans', size: 11 } } }
+      }
+    }
+  });
+
+  document.getElementById('adPerfBody').innerHTML = s.topAdsBySpend.map(r => `
+    <tr>
+      <td title="${r.name}">${r.name.length > 45 ? r.name.slice(0,45)+'…' : r.name}</td>
+      <td>${fmt$(r.spend)}</td>
+      <td>${r.impressions.toLocaleString()}</td>
+      <td>${r.clicks.toLocaleString()}</td>
+      <td>${r.ctr.toFixed(2)}%</td>
+      <td>${fmt$(r.cpc)}</td>
+      <td>${r.freq ? r.freq.toFixed(2)+'×' : '—'}</td>
+    </tr>
+  `).join('');
+
+  // Google PPC section
+  const gp = D.googlePpc;
+  if (gp && gp.hasData) {
+    document.getElementById('googleKpis').innerHTML = `
+      <div class="kpi-card blue"><div class="kpi-label">Google Spend</div><div class="kpi-value" style="font-size:26px;">${fmt$(gp.totalSpend)}</div><div class="kpi-sub">Q1 brand search</div></div>
+      <div class="kpi-card teal"><div class="kpi-label">Clicks</div><div class="kpi-value" style="font-size:26px;">${gp.totalClicks.toLocaleString()}</div><div class="kpi-sub">Avg CPC ${fmt$(gp.avgCpc)}</div></div>
+      <div class="kpi-card purple"><div class="kpi-label">Impressions</div><div class="kpi-value" style="font-size:26px;">${gp.totalImpressions.toLocaleString()}</div><div class="kpi-sub">CPM ${fmt$(gp.avgCpm)}</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Conversions</div><div class="kpi-value" style="font-size:26px;">${gp.totalConversions}</div><div class="kpi-sub">Cost/conv ${gp.totalConversions > 0 ? fmt$(gp.totalSpend / gp.totalConversions) : '—'}</div></div>
+    `;
+    const ml = D.monthly.labels;
+    document.getElementById('googleMonthBody').innerHTML = `
+      <tr><td><span class="stage-dot blue"></span>Spend</td>${gp.monthlySpend.map((v,i) => `<td>${fmt$(v)}</td>`).join('')}</tr>
+      <tr><td><span class="stage-dot blue"></span>Clicks</td>${gp.monthlyClicks.map(v => `<td>${v}</td>`).join('')}</tr>
+      <tr><td><span class="stage-dot teal"></span>Impressions</td>${gp.monthlyImpressions.map(v => `<td>${v.toLocaleString()}</td>`).join('')}</tr>
+      <tr><td><span class="stage-dot teal"></span>Avg CPC</td>${gp.monthlyCpc.map(v => `<td>${v ? fmt$(v) : '—'}</td>`).join('')}</tr>
+      <tr><td><span class="stage-dot green"></span>Conversions</td>${gp.monthlyConversions.map(v => `<td>${v}</td>`).join('')}</tr>
+    `;
+  } else {
+    document.getElementById('googleKpis').innerHTML = '<p style="color:var(--muted);padding:16px 0;">No Google PPC data available.</p>';
+    document.getElementById('googleMonthlyWrap').style.display = 'none';
+  }
+}
+
+// ── Presentation mode ──
+const PRESENT_TAB_IDS   = ['overview','pipeline','channels','paid','campaigns','salesrep','adperf','gallery'];
+const PRESENT_TAB_NAMES = ['Overview','Pipeline','Channels','Paid (Meta + Google)','Campaigns','Sales','Ad Performance','Creative Gallery'];
+let presentIdx = 0;
+
+function togglePresent() {
+  const on = document.body.classList.toggle('present');
+  document.getElementById('presentBtn').classList.toggle('present-active', on);
+  if (on) {
+    presentIdx = PRESENT_TAB_IDS.findIndex(id => document.getElementById(id)?.classList.contains('active'));
+    if (presentIdx < 0) presentIdx = 0;
+    updatePresentNav();
+  }
+}
+
+function presentGo(idx) {
+  presentIdx = (idx + PRESENT_TAB_IDS.length) % PRESENT_TAB_IDS.length;
+  const btn = document.querySelectorAll('.nav-tab')[presentIdx];
+  showSection(PRESENT_TAB_IDS[presentIdx], btn);
+  updatePresentNav();
+}
+function presentPrev() { presentGo(presentIdx - 1); }
+function presentNext() { presentGo(presentIdx + 1); }
+
+function updatePresentNav() {
+  document.getElementById('presentTabName').textContent = PRESENT_TAB_NAMES[presentIdx];
+  document.getElementById('presentCounter').textContent = (presentIdx + 1) + ' / ' + PRESENT_TAB_IDS.length;
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.body.classList.contains('present')) return;
+  if (e.key === 'Escape') togglePresent();
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') presentNext();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   presentPrev();
+});
+
+// ── Gallery filter ──
+function filterGallery(stage, btn) {
+  document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    card.classList.toggle('hidden', stage !== 'all' && card.dataset.stage !== stage);
+  });
+}
+
+// ── Init on load ──
+window.addEventListener('DOMContentLoaded', () => {
+  window._sectionInited = { overview: true };
+  initOverview();
+});
+</script>
+</body>
+</html>
