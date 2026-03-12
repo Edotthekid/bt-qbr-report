@@ -157,6 +157,21 @@ h1,h2,h3,.chart-title,.kpi-value{font-family:'Poppins',sans-serif;}
 .ad-copy-full.open{display:block;}
 .ad-copy-toggle{font-size:11px;font-weight:600;color:var(--blue);cursor:pointer;border:none;background:none;padding:2px 0;margin-top:4px;display:inline-block;}
 .ad-copy-toggle:hover{text-decoration:underline;}
+.video-badge{display:inline-block;background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;position:absolute;top:8px;left:8px;z-index:2;letter-spacing:0.5px;}
+.ad-image-wrap{position:relative;}
+.view-script-btn{background:linear-gradient(135deg,var(--blue),#6366f1);color:#fff;border:none;border-radius:6px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;width:100%;margin-top:6px;letter-spacing:0.3px;transition:opacity .2s;}
+.view-script-btn:hover{opacity:0.85;}
+.script-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+.script-modal-overlay.open{display:flex;}
+.script-modal{background:#fff;border-radius:12px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;padding:28px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+body.dark .script-modal{background:var(--card-bg);color:var(--text);}
+.script-modal-title{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:16px;}
+.script-modal-content{font-size:13px;line-height:1.7;white-space:pre-line;color:#444;}
+body.dark .script-modal-content{color:var(--text2);}
+.script-modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#999;line-height:1;}
+.script-modal-close:hover{color:#333;}
+body.dark .script-modal-close{color:var(--muted);}
+body.dark .script-modal-close:hover{color:var(--text);}
 .ad-cta-row{border-top:1px solid #dadde1;padding-top:8px;margin-top:4px;}
 .ad-cta-btn{background:#e4e6ea;border:none;border-radius:4px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c1e21;cursor:pointer;width:100%;}
 .card-meta{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap;}
@@ -1816,6 +1831,7 @@ The data was always there. She just couldn't see it before. Now she can.
       <div class="ad-meta"><div class="ad-name">Breakthrough</div><div class="ad-sponsored">Sponsored</div></div>
     </div>
     <div class="ad-image-wrap">
+      <span class="video-badge">VIDEO</span>
       <img src="creatives/test-video-01.png" alt="Patient Success Story — Video Script" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Image not yet generated</div>'">
     </div>
     <div class="ad-body">
@@ -1854,6 +1870,7 @@ If you're a practice owner still doing it the old way — spending money on ads 
       <button class="ad-copy-toggle" onclick="toggleAdCopy(this)">View more</button>
     </div>
     <div class="ad-cta-row"><button class="ad-cta-btn">Book Your Free Demo</button></div>
+    <div style="padding:0 0 4px;"><button class="view-script-btn" onclick="openScriptModal()">View Video Script</button></div>
   </div>
   <div class="card-meta">
     <span class="funnel-tag mofubofu">MOFU-BOFU</span>
@@ -1862,6 +1879,28 @@ If you're a practice owner still doing it the old way — spending money on ads 
   <div class="card-title">Patient Success Story — Video Script</div>
   <div class="card-desc">getbreakthrough.com</div>
 </div>
+  </div>
+</div>
+
+<!-- Video Script Modal -->
+<div class="script-modal-overlay" id="scriptModal" onclick="if(event.target===this)closeScriptModal()">
+  <div class="script-modal">
+    <button class="script-modal-close" onclick="closeScriptModal()">&times;</button>
+    <div class="script-modal-title">Video Script — Patient Success Story (0:30)</div>
+    <div class="script-modal-content">[0:00–0:03] HOOK
+Close-up of practice owner looking at camera — "I was working 60-hour weeks and barely breaking even..."
+
+[0:03–0:08] PROBLEM
+B-roll of empty waiting room, owner at desk late at night, looking stressed at spreadsheets.
+
+[0:08–0:15] TURNING POINT
+"Then I found Breakthrough and everything changed." Cut to dashboard showing upward metrics, phone notifications of new patient bookings.
+
+[0:15–0:25] RESULTS
+Quick cuts — full waiting room, happy patients, owner leaving clinic at 5pm, spending time with family. Text overlay: "47 new patients/month" → "$32K monthly revenue increase"
+
+[0:25–0:30] CTA
+Owner back on camera: "If you're a practice owner still doing it the old way — book a demo. Seriously." End card with Breakthrough logo + "Book Your Free Demo" button.</div>
   </div>
 </div>
 
@@ -4176,6 +4215,17 @@ function toggleAdCopy(btn) {
   preview.style.display = isOpen ? 'none' : '';
   btn.textContent = isOpen ? 'View less' : 'View more';
 }
+
+// ── Video script modal ──
+function openScriptModal() {
+  document.getElementById('scriptModal').classList.add('open');
+}
+function closeScriptModal() {
+  document.getElementById('scriptModal').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeScriptModal();
+});
 
 // ── Gallery filter ──
 function filterGallery(stage, btn) {
