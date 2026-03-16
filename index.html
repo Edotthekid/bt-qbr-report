@@ -71,6 +71,7 @@ h1,h2,h3,.chart-title,.kpi-value{font-family:'Poppins',sans-serif;}
 
 /* MONTH FILTER */
 .month-filter{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+#globalMonthFilter{margin:0 0 24px;padding:12px 0 0;}
 .month-btn{padding:8px 18px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);color:var(--text2);font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
 .month-btn:hover{border-color:var(--blue);color:var(--blue);}
 .month-btn.active{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 4px 12px rgba(47,100,255,.3);}
@@ -251,16 +252,21 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <h1>Q1 <span>2026</span> Marketing Report</h1>
   <div class="subtitle">Revenue attributed by SQO Appointment Date &nbsp;·&nbsp; Deals deduped by account</div>
   <div class="meta-info">Generated March 16, 2026 &nbsp;·&nbsp; v3.7</div>
-  <div style="margin-top:6px;padding:6px 16px;background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.3);border-radius:8px;color:#b8860b;font-size:0.85rem;display:inline-block;">⚠ Meta ad spend data covers Jan 1 – Mar 10, 2026 (token refresh pending)</div>
 </div>
 
-<!-- NAV (5 tabs) -->
+<!-- NAV (5 tabs) + GLOBAL MONTH FILTER -->
 <div class="nav-tabs" id="navTabs">
   <button class="nav-tab active" onclick="showSection('overview',this)">Overview</button>
   <button class="nav-tab" onclick="showSection('channels',this)">Channels</button>
   <button class="nav-tab" onclick="showSection('paid',this)">Paid Media</button>
   <button class="nav-tab" onclick="showSection('campaigns',this)">Campaigns</button>
   <button class="nav-tab" onclick="showSection('deals',this)">Deals</button>
+</div>
+<div class="month-filter" id="globalMonthFilter">
+  <button class="month-btn active" onclick="setGlobalMonth('all',this)">All Q1</button>
+  <button class="month-btn" onclick="setGlobalMonth(0,this)">January</button>
+  <button class="month-btn" onclick="setGlobalMonth(1,this)">February</button>
+  <button class="month-btn" onclick="setGlobalMonth(2,this)">Mar MTD</button>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════════
@@ -277,14 +283,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <span class="takeaways-icon">📊</span>
       <span class="takeaways-title">Key Takeaways</span>
     </div>
-    <ul class="takeaways-list"><li><strong>February</strong> was the strongest revenue month: <strong>$116,574</strong> net, <strong>8 deals</strong>.</li><li>SQO → Sale conversion peaked in <strong>Feb</strong> at <strong>26%</strong> (8 of 31 SQOs).</li><li>Best ROAS campaign: "<strong>AI Checklist</strong>" at <strong>4.69×</strong>.</li><li>Win rate: <strong>18%</strong> of SQOs closed · Avg deal size: <strong>$17,782</strong>.</li><li>Google brand search: <strong>$6,097</strong> spend · <strong>563 clicks</strong> · $10.83 avg CPC.</li></ul>
-  </div>
-
-  <div class="month-filter" id="ovMonthFilter">
-    <button class="month-btn active" onclick="setOvMonth('all',this)">All Q1</button>
-    <button class="month-btn" onclick="setOvMonth(0,this)">January</button>
-    <button class="month-btn" onclick="setOvMonth(1,this)">February</button>
-    <button class="month-btn" onclick="setOvMonth(2,this)">Mar MTD</button>
+    <ul class="takeaways-list"><li><strong>February</strong> was the strongest revenue month: <strong>$149,125</strong> net, <strong>7 deals</strong>.</li><li>SQO → Sale conversion peaked in <strong>Feb</strong> at <strong>23%</strong> (7 of 31 SQOs).</li><li>Best ROAS campaign: "<strong>Cash Pay</strong>" at <strong>11.18×</strong>.</li><li>Win rate: <strong>18%</strong> of SQOs closed · Avg deal size: <strong>$17,782</strong>.</li><li>Google brand search: <strong>$6,097</strong> spend · <strong>563 clicks</strong> · $10.83 avg CPC.</li></ul>
   </div>
 
   <div class="kpi-grid" id="ovKpis"></div>
@@ -297,18 +296,10 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <div class="chart-card">
     <div class="chart-title">Performance Trend</div>
     <div class="chart-sub">Core metrics over time — dual axis (counts left, dollars right)</div>
+    <div id="trendChannelFilter" class="month-filter" style="margin-bottom:16px;"></div>
     <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
   </div>
 
-  <div class="pf-wrap"><div class="pf-inner" id="ovPipeline"></div></div>
-
-  <div class="win-rate-callout">
-    <div>
-      <div class="win-rate-label">Win Rate (SQO → Sale)</div>
-      <div class="win-rate-value">18%</div>
-      <div class="win-rate-sub">13 of 74 SQOs closed &nbsp;·&nbsp; Avg deal size: $17,782</div>
-    </div>
-  </div>
 
 </div>
 
@@ -321,12 +312,6 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <div class="section-desc">Core metrics by channel — filter by month</div>
   </div>
 
-  <div class="month-filter" id="chMonthFilter">
-    <button class="month-btn active" onclick="setChMonth('all',this)">All Q1</button>
-    <button class="month-btn" onclick="setChMonth('2026-01',this)">January</button>
-    <button class="month-btn" onclick="setChMonth('2026-02',this)">February</button>
-    <button class="month-btn" onclick="setChMonth('2026-03',this)">Mar MTD</button>
-  </div>
 
   <div class="chart-card">
     <div class="chart-title">Revenue by Channel</div>
@@ -359,8 +344,8 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <td>$26,388</td>
 </tr><tr>
   <td class="ch-name">Other</td>
-  <td>24</td>
-  <td>17</td>
+  <td>9</td>
+  <td>5</td>
   <td>2</td>
   <td>$16,791</td>
 </tr><tr>
@@ -371,13 +356,19 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <td>$14,799</td>
 </tr><tr>
   <td class="ch-name">Direct</td>
-  <td>2</td>
-  <td>2</td>
+  <td>3</td>
+  <td>3</td>
   <td>1</td>
   <td>$599</td>
 </tr><tr>
+  <td class="ch-name">Event</td>
+  <td>13</td>
+  <td>11</td>
+  <td>0</td>
+  <td>$0</td>
+</tr><tr>
   <td class="ch-name">Direct Mail</td>
-  <td>9</td>
+  <td>10</td>
   <td>9</td>
   <td>0</td>
   <td>$0</td>
@@ -398,8 +389,14 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   </div>
 
   <div class="chart-card">
-    <div class="chart-title">Revenue Trend by Channel</div>
-    <div class="chart-sub">Top channels — monthly revenue progression</div>
+    <div class="chart-title">Metrics Trend by Channel</div>
+    <div class="chart-sub">Top channels — monthly progression by selected metric</div>
+    <div class="view-toggle" style="margin:0 0 16px">
+      <button class="toggle-btn" onclick="setChanTrendMetric('bookDemos',this)">Book Demos</button>
+      <button class="toggle-btn" onclick="setChanTrendMetric('sqos',this)">SQOs</button>
+      <button class="toggle-btn" onclick="setChanTrendMetric('deals',this)">Deals</button>
+      <button class="toggle-btn active" onclick="setChanTrendMetric('revNet',this)">Revenue</button>
+    </div>
     <div class="chart-wrap tall"><canvas id="chTrendChart"></canvas></div>
   </div>
 
@@ -414,7 +411,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <div class="section-desc">Paid = Meta/Facebook + Google PPC</div>
   </div>
 
-  <div class="hero-grid">
+  <div class="hero-grid" id="paidHero">
     <div class="hero-card">
       <div class="hero-label">Total Paid Spend</div>
       <div class="hero-value">$58,615</div>
@@ -432,7 +429,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     </div>
   </div>
 
-  <div class="kpi-grid">
+  <div class="kpi-grid" id="paidKpis">
     <div class="kpi-card blue"><div class="kpi-label">Cost per Booked Demo</div><div class="kpi-value">$1,811</div></div>
     <div class="kpi-card teal"><div class="kpi-label">Cost per SQO</div><div class="kpi-value">$2,283</div></div>
     <div class="kpi-card orange"><div class="kpi-label">Cost per Closed Deal</div><div class="kpi-value">$13,129</div></div>
@@ -452,10 +449,10 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <td>14</td>
       <td>$1,528</td>
       <td>12</td>
-      <td>1</td>
-      <td>$21,389</td>
-      <td>$6,388</td>
-      <td>0.30×</td>
+      <td>2</td>
+      <td>$10,695</td>
+      <td>$38,238</td>
+      <td>1.79×</td>
     </tr><tr>
       <td>Feb</td>
       <td>$24,710</td>
@@ -464,34 +461,23 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <td>9</td>
       <td>2</td>
       <td>$11,118</td>
-      <td>$55,850</td>
-      <td>2.51×</td>
+      <td>$89,000</td>
+      <td>4.00×</td>
     </tr><tr>
       <td>Mar MTD</td>
       <td>$9,719</td>
       <td>2</td>
       <td>$4,447</td>
       <td>2</td>
-      <td>1</td>
-      <td>$8,894</td>
-      <td>$65,000</td>
-      <td>7.31×</td>
+      <td>0</td>
+      <td>—</td>
+      <td>$0</td>
+      <td>0.00×</td>
     </tr></tbody>
     </table>
+    <div class="chart-sub" style="margin-top:8px">* CPL, Cost/SQO, and Cost/Sale are calculated from Meta spend only. Google PPC spend is shown separately above.</div>
   </div>
 
-  <div class="chart-grid">
-    <div class="chart-card">
-      <div class="chart-title">Meta vs Google Monthly Spend</div>
-      <div class="chart-sub">Platform comparison</div>
-      <div class="chart-wrap"><canvas id="paidCompChart"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">Weekly Spend vs Pipeline</div>
-      <div class="chart-sub">Spend (bars) vs Booked Demos & SQOs (lines)</div>
-      <div class="chart-wrap"><canvas id="paidWeeklyChart"></canvas></div>
-    </div>
-  </div>
 
 </div>
 
@@ -518,15 +504,15 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
         <th onclick="sortTable('campTable',8)">Cost/Sale ↕</th>
         <th onclick="sortTable('campTable',9)">ROAS ↕</th>
       </tr></thead>
-      <tbody><tr>
+      <tbody id="paidCampTableBody"><tr>
       <td class="camp-name">Testimonial</td>
       <td>$31,416</td>
-      <td>9</td>
-      <td>5</td>
+      <td>19</td>
+      <td>14</td>
       <td>1</td>
       <td>$24,000</td>
-      <td>$3,491</td>
-      <td>$6,283</td>
+      <td>$1,653</td>
+      <td>$2,244</td>
       <td>$31,416</td>
       <td class="bad">0.76×</td>
     </tr><tr>
@@ -543,25 +529,25 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     </tr><tr>
       <td class="camp-name">PT Marketing System</td>
       <td>$4,395</td>
-      <td>5</td>
-      <td>4</td>
-      <td>2</td>
-      <td>$11,176</td>
-      <td>$879</td>
-      <td>$1,099</td>
-      <td>$2,197</td>
-      <td class="neutral">2.54×</td>
+      <td>9</td>
+      <td>7</td>
+      <td>3</td>
+      <td>$15,964</td>
+      <td>$488</td>
+      <td>$628</td>
+      <td>$1,465</td>
+      <td class="good">3.63×</td>
     </tr><tr>
       <td class="camp-name">Cash Pay</td>
       <td>$2,848</td>
-      <td>5</td>
-      <td>5</td>
-      <td>0</td>
-      <td>$0</td>
-      <td>$570</td>
-      <td>$570</td>
-      <td>—</td>
-      <td class="">—</td>
+      <td>7</td>
+      <td>7</td>
+      <td>1</td>
+      <td>$31,850</td>
+      <td>$407</td>
+      <td>$407</td>
+      <td>$2,848</td>
+      <td class="good">11.18×</td>
     </tr></tbody>
     </table>
   </div>
@@ -570,6 +556,18 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <div class="chart-title">ROAS by Campaign</div>
     <div class="chart-sub">Higher is better — green ≥ 3×, orange 1-3×, red < 1×</div>
     <div class="chart-wrap"><canvas id="campRoasChart"></canvas></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Campaigns by Month</div>
+    <div class="chart-sub">Select a metric to see how each campaign trended across Q1</div>
+    <div class="view-toggle" style="margin:12px 0 16px">
+      <button class="toggle-btn active" onclick="setCampMonthMetric('spend',this)">Spend</button>
+      <button class="toggle-btn" onclick="setCampMonthMetric('bookDemos',this)">Book Demos</button>
+      <button class="toggle-btn" onclick="setCampMonthMetric('sqos',this)">SQOs</button>
+      <button class="toggle-btn" onclick="setCampMonthMetric('deals',this)">Deals</button>
+    </div>
+    <div class="chart-wrap"><canvas id="campMonthChart"></canvas></div>
   </div>
 </div>
 
@@ -580,6 +578,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <div class="section-header">
     <div class="section-title">Deal Detail</div>
     <div class="section-desc">Revenue attributed to SQO Appointment Date · Multi-location accounts shown as 1 deal</div>
+    <div class="section-desc" style="margin-top:4px">All deals shown regardless of month filter · Sorted by SQO date</div>
   </div>
 
   <div class="deals-summary">
@@ -723,7 +722,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
 
 <script>
 // ── DATA ──
-const D = {"meta":{"generated":"2026-03-16T14:00:26.628Z","totalBookDemos":90,"totalSqos":74,"totalRevNet":231165,"totalDeals":13,"totalSpend":58615.46},"monthly":{"labels":["Jan","Feb","Mar MTD"],"fullLabels":["January","February","Mar (MTD)"],"bookDemos":[37,31,22],"sqos":[25,31,18],"revNet":[27991,116574,86600],"deals":[3,8,2],"spend":[24186.81,24709.52,9719.13]},"mom":{"book":-16,"sqo":24,"rev":316,"deals":167,"spend":2},"weeks":{"labels":["Jan 6","Jan 13","Jan 20","Jan 27","Feb 3","Feb 10","Feb 17","Feb 24","Mar 3","Mar 10"],"bookDemos":[8,7,12,10,5,5,12,10,17,4],"sqos":[4,1,13,8,11,5,4,10,15,3],"deals":[0,1,2,0,1,2,1,4,2,0]},"channels":{"all":[{"channel":"Paid Social","bookDemos":29,"sqos":23,"deals":4,"revNet":127238},{"channel":"Partner / Referral","bookDemos":4,"sqos":4,"deals":2,"revNet":45350},{"channel":"Email","bookDemos":13,"sqos":11,"deals":2,"revNet":26388},{"channel":"Other","bookDemos":24,"sqos":17,"deals":2,"revNet":16791},{"channel":"PPC","bookDemos":3,"sqos":3,"deals":2,"revNet":14799},{"channel":"Direct","bookDemos":2,"sqos":2,"deals":1,"revNet":599},{"channel":"Direct Mail","bookDemos":9,"sqos":9,"deals":0,"revNet":0},{"channel":"SME","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0}],"byMonth":{"2026-01":[{"channel":"Other","bookDemos":3,"sqos":3,"deals":1,"revNet":12003},{"channel":"Partner / Referral","bookDemos":3,"sqos":1,"deals":1,"revNet":9600},{"channel":"Paid Social","bookDemos":14,"sqos":12,"deals":1,"revNet":6388},{"channel":"Direct Mail","bookDemos":6,"sqos":3,"deals":0,"revNet":0},{"channel":"SME","bookDemos":2,"sqos":0,"deals":0,"revNet":0},{"channel":"Direct","bookDemos":1,"sqos":1,"deals":0,"revNet":0},{"channel":"Email","bookDemos":3,"sqos":2,"deals":0,"revNet":0},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":0,"deals":0,"revNet":0}],"2026-02":[{"channel":"Paid Social","bookDemos":13,"sqos":9,"deals":2,"revNet":55850},{"channel":"Partner / Referral","bookDemos":1,"sqos":3,"deals":1,"revNet":35750},{"channel":"PPC","bookDemos":1,"sqos":2,"deals":2,"revNet":14799},{"channel":"Email","bookDemos":7,"sqos":6,"deals":1,"revNet":4788},{"channel":"Other","bookDemos":5,"sqos":2,"deals":1,"revNet":4788},{"channel":"Direct","bookDemos":1,"sqos":1,"deals":1,"revNet":599},{"channel":"Direct Mail","bookDemos":3,"sqos":6,"deals":0,"revNet":0},{"channel":"SME","bookDemos":0,"sqos":2,"deals":0,"revNet":0}],"2026-03":[{"channel":"Paid Social","bookDemos":2,"sqos":2,"deals":1,"revNet":65000},{"channel":"Email","bookDemos":3,"sqos":3,"deals":1,"revNet":21600},{"channel":"Other","bookDemos":16,"sqos":12,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":1,"deals":0,"revNet":0}]}},"winRate":18,"avgDealSize":17782,"sqoToSale":[12,26,11],"adSpend":{"hasData":true,"totalSpend":52517.98000000001,"totalImpressions":1300781,"totalClicks":10437,"cpl":1810.9648275862073,"costPerSqo":2283.390434782609,"costPerSale":13129.495000000003,"roas":"2.42","paidBookDemos":29,"paidSqos":23,"paidSales":4,"paidRevNet":127238,"monthlySpend":[21389,22235,8894],"monthlyPaidBookDemos":[14,13,2],"monthlyPaidSqos":[12,9,2],"monthlyPaidSales":[1,2,1],"monthlyPaidRevNet":[6388,55850,65000],"monthlyCpl":[1528,1710,4447],"monthlyCostPerSale":[21389,11118,8894],"monthlyROAS":["0.30","2.51","7.31"],"weeklySpendMap":{"2026-01-05":6469.08,"2026-01-12":5415.9800000000005,"2026-01-19":3414.6500000000005,"2026-01-26":3832.8099999999995,"2026-02-02":4691.67,"2026-02-09":5415.54,"2026-02-16":5237.4400000000005,"2026-02-23":6822.94,"2026-03-02":4852.9,"2026-03-09":3232.15,"2026-03-16":82.57},"weeklyPipelineMap":{"2026-02-24":{"bookDemos":6,"sqos":2,"sales":0},"2026-03-03":{"bookDemos":1,"sqos":1,"sales":0},"2026-02-17":{"bookDemos":3,"sqos":0,"sales":0},"2026-02-10":{"bookDemos":1,"sqos":4,"sales":0},"2026-02-03":{"bookDemos":4,"sqos":3,"sales":0},"2026-01-20":{"bookDemos":5,"sqos":6,"sales":0},"2026-01-27":{"bookDemos":1,"sqos":2,"sales":0},"2026-01-13":{"bookDemos":4,"sqos":0,"sales":0},"2026-01-06":{"bookDemos":4,"sqos":4,"sales":0},"2026-03-10":{"bookDemos":0,"sqos":1,"sales":0}},"campaignAttribution":[{"name":"Testimonial","spend":31416,"bookDemos":9,"sqos":5,"deals":1,"revenue":24000,"roas":"0.76","cpl":3491,"costPerSqo":6283,"costPerSale":31416},{"name":"AI Checklist","spend":13858,"bookDemos":10,"sqos":7,"deals":1,"revenue":65000,"roas":"4.69","cpl":1386,"costPerSqo":1980,"costPerSale":13858},{"name":"PT Marketing System","spend":4395,"bookDemos":5,"sqos":4,"deals":2,"revenue":11176,"roas":"2.54","cpl":879,"costPerSqo":1099,"costPerSale":2197},{"name":"Cash Pay","spend":2848,"bookDemos":5,"sqos":5,"deals":0,"revenue":0,"roas":null,"cpl":570,"costPerSqo":570,"costPerSale":null}]},"googlePpc":{"hasData":true,"totalSpend":6097.46,"totalClicks":563,"totalImpressions":5491,"avgCpc":10.83,"monthlySpend":[2797.81,2474.52,825.13],"monthlyClicks":[247,239,77]},"dealsDetail":[{"account":"Optimum Physio Therapies","locationCount":1,"revNet":12003,"channel":"Other","campaign":"Unknown","sqoDate":"2026-01-17","closeDate":"2026-01-22","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Active Physical Therapy","locationCount":1,"revNet":9600,"channel":"Partner / Referral","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-01-20","closeDate":"2026-01-20","rep":"Kaleb Gebrewold","product":"Pro"},{"account":"ChiroCare Rehabilitation Center","locationCount":1,"revNet":599,"channel":"Direct","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-29","closeDate":"2026-02-13","rep":"James Nasworthy","product":"Core"},{"account":"AIM Physical Therapy","locationCount":2,"revNet":65000,"channel":"Paid Social","campaign":"AI Checklist","sqoDate":"2026-02-25","closeDate":"2026-03-09","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Humphries Physical Therapy","locationCount":2,"revNet":31850,"channel":"Paid Social","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-22","closeDate":"2026-02-17","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Therapy Retreat","locationCount":1,"revNet":6388,"channel":"Paid Social","campaign":"PT Marketing System","sqoDate":"2026-01-09","closeDate":"2026-01-17","rep":"James Nasworthy","product":"Pro"},{"account":"Moffett Physical Therapy","locationCount":3,"revNet":24000,"channel":"Paid Social","campaign":"Testimonial","sqoDate":"2026-02-10","closeDate":"2026-02-24","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Trust Physical Therapy","locationCount":1,"revNet":399,"channel":"PPC","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-02-25","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"Beyond Therapy & Wellness, PLLC","locationCount":1,"revNet":14400,"channel":"PPC","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-02-05","closeDate":"2026-02-05","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Peak Motion Physical Therapy","locationCount":1,"revNet":4788,"channel":"Email","campaign":"PT Marketing System","sqoDate":"2026-02-06","closeDate":"2026-02-10","rep":"James Nasworthy","product":"Core"},{"account":"Precision Performance Physical Therapy","locationCount":2,"revNet":21600,"channel":"Email","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-03-04","closeDate":"2026-03-04","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Desert Hand and Physical Therapy","locationCount":1,"revNet":4788,"channel":"Other","campaign":"Webinar","sqoDate":"","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"Core Physical Therapy and Sports Performance","locationCount":2,"revNet":35750,"channel":"Partner / Referral","campaign":"Partner Referral","sqoDate":"2026-02-05","closeDate":"2026-02-26","rep":"Kaleb Gebrewold","product":"GrowthX"}]};
+const D = {"meta":{"generated":"2026-03-16T16:22:24.194Z","totalBookDemos":90,"totalSqos":74,"totalRevNet":231165,"totalDeals":13,"totalSpend":58615.46},"monthly":{"labels":["Jan","Feb","Mar MTD"],"fullLabels":["January","February","Mar (MTD)"],"bookDemos":[37,31,22],"sqos":[25,31,18],"revNet":[60440,149125,21600],"deals":[5,7,1],"spend":[24186.81,24709.52,9719.13],"byChannel":{"Event":{"bookDemos":[0,0,13],"sqos":[0,0,11],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]},"Email":{"bookDemos":[3,7,3],"sqos":[2,6,3],"deals":[0,1,1],"revNet":[0,4788,21600],"spend":[0,0,0]},"Direct Mail":{"bookDemos":[6,3,1],"sqos":[3,6,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]},"Other":{"bookDemos":[3,4,2],"sqos":[3,1,1],"deals":[1,1,0],"revNet":[12003,4788,0],"spend":[0,0,0]},"PPC":{"bookDemos":[1,1,1],"sqos":[0,2,1],"deals":[0,2,0],"revNet":[0,14799,0],"spend":[0,0,0]},"Paid Social":{"bookDemos":[14,13,2],"sqos":[12,9,2],"deals":[2,2,0],"revNet":[38238,89000,0],"spend":[21389,22235,8894]},"Partner / Referral":{"bookDemos":[3,1,0],"sqos":[1,3,0],"deals":[1,1,0],"revNet":[9600,35750,0],"spend":[0,0,0]},"Direct":{"bookDemos":[1,2,0],"sqos":[1,2,0],"deals":[1,0,0],"revNet":[599,0,0],"spend":[0,0,0]},"SME":{"bookDemos":[2,0,0],"sqos":[0,2,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]},"Organic":{"bookDemos":[4,0,0],"sqos":[3,0,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]}}},"mom":{"book":-16,"sqo":24,"rev":147,"deals":40,"spend":2},"weeks":{"labels":["Jan 6","Jan 13","Jan 20","Jan 27","Feb 3","Feb 10","Feb 17","Feb 24","Mar 3","Mar 10"],"bookDemos":[8,7,12,10,5,5,12,10,17,4],"sqos":[4,1,13,8,11,5,4,10,15,3],"deals":[0,1,2,0,1,2,1,4,2,0]},"channels":{"all":[{"channel":"Paid Social","bookDemos":29,"sqos":23,"deals":4,"revNet":127238},{"channel":"Partner / Referral","bookDemos":4,"sqos":4,"deals":2,"revNet":45350},{"channel":"Email","bookDemos":13,"sqos":11,"deals":2,"revNet":26388},{"channel":"Other","bookDemos":9,"sqos":5,"deals":2,"revNet":16791},{"channel":"PPC","bookDemos":3,"sqos":3,"deals":2,"revNet":14799},{"channel":"Direct","bookDemos":3,"sqos":3,"deals":1,"revNet":599},{"channel":"Event","bookDemos":13,"sqos":11,"deals":0,"revNet":0},{"channel":"Direct Mail","bookDemos":10,"sqos":9,"deals":0,"revNet":0},{"channel":"SME","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0}],"byMonth":{"2026-01":[{"channel":"Paid Social","bookDemos":14,"sqos":12,"deals":2,"revNet":38238},{"channel":"Other","bookDemos":3,"sqos":3,"deals":1,"revNet":12003},{"channel":"Partner / Referral","bookDemos":3,"sqos":1,"deals":1,"revNet":9600},{"channel":"Direct","bookDemos":1,"sqos":1,"deals":1,"revNet":599},{"channel":"Direct Mail","bookDemos":6,"sqos":3,"deals":0,"revNet":0},{"channel":"SME","bookDemos":2,"sqos":0,"deals":0,"revNet":0},{"channel":"Email","bookDemos":3,"sqos":2,"deals":0,"revNet":0},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":0,"deals":0,"revNet":0}],"2026-02":[{"channel":"Paid Social","bookDemos":13,"sqos":9,"deals":2,"revNet":89000},{"channel":"Partner / Referral","bookDemos":1,"sqos":3,"deals":1,"revNet":35750},{"channel":"PPC","bookDemos":1,"sqos":2,"deals":2,"revNet":14799},{"channel":"Email","bookDemos":7,"sqos":6,"deals":1,"revNet":4788},{"channel":"Other","bookDemos":4,"sqos":1,"deals":1,"revNet":4788},{"channel":"Direct Mail","bookDemos":3,"sqos":6,"deals":0,"revNet":0},{"channel":"Direct","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"SME","bookDemos":0,"sqos":2,"deals":0,"revNet":0}],"2026-03":[{"channel":"Email","bookDemos":3,"sqos":3,"deals":1,"revNet":21600},{"channel":"Event","bookDemos":13,"sqos":11,"deals":0,"revNet":0},{"channel":"Direct Mail","bookDemos":1,"sqos":0,"deals":0,"revNet":0},{"channel":"Other","bookDemos":2,"sqos":1,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":1,"deals":0,"revNet":0},{"channel":"Paid Social","bookDemos":2,"sqos":2,"deals":0,"revNet":0}]}},"winRate":18,"avgDealSize":17782,"sqoToSale":[20,23,6],"adSpend":{"hasData":true,"totalSpend":52517.98000000001,"totalImpressions":1300781,"totalClicks":10437,"cpl":1810.9648275862073,"costPerSqo":2283.390434782609,"costPerSale":13129.495000000003,"roas":"2.42","paidBookDemos":29,"paidSqos":23,"paidSales":4,"paidRevNet":127238,"monthlySpend":[21389,22235,8894],"monthlyPaidBookDemos":[14,13,2],"monthlyPaidSqos":[12,9,2],"monthlyPaidSales":[2,2,0],"monthlyPaidRevNet":[38238,89000,0],"monthlyCpl":[1528,1710,4447],"monthlyCostPerSale":[10695,11118,null],"monthlyROAS":["1.79","4.00","0.00"],"weeklySpendMap":{"2026-01-05":6469.08,"2026-01-12":5415.9800000000005,"2026-01-19":3414.6500000000005,"2026-01-26":3832.8099999999995,"2026-02-02":4691.67,"2026-02-09":5415.54,"2026-02-16":5237.4400000000005,"2026-02-23":6822.94,"2026-03-02":4852.9,"2026-03-09":3232.15,"2026-03-16":82.57},"weeklyPipelineMap":{"2026-02-24":{"bookDemos":6,"sqos":2,"sales":0},"2026-03-03":{"bookDemos":1,"sqos":1,"sales":0},"2026-02-17":{"bookDemos":3,"sqos":0,"sales":0},"2026-02-10":{"bookDemos":1,"sqos":4,"sales":0},"2026-02-03":{"bookDemos":4,"sqos":3,"sales":0},"2026-01-20":{"bookDemos":5,"sqos":6,"sales":0},"2026-01-27":{"bookDemos":1,"sqos":2,"sales":0},"2026-01-13":{"bookDemos":4,"sqos":0,"sales":0},"2026-01-06":{"bookDemos":4,"sqos":4,"sales":0},"2026-03-10":{"bookDemos":0,"sqos":1,"sales":0}},"campaignAttribution":[{"name":"Testimonial","spend":31416,"bookDemos":19,"sqos":14,"deals":1,"revenue":24000,"roas":"0.76","cpl":1653,"costPerSqo":2244,"costPerSale":31416},{"name":"AI Checklist","spend":13858,"bookDemos":10,"sqos":7,"deals":1,"revenue":65000,"roas":"4.69","cpl":1386,"costPerSqo":1980,"costPerSale":13858},{"name":"PT Marketing System","spend":4395,"bookDemos":9,"sqos":7,"deals":3,"revenue":15964,"roas":"3.63","cpl":488,"costPerSqo":628,"costPerSale":1465},{"name":"Cash Pay","spend":2848,"bookDemos":7,"sqos":7,"deals":1,"revenue":31850,"roas":"11.18","cpl":407,"costPerSqo":407,"costPerSale":2848}],"campaignByMonth":{"AI Checklist":[{"spend":7136,"bookDemos":4,"sqos":2,"deals":0},{"spend":4025,"bookDemos":4,"sqos":3,"deals":1},{"spend":2697,"bookDemos":2,"sqos":2,"deals":0}],"Cash Pay":[{"spend":2848,"bookDemos":4,"sqos":5,"deals":0},{"spend":0,"bookDemos":1,"sqos":0,"deals":0},{"spend":0,"bookDemos":0,"sqos":0,"deals":0}],"PT Marketing System":[{"spend":3744,"bookDemos":3,"sqos":2,"deals":1},{"spend":651,"bookDemos":2,"sqos":2,"deals":1},{"spend":0,"bookDemos":0,"sqos":0,"deals":0}],"Testimonial":[{"spend":7661,"bookDemos":1,"sqos":0,"deals":0},{"spend":17559,"bookDemos":8,"sqos":5,"deals":1},{"spend":6197,"bookDemos":0,"sqos":0,"deals":0}]},"campaignByMonthFull":{"AI Checklist":[{"spend":7136,"bookDemos":4,"sqos":2,"deals":0,"revenue":0,"cpl":1784,"costPerSqo":3568,"costPerSale":null,"roas":null},{"spend":4025,"bookDemos":4,"sqos":3,"deals":1,"revenue":65000,"cpl":1006,"costPerSqo":1342,"costPerSale":4025,"roas":"16.15"},{"spend":2697,"bookDemos":2,"sqos":2,"deals":0,"revenue":0,"cpl":1349,"costPerSqo":1349,"costPerSale":null,"roas":null}],"Cash Pay":[{"spend":2848,"bookDemos":4,"sqos":5,"deals":0,"revenue":0,"cpl":712,"costPerSqo":570,"costPerSale":null,"roas":null},{"spend":0,"bookDemos":1,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null},{"spend":0,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}],"PT Marketing System":[{"spend":3744,"bookDemos":3,"sqos":2,"deals":1,"revenue":6388,"cpl":1248,"costPerSqo":1872,"costPerSale":3744,"roas":"1.71"},{"spend":651,"bookDemos":2,"sqos":2,"deals":1,"revenue":4788,"cpl":326,"costPerSqo":326,"costPerSale":651,"roas":"7.35"},{"spend":0,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}],"Testimonial":[{"spend":7661,"bookDemos":1,"sqos":0,"deals":0,"revenue":0,"cpl":7661,"costPerSqo":null,"costPerSale":null,"roas":null},{"spend":17559,"bookDemos":8,"sqos":5,"deals":1,"revenue":24000,"cpl":2195,"costPerSqo":3512,"costPerSale":17559,"roas":"1.37"},{"spend":6197,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}]}},"googlePpc":{"hasData":true,"totalSpend":6097.46,"totalClicks":563,"totalImpressions":5491,"avgCpc":10.83,"monthlySpend":[2797.81,2474.52,825.13],"monthlyClicks":[247,239,77]},"dealsDetail":[{"account":"Optimum Physio Therapies","locationCount":1,"revNet":12003,"channel":"Other","campaign":"Unknown","sqoDate":"2026-01-17","closeDate":"2026-01-22","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Active Physical Therapy","locationCount":1,"revNet":9600,"channel":"Partner / Referral","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-01-20","closeDate":"2026-01-20","rep":"Kaleb Gebrewold","product":"Pro"},{"account":"ChiroCare Rehabilitation Center","locationCount":1,"revNet":599,"channel":"Direct","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-29","closeDate":"2026-02-13","rep":"James Nasworthy","product":"Core"},{"account":"AIM Physical Therapy","locationCount":2,"revNet":65000,"channel":"Paid Social","campaign":"AI Checklist","sqoDate":"2026-02-25","closeDate":"2026-03-09","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Humphries Physical Therapy","locationCount":2,"revNet":31850,"channel":"Paid Social","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-22","closeDate":"2026-02-17","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Therapy Retreat","locationCount":1,"revNet":6388,"channel":"Paid Social","campaign":"PT Marketing System","sqoDate":"2026-01-09","closeDate":"2026-01-17","rep":"James Nasworthy","product":"Pro"},{"account":"Moffett Physical Therapy","locationCount":3,"revNet":24000,"channel":"Paid Social","campaign":"Testimonial","sqoDate":"2026-02-10","closeDate":"2026-02-24","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Trust Physical Therapy","locationCount":1,"revNet":399,"channel":"PPC","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-02-25","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"Beyond Therapy & Wellness, PLLC","locationCount":1,"revNet":14400,"channel":"PPC","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-02-05","closeDate":"2026-02-05","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Peak Motion Physical Therapy","locationCount":1,"revNet":4788,"channel":"Email","campaign":"PT Marketing System","sqoDate":"2026-02-06","closeDate":"2026-02-10","rep":"James Nasworthy","product":"Core"},{"account":"Precision Performance Physical Therapy","locationCount":2,"revNet":21600,"channel":"Email","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-03-04","closeDate":"2026-03-04","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Desert Hand and Physical Therapy","locationCount":1,"revNet":4788,"channel":"Other","campaign":"Webinar","sqoDate":"","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"Core Physical Therapy and Sports Performance","locationCount":2,"revNet":35750,"channel":"Partner / Referral","campaign":"Partner Referral","sqoDate":"2026-02-05","closeDate":"2026-02-26","rep":"Kaleb Gebrewold","product":"GrowthX"}]};
 
 // ── Chart helpers ──
 const chartInstances = {};
@@ -756,25 +755,6 @@ function lineChart(id, labels, datasets, opts) {
   });
 }
 
-function barChart(id, labels, datasets, opts) {
-  destroyChart(id);
-  const ctx = document.getElementById(id);
-  if (!ctx) return;
-  chartInstances[id] = new Chart(ctx, {
-    type: 'bar',
-    data: { labels, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: {
-        y: { beginAtZero: true, grid: { color: gridColor() }, ticks: { color: tickColor(), ...(opts && opts.yDollar ? { callback: v => '$'+v.toLocaleString() } : {}) } },
-        x: { grid: { display: false }, ticks: { color: tickColor() } }
-      },
-      plugins: { legend: { labels: { color: legendColor() } } },
-      ...(opts || {})
-    }
-  });
-}
-
 function hbarChart(id, labels, data, color) {
   destroyChart(id);
   const ctx = document.getElementById(id);
@@ -801,13 +781,12 @@ function badge(val, good) {
 function fmt$(n) { return '$' + Math.round(n).toLocaleString(); }
 
 // ── Navigation ──
-const _sectionInited = {};
 function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if (btn) btn.classList.add('active');
-  if (!_sectionInited[id]) { _sectionInited[id] = true; initSection(id); }
+  initSection(id);
 }
 
 function initSection(id) {
@@ -817,22 +796,50 @@ function initSection(id) {
   if (id === 'campaigns') initCampaigns();
 }
 
-// ── OVERVIEW ──
-let currentOvMonth = 'all';
-let currentTrendView = 'monthly';
+// ── GLOBAL MONTH FILTER ──
+window._activeMonth = 'all';
 
-function setOvMonth(m, btn) {
-  currentOvMonth = m;
-  document.querySelectorAll('#ovMonthFilter .month-btn').forEach(b => b.classList.remove('active'));
+function setGlobalMonth(m, btn) {
+  window._activeMonth = m;
+  document.querySelectorAll('#globalMonthFilter .month-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  renderOvKpis(m);
-  renderOvPipeline(m);
+  // Re-render the currently active section
+  const active = document.querySelector('.section.active');
+  if (!active) return;
+  const id = active.id;
+  if (id === 'overview') { renderOvKpis(m); renderTrendChart(); }
+  if (id === 'channels') renderChannels(m === 'all' ? 'all' : ['2026-01','2026-02','2026-03'][m]);
+  if (id === 'paid') renderPaid(m === 'all' ? 'all' : ['2026-01','2026-02','2026-03'][m]);
+  if (id === 'campaigns') { initCampaigns(); }
+  if (id === 'deals') { /* deals table is static */ }
 }
+
+// ── OVERVIEW ──
+let currentTrendView = 'monthly';
+let currentTrendChannel = 'all';
 
 function setTrendView(view, btn) {
   currentTrendView = view;
   btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  renderTrendChart();
+}
+
+function initTrendChannelFilter() {
+  const wrap = document.getElementById('trendChannelFilter');
+  if (!wrap) return;
+  const channels = Object.keys(D.monthly.byChannel || {});
+  let html = '<button class="month-btn active" data-ch="all" onclick="setTrendChannel(this.dataset.ch,this)">All Channels</button>';
+  channels.forEach(ch => {
+    html += '<button class="month-btn" data-ch="'+ch+'" onclick="setTrendChannel(this.dataset.ch,this)">'+ch+'</button>';
+  });
+  wrap.innerHTML = html;
+}
+
+function setTrendChannel(ch, btn) {
+  currentTrendChannel = ch;
+  document.querySelectorAll('#trendChannelFilter .month-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
   renderTrendChart();
 }
 
@@ -852,53 +859,116 @@ function renderOvKpis(m) {
     '<div class="kpi-card purple"><div class="kpi-label">Total Spend</div><div class="kpi-value">'+fmt$(sp)+'</div>'+(isFeb?'<div class="kpi-sub">vs Jan '+badge(D.mom.spend,false)+'</div>':'')+'</div>';
 }
 
-function renderOvPipeline(m) {
-  const idx = typeof m === 'number' ? m : -1;
-  const bd = idx < 0 ? D.meta.totalBookDemos : D.monthly.bookDemos[idx];
-  const sq = idx < 0 ? D.meta.totalSqos : D.monthly.sqos[idx];
-  const dl = idx < 0 ? D.meta.totalDeals : D.monthly.deals[idx];
-  const rv = idx < 0 ? D.meta.totalRevNet : D.monthly.revNet[idx];
-  const bdToSq = bd > 0 ? Math.round(sq/bd*100)+'%' : '—';
-  const sqToDl = sq > 0 ? Math.round(dl/sq*100)+'%' : '—';
-  document.getElementById('ovPipeline').innerHTML =
-    '<div class="pf-node"><div class="pf-count">'+bd+'</div><div class="pf-label">Booked Demos</div></div>' +
-    '<div class="pf-arrow"><div class="pf-rate">'+bdToSq+'</div><div class="pf-line"></div></div>' +
-    '<div class="pf-node"><div class="pf-count">'+sq+'</div><div class="pf-label">SQOs</div></div>' +
-    '<div class="pf-arrow"><div class="pf-rate">'+sqToDl+'</div><div class="pf-line"></div></div>' +
-    '<div class="pf-node"><div class="pf-count">'+dl+'</div><div class="pf-label">Deals</div></div>' +
-    '<div class="pf-arrow"><div class="pf-line"></div></div>' +
-    '<div class="pf-node"><div class="pf-count" style="color:var(--orange)">'+fmt$(rv)+'</div><div class="pf-label">Revenue</div></div>';
-}
-
 function renderTrendChart() {
   if (currentTrendView === 'monthly') {
+    const chData = (currentTrendChannel !== 'all') ? (D.monthly.byChannel[currentTrendChannel] || null) : null;
+    const bd = chData ? chData.bookDemos : D.monthly.bookDemos;
+    const sq = chData ? chData.sqos      : D.monthly.sqos;
+    const dl = chData ? chData.deals     : D.monthly.deals;
+    const rv = chData ? chData.revNet    : D.monthly.revNet;
+    const sp = chData ? chData.spend     : D.monthly.spend;
     lineChart('trendChart', D.monthly.labels, [
-      { label: 'Booked Demos', data: D.monthly.bookDemos, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y' },
-      { label: 'SQOs', data: D.monthly.sqos, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y' },
-      { label: 'Deals', data: D.monthly.deals, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y' },
-      { label: 'Revenue ($)', data: D.monthly.revNet, borderColor: PALETTE[2], backgroundColor: PALETTE[2]+'20', tension: .3, yAxisID: 'y1' },
-      { label: 'Spend ($)', data: D.monthly.spend, borderColor: PALETTE[4], backgroundColor: PALETTE[4]+'20', tension: .3, borderDash: [5,5], yAxisID: 'y1' },
+      { label: 'Booked Demos', data: bd, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y' },
+      { label: 'SQOs', data: sq, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y' },
+      { label: 'Deals', data: dl, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y' },
+      { label: 'Revenue ($)', data: rv, borderColor: PALETTE[2], backgroundColor: PALETTE[2]+'20', tension: .3, yAxisID: 'y1' },
+      { label: 'Spend ($)', data: sp, borderColor: PALETTE[4], backgroundColor: PALETTE[4]+'20', tension: .3, borderDash: [5,5], yAxisID: 'y1' },
     ], { y1: {} });
   } else {
-    lineChart('trendChart', D.weeks.labels, [
-      { label: 'Booked Demos', data: D.weeks.bookDemos, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3 },
-      { label: 'SQOs', data: D.weeks.sqos, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3 },
-      { label: 'Deals', data: D.weeks.deals, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3 },
-    ]);
+    // Weekly view: line chart for pipeline metrics + bar for spend on right axis
+    const weekLabels = D.weeks.labels;
+    const allWeekKeys = Object.keys(D.adSpend.weeklySpendMap || {}).sort().filter(k => k >= '2026-01-01' && k <= '2026-03-31');
+    // Map weekly spend to the same labels order as D.weeks.labels
+    // We need the week keys in the same order used to build D.weeks.labels
+    const spendByLabel = {};
+    if (D.adSpend.hasData && D.adSpend.weeklySpendMap) {
+      Object.entries(D.adSpend.weeklySpendMap).forEach(([wk, amt]) => {
+        const d = new Date(wk + 'T00:00:00Z');
+        const ms = ['Jan','Feb','Mar'];
+        const lbl = ms[d.getUTCMonth()] + ' ' + d.getUTCDate();
+        spendByLabel[lbl] = (spendByLabel[lbl] || 0) + amt;
+      });
+    }
+    const weeklySpendData = weekLabels.map(lbl => Math.round(spendByLabel[lbl] || 0));
+    destroyChart('trendChart');
+    const ctx = document.getElementById('trendChart');
+    if (!ctx) return;
+    chartInstances['trendChart'] = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [
+          { type: 'line', label: 'Booked Demos', data: D.weeks.bookDemos, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y', order: 1 },
+          { type: 'line', label: 'SQOs', data: D.weeks.sqos, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y', order: 1 },
+          { type: 'line', label: 'Deals', data: D.weeks.deals, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y', order: 1 },
+          { type: 'bar', label: 'Spend ($)', data: weeklySpendData, backgroundColor: PALETTE[4]+'60', borderColor: PALETTE[4], borderWidth: 1, yAxisID: 'y1', order: 2 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          y:  { beginAtZero: true, grid: { color: gridColor() }, ticks: { color: tickColor() } },
+          y1: { position: 'right', beginAtZero: true, grid: { display: false }, ticks: { color: tickColor(), callback: v => '$'+v.toLocaleString() } },
+          x:  { grid: { display: false }, ticks: { color: tickColor() } }
+        },
+        plugins: { legend: { labels: { color: legendColor(), usePointStyle: true, pointStyle: 'circle' } } }
+      }
+    });
   }
 }
 
 function initOverview() {
-  renderOvKpis('all');
-  renderOvPipeline('all');
+  const m = window._activeMonth || 'all';
+  renderOvKpis(m);
+  initTrendChannelFilter();
   renderTrendChart();
 }
 
 // ── CHANNELS ──
-function setChMonth(m, btn) {
-  document.querySelectorAll('#chMonthFilter .month-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderChannels(m);
+let currentChanTrendMetric = 'revNet';
+
+function setChanTrendMetric(metric, btn) {
+  currentChanTrendMetric = metric;
+  if (btn) {
+    btn.closest('.view-toggle').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderChanTrendChart();
+}
+
+function renderChanTrendChart() {
+  const metric = currentChanTrendMetric || 'revNet';
+  const topCh = D.channels.all.slice(0, 5).map(c => c.channel);
+  const months = ['2026-01','2026-02','2026-03'];
+  const isMoney = metric === 'revNet';
+  const datasets = topCh.map((ch, i) => ({
+    label: ch,
+    data: months.map(mo => {
+      const chData = D.channels.byMonth[mo] || [];
+      const found = chData.find(c => c.channel === ch);
+      return found ? (found[metric] || 0) : 0;
+    }),
+    borderColor: PALETTE[i],
+    backgroundColor: PALETTE[i] + '20',
+    tension: .3,
+  }));
+  destroyChart('chTrendChart');
+  const ctx = document.getElementById('chTrendChart');
+  if (!ctx) return;
+  chartInstances['chTrendChart'] = new Chart(ctx, {
+    type: 'line',
+    data: { labels: D.monthly.labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        y: { beginAtZero: true, grid: { color: gridColor() }, ticks: { color: tickColor(), callback: v => isMoney ? '$'+v.toLocaleString() : v } },
+        x: { grid: { display: false }, ticks: { color: tickColor() } }
+      },
+      plugins: { legend: { labels: { color: legendColor(), usePointStyle: true, pointStyle: 'circle' } } }
+    }
+  });
 }
 
 function renderChannels(m) {
@@ -908,71 +978,59 @@ function renderChannels(m) {
   tbody.innerHTML = rows.map(c =>
     '<tr><td class="ch-name">'+c.channel+'</td><td>'+c.bookDemos+'</td><td>'+c.sqos+'</td><td>'+c.deals+'</td><td>'+fmt$(c.revNet)+'</td></tr>'
   ).join('');
-  // Revenue chart
+  // Revenue bar chart
   hbarChart('chRevChart', rows.map(c=>c.channel), rows.map(c=>c.revNet), PALETTE[0]);
-  // Trend chart — always shows monthly by channel for the top channels
-  const topCh = D.channels.all.slice(0, 5).map(c => c.channel);
-  const months = ['2026-01','2026-02','2026-03'];
-  const datasets = topCh.map((ch, i) => ({
-    label: ch,
-    data: months.map(mo => {
-      const chData = D.channels.byMonth[mo] || [];
-      const found = chData.find(c => c.channel === ch);
-      return found ? found.revNet : 0;
-    }),
-    borderColor: PALETTE[i],
-    backgroundColor: PALETTE[i] + '20',
-    tension: .3,
-  }));
-  lineChart('chTrendChart', D.monthly.labels, datasets, { y: {} });
+  // Trend chart
+  renderChanTrendChart();
 }
 
 function initChannels() {
-  renderChannels('all');
+  const m = window._activeMonth || 'all';
+  renderChannels(m === 'all' ? 'all' : ['2026-01','2026-02','2026-03'][m]);
 }
 
 // ── PAID MEDIA ──
 function initPaid() {
+  const m = window._activeMonth || 'all';
+  renderPaid(m === 'all' ? 'all' : ['2026-01','2026-02','2026-03'][m]);
+}
+
+function renderPaid(m) {
   if (!D.adSpend.hasData) return;
-  // Meta vs Google comparison
-  const metaSpend = D.adSpend.monthlySpend || [0,0,0];
-  const googleSpend = D.googlePpc.hasData ? D.googlePpc.monthlySpend : [0,0,0];
-  barChart('paidCompChart', D.monthly.labels, [
-    { label: 'Meta', data: metaSpend, backgroundColor: '#2F64FF', borderRadius: 4 },
-    { label: 'Google PPC', data: googleSpend, backgroundColor: '#22c55e', borderRadius: 4 },
-  ], { yDollar: true });
+  const idx = m === 'all' ? null : ['2026-01','2026-02','2026-03'].indexOf(m);
+  // KPI recalc for selected month
+  const spend = idx !== null ? (D.adSpend.monthlySpend[idx]||0) : D.adSpend.totalSpend;
+  const bd    = idx !== null ? (D.adSpend.monthlyPaidBookDemos[idx]||0) : D.adSpend.paidBookDemos;
+  const sq    = idx !== null ? (D.adSpend.monthlyPaidSqos[idx]||0) : D.adSpend.paidSqos;
+  const dl    = idx !== null ? (D.adSpend.monthlyPaidSales[idx]||0) : D.adSpend.paidSales;
+  const rev   = idx !== null ? (D.adSpend.monthlyPaidRevNet[idx]||0) : D.adSpend.paidRevNet;
+  const gSpend= idx !== null ? ((D.googlePpc.hasData ? D.googlePpc.monthlySpend[idx] : 0)||0) : (D.googlePpc.hasData ? D.googlePpc.totalSpend : 0);
+  const totalSpend = spend + gSpend;
+  const roas = totalSpend > 0 && rev > 0 ? (rev/totalSpend).toFixed(2) : '—';
+  const cpl  = bd > 0 ? Math.round(spend/bd) : null;
+  const cpsqo= sq > 0 ? Math.round(spend/sq) : null;
+  const cpsale=dl > 0 ? Math.round(spend/dl) : null;
 
-  // Weekly spend vs pipeline
-  const wkKeys = Object.keys(D.adSpend.weeklySpendMap || {}).sort();
-  const wkLabels = wkKeys.map(k => { const d = new Date(k+'T00:00:00Z'); return ['Jan','Feb','Mar'][d.getUTCMonth()]+' '+d.getUTCDate(); });
-  const wkSpend = wkKeys.map(k => Math.round(D.adSpend.weeklySpendMap[k] || 0));
-  const wkPipe = D.adSpend.weeklyPipelineMap || {};
-  const wkBD = wkKeys.map(k => (wkPipe[k]||{}).bookDemos||0);
-  const wkSQ = wkKeys.map(k => (wkPipe[k]||{}).sqos||0);
-
-  destroyChart('paidWeeklyChart');
-  const ctx = document.getElementById('paidWeeklyChart');
-  if (ctx) {
-    chartInstances['paidWeeklyChart'] = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: wkLabels,
-        datasets: [
-          { label: 'Spend', data: wkSpend, backgroundColor: '#2F64FF80', borderRadius: 4, yAxisID: 'y' },
-          { label: 'Book Demos', data: wkBD, type: 'line', borderColor: '#22c55e', backgroundColor: '#22c55e20', tension: .3, yAxisID: 'y1' },
-          { label: 'SQOs', data: wkSQ, type: 'line', borderColor: '#f97316', backgroundColor: '#f9731620', tension: .3, yAxisID: 'y1' },
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        scales: {
-          y:  { beginAtZero: true, grid: { color: gridColor() }, ticks: { color: tickColor(), callback: v=>'$'+v.toLocaleString() } },
-          y1: { position: 'right', beginAtZero: true, grid: { display: false }, ticks: { color: tickColor() } },
-          x:  { grid: { display: false }, ticks: { color: tickColor(), maxRotation: 45 } }
-        },
-        plugins: { legend: { labels: { color: legendColor() } } }
-      }
-    });
+  // Update hero cards
+  const heroEl = document.getElementById('paidHero');
+  if (heroEl) {
+    heroEl.innerHTML = `
+      <div class="hero-card hero-blue"><div class="hero-val">$${Math.round(totalSpend).toLocaleString()}</div><div class="hero-label">Total Paid Spend</div><div class="hero-sub">Meta + Google PPC</div></div>
+      <div class="hero-card hero-green"><div class="hero-val">$${Math.round(rev).toLocaleString()}</div><div class="hero-label">Paid Revenue</div><div class="hero-sub">Attributed to paid channels</div></div>
+      <div class="hero-card hero-purple"><div class="hero-val">${roas}×</div><div class="hero-label">Blended ROAS</div><div class="hero-sub">Revenue ÷ Total Spend</div></div>
+    `;
+  }
+  // Update KPI cards
+  const kpiEl = document.getElementById('paidKpis');
+  if (kpiEl) {
+    kpiEl.innerHTML = [
+      { label: 'CPL (Meta)', val: cpl ? '$'+cpl.toLocaleString() : '—' },
+      { label: 'Cost / SQO', val: cpsqo ? '$'+cpsqo.toLocaleString() : '—' },
+      { label: 'Cost / Closed Deal', val: cpsale ? '$'+cpsale.toLocaleString() : '—' },
+      { label: 'Booked Demos (Paid)', val: bd },
+      { label: 'SQOs (Paid)', val: sq },
+      { label: 'Deals (Paid)', val: dl },
+    ].map(k => `<div class="kpi-card"><div class="kpi-val">${k.val}</div><div class="kpi-label">${k.label}</div></div>`).join('');
   }
 }
 
@@ -983,6 +1041,80 @@ function initCampaigns() {
   const camps = (D.adSpend.campaignAttribution || []).filter(c => c.roas);
   const sorted = [...camps].sort((a,b) => parseFloat(b.roas) - parseFloat(a.roas));
   hbarChart('campRoasChart', sorted.map(c => c.name), sorted.map(c => parseFloat(c.roas)), sorted.map(c => parseFloat(c.roas) >= 3 ? '#22c55e' : parseFloat(c.roas) >= 1 ? '#f97316' : '#ef4444'));
+  // Monthly campaign chart
+  setCampMonthMetric('spend', document.querySelector('#campaigns .toggle-btn.active'));
+  // Render campaign efficiency table (month-filtered)
+  renderCampTable(window._activeMonth);
+}
+
+function renderCampTable(m) {
+  const tbody = document.getElementById('paidCampTableBody');
+  if (!tbody || !D.adSpend.hasData) return;
+  const idx = (typeof m === 'number') ? m : (m === 'all' ? null : ['2026-01','2026-02','2026-03'].indexOf(m));
+  let rows;
+  if (idx === null || idx < 0) {
+    // Q1 totals
+    rows = D.adSpend.campaignAttribution;
+  } else {
+    // Monthly data from campaignByMonthFull
+    const cbmf = D.adSpend.campaignByMonthFull || {};
+    rows = Object.keys(cbmf).map(name => {
+      const mo = cbmf[name][idx] || {};
+      return { name, spend: mo.spend||0, bookDemos: mo.bookDemos||0, sqos: mo.sqos||0, deals: mo.deals||0, revenue: mo.revenue||0, cpl: mo.cpl, costPerSqo: mo.costPerSqo, costPerSale: mo.costPerSale, roas: mo.roas };
+    }).sort((a,b) => b.spend - a.spend);
+  }
+  tbody.innerHTML = rows.map(c => {
+    const roasCls = c.roas ? (parseFloat(c.roas) >= 3 ? 'good' : parseFloat(c.roas) >= 1 ? 'neutral' : 'bad') : '';
+    return '<tr>' +
+      '<td class="camp-name">'+c.name+'</td>' +
+      '<td>'+fmt$(c.spend)+'</td>' +
+      '<td>'+c.bookDemos+'</td>' +
+      '<td>'+c.sqos+'</td>' +
+      '<td>'+c.deals+'</td>' +
+      '<td>'+fmt$(c.revenue)+'</td>' +
+      '<td>'+(c.cpl ? fmt$(c.cpl) : '—')+'</td>' +
+      '<td>'+(c.costPerSqo ? fmt$(c.costPerSqo) : '—')+'</td>' +
+      '<td>'+(c.costPerSale ? fmt$(c.costPerSale) : '—')+'</td>' +
+      '<td class="'+roasCls+'">'+(c.roas ? c.roas+'×' : '—')+'</td>' +
+      '</tr>';
+  }).join('');
+}
+
+function setCampMonthMetric(metric, btn) {
+  if (btn) {
+    document.querySelectorAll('#campaigns .toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const cbm = D.adSpend.campaignByMonth || {};
+  const campNames = Object.keys(cbm);
+  const labels = ['Jan', 'Feb', 'Mar MTD'];
+  const isMoney = metric === 'spend';
+  const datasets = campNames.map((name, i) => ({
+    label: name,
+    data: cbm[name].map(m => m[metric]),
+    backgroundColor: PALETTE[i % PALETTE.length],
+  }));
+  destroyChart('campMonthChart');
+  const ctx = document.getElementById('campMonthChart');
+  if (!ctx) return;
+  chartInstances['campMonthChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: legendColor() } },
+        tooltip: { callbacks: { label: ctx => {
+          const v = ctx.parsed.y;
+          return ' ' + ctx.dataset.label + ': ' + (isMoney ? '$' + Math.round(v).toLocaleString() : v);
+        }}},
+      },
+      scales: {
+        x: { stacked: false, grid: { color: gridColor() }, ticks: { color: tickColor() } },
+        y: { grid: { color: gridColor() }, ticks: { color: tickColor(), callback: v => isMoney ? '$' + v.toLocaleString() : v } },
+      },
+    },
+  });
 }
 
 // ── SORTABLE TABLE ──
