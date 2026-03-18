@@ -251,7 +251,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <div class="brand">Breakthrough Marketing</div>
   <h1>Q1 <span>2026</span> Marketing Report</h1>
   <div class="subtitle">Revenue attributed by SQO Appointment Date &nbsp;·&nbsp; Deals deduped by account</div>
-  <div class="meta-info">Generated March 16, 2026 &nbsp;·&nbsp; v3.7</div>
+  <div class="meta-info">Generated March 18, 2026 &nbsp;·&nbsp; v3.7</div>
 </div>
 
 <!-- NAV (5 tabs) + GLOBAL MONTH FILTER -->
@@ -283,7 +283,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <span class="takeaways-icon">📊</span>
       <span class="takeaways-title">Key Takeaways</span>
     </div>
-    <ul class="takeaways-list"><li><strong>February</strong> was the strongest revenue month: <strong>$149,125</strong> net, <strong>7 deals</strong>.</li><li>SQO → Sale conversion peaked in <strong>Feb</strong> at <strong>23%</strong> (7 of 31 SQOs).</li><li>Best ROAS campaign: "<strong>AI Checklist</strong>" at <strong>4.69×</strong>.</li><li>Win rate: <strong>18%</strong> of SQOs closed · Avg deal size: <strong>$17,782</strong>.</li><li>Google brand search: <strong>$6,097</strong> spend · <strong>563 clicks</strong> · $10.83 avg CPC.</li></ul>
+    <ul class="takeaways-list"><li><strong>January</strong> was the strongest revenue month: <strong>$184,878</strong> net, <strong>8 deals</strong>.</li><li>SQO → Sale conversion peaked in <strong>Jan</strong> at <strong>32%</strong> (8 of 25 SQOs).</li><li>Best ROAS campaign: "<strong>PT Marketing System</strong>" at <strong>5.29×</strong>.</li><li>Win rate: <strong>25%</strong> of SQOs closed · Avg deal size: <strong>$21,974</strong>.</li><li>Google brand search: <strong>$6,097</strong> spend · <strong>563 clicks</strong> · $10.83 avg CPC.</li></ul>
   </div>
 
   <div class="kpi-grid" id="ovKpis"></div>
@@ -329,25 +329,37 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <td>29</td>
   <td>23</td>
   <td>4</td>
-  <td>$127,238</td>
+  <td>$134,138</td>
+</tr><tr>
+  <td class="ch-name">Direct Mail</td>
+  <td>10</td>
+  <td>9</td>
+  <td>3</td>
+  <td>$90,900</td>
 </tr><tr>
   <td class="ch-name">Partner / Referral</td>
-  <td>4</td>
-  <td>4</td>
+  <td>6</td>
+  <td>6</td>
   <td>2</td>
-  <td>$45,350</td>
+  <td>$47,800</td>
+</tr><tr>
+  <td class="ch-name">Outbound</td>
+  <td>6</td>
+  <td>3</td>
+  <td>1</td>
+  <td>$40,800</td>
 </tr><tr>
   <td class="ch-name">Email</td>
   <td>13</td>
+  <td>12</td>
+  <td>3</td>
+  <td>$39,476</td>
+</tr><tr>
+  <td class="ch-name">Event</td>
+  <td>13</td>
   <td>11</td>
   <td>2</td>
-  <td>$26,388</td>
-</tr><tr>
-  <td class="ch-name">Other</td>
-  <td>9</td>
-  <td>5</td>
-  <td>2</td>
-  <td>$16,791</td>
+  <td>$36,000</td>
 </tr><tr>
   <td class="ch-name">PPC</td>
   <td>3</td>
@@ -355,29 +367,17 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <td>2</td>
   <td>$14,799</td>
 </tr><tr>
+  <td class="ch-name">Other</td>
+  <td>3</td>
+  <td>2</td>
+  <td>1</td>
+  <td>$12,003</td>
+</tr><tr>
   <td class="ch-name">Direct</td>
   <td>3</td>
   <td>3</td>
   <td>1</td>
-  <td>$599</td>
-</tr><tr>
-  <td class="ch-name">Event</td>
-  <td>13</td>
-  <td>11</td>
-  <td>0</td>
-  <td>$0</td>
-</tr><tr>
-  <td class="ch-name">Direct Mail</td>
-  <td>10</td>
-  <td>9</td>
-  <td>0</td>
-  <td>$0</td>
-</tr><tr>
-  <td class="ch-name">SME</td>
-  <td>2</td>
-  <td>2</td>
-  <td>0</td>
-  <td>$0</td>
+  <td>$1,599</td>
 </tr><tr>
   <td class="ch-name">Organic</td>
   <td>4</td>
@@ -390,7 +390,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
 
   <div class="chart-card">
     <div class="chart-title">Metrics Trend by Channel</div>
-    <div class="chart-sub">Top channels — monthly progression by selected metric</div>
+    <div class="chart-sub">All channels — monthly progression by selected metric</div>
     <div class="view-toggle" style="margin:0 0 16px">
       <button class="toggle-btn" onclick="setChanTrendMetric('bookDemos',this)">Book Demos</button>
       <button class="toggle-btn" onclick="setChanTrendMetric('sqos',this)">SQOs</button>
@@ -398,6 +398,20 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <button class="toggle-btn active" onclick="setChanTrendMetric('revNet',this)">Revenue</button>
     </div>
     <div class="chart-wrap tall"><canvas id="chTrendChart"></canvas></div>
+  </div>
+
+  <!-- SINGLE-CHANNEL DEEP DIVE -->
+  <div class="chart-card" id="channelDeepDive" style="display:none;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+      <div class="chart-title" id="deepDiveTitle">Channel Deep Dive</div>
+      <button class="action-btn" onclick="closeDeepDive()" style="font-size:12px;padding:6px 12px;">&#x2715; Close</button>
+    </div>
+    <div class="chart-sub">Book Demos, SQOs, Deals & Revenue for one channel — click a channel row above to open</div>
+    <div class="view-toggle" style="margin:12px 0 16px">
+      <button class="toggle-btn active" onclick="setDeepDiveView('weekly',this)">Weekly</button>
+      <button class="toggle-btn" onclick="setDeepDiveView('monthly',this)">Monthly</button>
+    </div>
+    <div class="chart-wrap tall"><canvas id="deepDiveChart"></canvas></div>
   </div>
 
 </div>
@@ -414,25 +428,25 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <div class="hero-grid" id="paidHero">
     <div class="hero-card">
       <div class="hero-label">Total Paid Spend</div>
-      <div class="hero-value">$58,615</div>
-      <div class="hero-sub">Meta: $52,518 · Google: $6,097</div>
+      <div class="hero-value">$59,147</div>
+      <div class="hero-sub">Meta: $53,051 · Google: $6,097</div>
     </div>
     <div class="hero-card">
       <div class="hero-label">Paid Revenue</div>
-      <div class="hero-value">$127,238</div>
+      <div class="hero-value">$134,138</div>
       <div class="hero-sub">From Paid Social channel</div>
     </div>
     <div class="hero-card">
       <div class="hero-label">ROAS</div>
-      <div class="hero-value">2.42×</div>
+      <div class="hero-value">2.53×</div>
       <div class="hero-sub">Return on Meta ad spend</div>
     </div>
   </div>
 
   <div class="kpi-grid" id="paidKpis">
-    <div class="kpi-card blue"><div class="kpi-label">Cost per Booked Demo</div><div class="kpi-value">$1,811</div></div>
-    <div class="kpi-card teal"><div class="kpi-label">Cost per SQO</div><div class="kpi-value">$2,283</div></div>
-    <div class="kpi-card orange"><div class="kpi-label">Cost per Closed Deal</div><div class="kpi-value">$13,129</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Cost per Booked Demo</div><div class="kpi-value">$1,829</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Cost per SQO</div><div class="kpi-value">$2,307</div></div>
+    <div class="kpi-card orange"><div class="kpi-label">Cost per Closed Deal</div><div class="kpi-value">$13,263</div></div>
     <div class="kpi-card green"><div class="kpi-label">Paid Booked Demos</div><div class="kpi-value">29</div></div>
     <div class="kpi-card green"><div class="kpi-label">Paid SQOs</div><div class="kpi-value">23</div></div>
     <div class="kpi-card green"><div class="kpi-label">Paid Deals</div><div class="kpi-value">4</div></div>
@@ -451,8 +465,8 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <td>12</td>
       <td>2</td>
       <td>$10,695</td>
-      <td>$38,238</td>
-      <td>1.79×</td>
+      <td>$41,188</td>
+      <td>1.93×</td>
     </tr><tr>
       <td>Feb</td>
       <td>$24,710</td>
@@ -461,13 +475,13 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <td>9</td>
       <td>2</td>
       <td>$11,118</td>
-      <td>$89,000</td>
-      <td>4.00×</td>
+      <td>$92,950</td>
+      <td>4.18×</td>
     </tr><tr>
       <td>Mar MTD</td>
-      <td>$9,719</td>
+      <td>$10,251</td>
       <td>2</td>
-      <td>$4,447</td>
+      <td>$4,713</td>
       <td>2</td>
       <td>0</td>
       <td>—</td>
@@ -509,22 +523,22 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <td>$31,416</td>
       <td>19</td>
       <td>14</td>
-      <td>1</td>
-      <td>$24,000</td>
+      <td>3</td>
+      <td>$103,900</td>
       <td>$1,653</td>
       <td>$2,244</td>
-      <td>$31,416</td>
-      <td class="bad">0.76×</td>
+      <td>$10,472</td>
+      <td class="good">3.31×</td>
     </tr><tr>
       <td class="camp-name">AI Checklist</td>
-      <td>$13,858</td>
+      <td>$14,391</td>
       <td>10</td>
       <td>7</td>
       <td>1</td>
-      <td>$65,000</td>
-      <td>$1,386</td>
-      <td>$1,980</td>
-      <td>$13,858</td>
+      <td>$67,450</td>
+      <td>$1,439</td>
+      <td>$2,056</td>
+      <td>$14,391</td>
       <td class="good">4.69×</td>
     </tr><tr>
       <td class="camp-name">PT Marketing System</td>
@@ -532,11 +546,11 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
       <td>9</td>
       <td>7</td>
       <td>3</td>
-      <td>$15,964</td>
+      <td>$23,264</td>
       <td>$488</td>
       <td>$628</td>
       <td>$1,465</td>
-      <td class="good">3.63×</td>
+      <td class="good">5.29×</td>
     </tr><tr>
       <td class="camp-name">Cash Pay</td>
       <td>$2,848</td>
@@ -578,13 +592,13 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <div class="section-header">
     <div class="section-title">Deal Detail</div>
     <div class="section-desc">Revenue attributed to SQO Appointment Date · Multi-location accounts shown as 1 deal</div>
-    <div class="section-desc" style="margin-top:4px">All deals shown regardless of month filter · Sorted by SQO date</div>
+    <div class="section-desc" style="margin-top:4px">Sorted by close date · Use month filter to narrow</div>
   </div>
 
   <div class="deals-summary">
-    <div class="ds-item"><div class="ds-val">13</div><div class="ds-label">Deals</div></div>
-    <div class="ds-item"><div class="ds-val">$231,165</div><div class="ds-label">Total Revenue</div></div>
-    <div class="ds-item"><div class="ds-val">$17,782</div><div class="ds-label">Avg Deal Size</div></div>
+    <div class="ds-item"><div class="ds-val">19</div><div class="ds-label">Deals</div></div>
+    <div class="ds-item"><div class="ds-val">$417,515</div><div class="ds-label">Total Revenue</div></div>
+    <div class="ds-item"><div class="ds-val">$21,974</div><div class="ds-label">Avg Deal Size</div></div>
   </div>
 
   <div class="search-bar">
@@ -594,9 +608,18 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
   <div class="data-table-wrap">
     <table class="data-table" id="dealTable">
       <thead><tr>
-        <th>Account</th><th>Revenue (Net)</th><th>Channel</th><th>Campaign</th><th>SQO Date</th><th>Close Date</th><th>Rep</th><th>Product</th>
+        <th onclick="sortTable('dealTable',0)">Account ↕</th><th onclick="sortTable('dealTable',1)">Revenue ↕</th><th onclick="sortTable('dealTable',2)">Channel ↕</th><th onclick="sortTable('dealTable',3)">Campaign ↕</th><th onclick="sortTable('dealTable',4)">SQO Date ↕</th><th onclick="sortTable('dealTable',5)">Close Date ↕</th><th onclick="sortTable('dealTable',6)">Rep ↕</th><th onclick="sortTable('dealTable',7)">Product ↕</th>
       </tr></thead>
       <tbody id="dealTableBody"><tr>
+    <td>Therapy Retreat </td>
+    <td>$6,888</td>
+    <td>Paid Social</td>
+    <td>PT Marketing System</td>
+    <td>2026-01-09</td>
+    <td>2026-01-17</td>
+    <td>James Nasworthy</td>
+    <td>Pro</td>
+  </tr><tr>
     <td>Optimum Physio Therapies </td>
     <td>$12,003</td>
     <td>Other</td>
@@ -606,8 +629,17 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <td>Kaleb Gebrewold</td>
     <td>Premium</td>
   </tr><tr>
+    <td>Humphries Physical Therapy <span class="loc-badge">2 locations</span></td>
+    <td>$34,300</td>
+    <td>Paid Social</td>
+    <td>Marketing - Main Contact Form - Website</td>
+    <td>2026-01-22</td>
+    <td>2026-02-17</td>
+    <td>Kaleb Gebrewold</td>
+    <td>Premium</td>
+  </tr><tr>
     <td>Active Physical Therapy </td>
-    <td>$9,600</td>
+    <td>$10,600</td>
     <td>Partner / Referral</td>
     <td>Demo-Main Website-Strategy Form</td>
     <td>2026-01-20</td>
@@ -615,8 +647,26 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <td>Kaleb Gebrewold</td>
     <td>Pro</td>
   </tr><tr>
+    <td>Physical Achievement Center </td>
+    <td>$11,088</td>
+    <td>Email</td>
+    <td>Webinar</td>
+    <td>2026-01-22</td>
+    <td>2026-01-23</td>
+    <td>James Nasworthy</td>
+    <td>Pro</td>
+  </tr><tr>
+    <td>Precision Sports Physical Therapy <span class="loc-badge">2 locations</span></td>
+    <td>$67,600</td>
+    <td>Direct Mail</td>
+    <td>DM Cookie Campaign</td>
+    <td>2026-01-21</td>
+    <td>2026-02-04</td>
+    <td>Kaleb Gebrewold</td>
+    <td>GrowthX</td>
+  </tr><tr>
     <td>ChiroCare Rehabilitation Center </td>
-    <td>$599</td>
+    <td>$1,599</td>
     <td>Direct</td>
     <td>Marketing - Main Contact Form - Website</td>
     <td>2026-01-29</td>
@@ -624,50 +674,14 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <td>James Nasworthy</td>
     <td>Core</td>
   </tr><tr>
-    <td>AIM Physical Therapy <span class="loc-badge">2 locations</span></td>
-    <td>$65,000</td>
-    <td>Paid Social</td>
-    <td>AI Checklist</td>
-    <td>2026-02-25</td>
-    <td>2026-03-09</td>
+    <td>New York Therapy & Wellness </td>
+    <td>$40,800</td>
+    <td>Outbound</td>
+    <td>Cold Outbound</td>
+    <td>2026-01-30</td>
+    <td>2026-02-06</td>
     <td>Kaleb Gebrewold</td>
     <td>GrowthX</td>
-  </tr><tr>
-    <td>Humphries Physical Therapy <span class="loc-badge">2 locations</span></td>
-    <td>$31,850</td>
-    <td>Paid Social</td>
-    <td>Marketing - Main Contact Form - Website</td>
-    <td>2026-01-22</td>
-    <td>2026-02-17</td>
-    <td>Kaleb Gebrewold</td>
-    <td>GrowthX</td>
-  </tr><tr>
-    <td>Therapy Retreat </td>
-    <td>$6,388</td>
-    <td>Paid Social</td>
-    <td>PT Marketing System</td>
-    <td>2026-01-09</td>
-    <td>2026-01-17</td>
-    <td>James Nasworthy</td>
-    <td>Pro</td>
-  </tr><tr>
-    <td>Moffett Physical Therapy <span class="loc-badge">3 locations</span></td>
-    <td>$24,000</td>
-    <td>Paid Social</td>
-    <td>Testimonial</td>
-    <td>2026-02-10</td>
-    <td>2026-02-24</td>
-    <td>Kaleb Gebrewold</td>
-    <td>Premium</td>
-  </tr><tr>
-    <td>Trust Physical Therapy </td>
-    <td>$399</td>
-    <td>PPC</td>
-    <td>Demo-Main Website-Strategy Form</td>
-    <td>2026-02-25</td>
-    <td>2026-02-27</td>
-    <td>James Nasworthy</td>
-    <td>Core</td>
   </tr><tr>
     <td>Beyond Therapy & Wellness, PLLC </td>
     <td>$14,400</td>
@@ -678,8 +692,26 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <td>Kaleb Gebrewold</td>
     <td>Premium</td>
   </tr><tr>
+    <td>Brunswick Physical Therapy </td>
+    <td>$10,800</td>
+    <td>Direct Mail</td>
+    <td>DM Cookie Campaign</td>
+    <td>2026-02-05</td>
+    <td>2026-03-14</td>
+    <td>Kaleb Gebrewold</td>
+    <td>Premium</td>
+  </tr><tr>
+    <td>Core Physical Therapy and Sports Performance <span class="loc-badge">2 locations</span></td>
+    <td>$37,200</td>
+    <td>Partner / Referral</td>
+    <td>Partner Referral</td>
+    <td>2026-02-05</td>
+    <td>2026-02-26</td>
+    <td>Kaleb Gebrewold</td>
+    <td>Premium</td>
+  </tr><tr>
     <td>Peak Motion Physical Therapy </td>
-    <td>$4,788</td>
+    <td>$5,288</td>
     <td>Email</td>
     <td>PT Marketing System</td>
     <td>2026-02-06</td>
@@ -687,8 +719,44 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <td>James Nasworthy</td>
     <td>Core</td>
   </tr><tr>
+    <td>Moffett Physical Therapy <span class="loc-badge">3 locations</span></td>
+    <td>$25,500</td>
+    <td>Paid Social</td>
+    <td>Testimonial</td>
+    <td>2026-02-10</td>
+    <td>2026-02-24</td>
+    <td>Kaleb Gebrewold</td>
+    <td>Premium</td>
+  </tr><tr>
+    <td>Edgewater Orthopedic Physical Therapy <span class="loc-badge">2 locations</span></td>
+    <td>$12,500</td>
+    <td>Direct Mail</td>
+    <td>DM Cookie Campaign</td>
+    <td>2026-02-27</td>
+    <td>2026-03-05</td>
+    <td>Kaleb Gebrewold</td>
+    <td>Pro</td>
+  </tr><tr>
+    <td>Trust Physical Therapy </td>
+    <td>$399</td>
+    <td>PPC</td>
+    <td>Demo-Main Website-Strategy Form</td>
+    <td>2026-02-25</td>
+    <td>2026-02-27</td>
+    <td>James Nasworthy</td>
+    <td>Core</td>
+  </tr><tr>
+    <td>AIM Physical Therapy <span class="loc-badge">2 locations</span></td>
+    <td>$67,450</td>
+    <td>Paid Social</td>
+    <td>AI Checklist</td>
+    <td>2026-02-25</td>
+    <td>2026-03-09</td>
+    <td>Kaleb Gebrewold</td>
+    <td>GrowthX</td>
+  </tr><tr>
     <td>Precision Performance Physical Therapy <span class="loc-badge">2 locations</span></td>
-    <td>$21,600</td>
+    <td>$23,100</td>
     <td>Email</td>
     <td>Marketing - Main Contact Form - Website</td>
     <td>2026-03-04</td>
@@ -696,23 +764,23 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
     <td>Kaleb Gebrewold</td>
     <td>Premium</td>
   </tr><tr>
-    <td>Desert Hand and Physical Therapy </td>
-    <td>$4,788</td>
-    <td>Other</td>
-    <td>Webinar</td>
-    <td>—</td>
-    <td>2026-02-27</td>
-    <td>James Nasworthy</td>
-    <td>Core</td>
-  </tr><tr>
-    <td>Core Physical Therapy and Sports Performance <span class="loc-badge">2 locations</span></td>
-    <td>$35,750</td>
-    <td>Partner / Referral</td>
-    <td>Partner Referral</td>
-    <td>2026-02-05</td>
-    <td>2026-02-26</td>
+    <td>Petersen Physical Therapy <span class="loc-badge">2 locations</span></td>
+    <td>$21,600</td>
+    <td>Event</td>
+    <td>Virtual Rockstar Event</td>
+    <td>2026-03-07</td>
+    <td>2026-03-09</td>
     <td>Kaleb Gebrewold</td>
-    <td>GrowthX</td>
+    <td>Premium</td>
+  </tr><tr>
+    <td>Reactive Physical Therapy <span class="loc-badge">2 locations</span></td>
+    <td>$14,400</td>
+    <td>Event</td>
+    <td>Virtual Rockstar Event</td>
+    <td>2026-03-07</td>
+    <td>2026-03-09</td>
+    <td>Kaleb Gebrewold</td>
+    <td>Pro</td>
   </tr></tbody>
     </table>
   </div>
@@ -722,7 +790,7 @@ body.dark .ds-item{background:var(--white);border-color:var(--border);}
 
 <script>
 // ── DATA ──
-const D = {"meta":{"generated":"2026-03-16T16:32:22.125Z","totalBookDemos":90,"totalSqos":74,"totalRevNet":231165,"totalDeals":13,"totalSpend":58615.46},"monthly":{"labels":["Jan","Feb","Mar MTD"],"fullLabels":["January","February","Mar (MTD)"],"bookDemos":[37,31,22],"sqos":[25,31,18],"revNet":[60440,149125,21600],"deals":[5,7,1],"spend":[24186.81,24709.52,9719.13],"byChannel":{"Event":{"bookDemos":[0,0,13],"sqos":[0,0,11],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]},"Email":{"bookDemos":[3,7,3],"sqos":[2,6,3],"deals":[0,1,1],"revNet":[0,4788,21600],"spend":[0,0,0]},"Direct Mail":{"bookDemos":[6,3,1],"sqos":[3,6,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]},"Other":{"bookDemos":[3,4,2],"sqos":[3,1,1],"deals":[1,1,0],"revNet":[12003,4788,0],"spend":[0,0,0]},"PPC":{"bookDemos":[1,1,1],"sqos":[0,2,1],"deals":[0,2,0],"revNet":[0,14799,0],"spend":[0,0,0]},"Paid Social":{"bookDemos":[14,13,2],"sqos":[12,9,2],"deals":[2,2,0],"revNet":[38238,89000,0],"spend":[21389,22235,8894]},"Partner / Referral":{"bookDemos":[3,1,0],"sqos":[1,3,0],"deals":[1,1,0],"revNet":[9600,35750,0],"spend":[0,0,0]},"Direct":{"bookDemos":[1,2,0],"sqos":[1,2,0],"deals":[1,0,0],"revNet":[599,0,0],"spend":[0,0,0]},"SME":{"bookDemos":[2,0,0],"sqos":[0,2,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]},"Organic":{"bookDemos":[4,0,0],"sqos":[3,0,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]}}},"mom":{"book":-16,"sqo":24,"rev":147,"deals":40,"spend":2},"weeks":{"labels":["Jan 6","Jan 13","Jan 20","Jan 27","Feb 3","Feb 10","Feb 17","Feb 24","Mar 3","Mar 10"],"bookDemos":[8,7,12,10,5,5,12,10,17,4],"sqos":[4,1,13,8,11,5,4,10,15,3],"deals":[0,1,2,0,1,2,1,4,2,0]},"channels":{"all":[{"channel":"Paid Social","bookDemos":29,"sqos":23,"deals":4,"revNet":127238},{"channel":"Partner / Referral","bookDemos":4,"sqos":4,"deals":2,"revNet":45350},{"channel":"Email","bookDemos":13,"sqos":11,"deals":2,"revNet":26388},{"channel":"Other","bookDemos":9,"sqos":5,"deals":2,"revNet":16791},{"channel":"PPC","bookDemos":3,"sqos":3,"deals":2,"revNet":14799},{"channel":"Direct","bookDemos":3,"sqos":3,"deals":1,"revNet":599},{"channel":"Event","bookDemos":13,"sqos":11,"deals":0,"revNet":0},{"channel":"Direct Mail","bookDemos":10,"sqos":9,"deals":0,"revNet":0},{"channel":"SME","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0}],"byMonth":{"2026-01":[{"channel":"Paid Social","bookDemos":14,"sqos":12,"deals":2,"revNet":38238},{"channel":"Other","bookDemos":3,"sqos":3,"deals":1,"revNet":12003},{"channel":"Partner / Referral","bookDemos":3,"sqos":1,"deals":1,"revNet":9600},{"channel":"Direct","bookDemos":1,"sqos":1,"deals":1,"revNet":599},{"channel":"Direct Mail","bookDemos":6,"sqos":3,"deals":0,"revNet":0},{"channel":"SME","bookDemos":2,"sqos":0,"deals":0,"revNet":0},{"channel":"Email","bookDemos":3,"sqos":2,"deals":0,"revNet":0},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":0,"deals":0,"revNet":0}],"2026-02":[{"channel":"Paid Social","bookDemos":13,"sqos":9,"deals":2,"revNet":89000},{"channel":"Partner / Referral","bookDemos":1,"sqos":3,"deals":1,"revNet":35750},{"channel":"PPC","bookDemos":1,"sqos":2,"deals":2,"revNet":14799},{"channel":"Email","bookDemos":7,"sqos":6,"deals":1,"revNet":4788},{"channel":"Other","bookDemos":4,"sqos":1,"deals":1,"revNet":4788},{"channel":"Direct Mail","bookDemos":3,"sqos":6,"deals":0,"revNet":0},{"channel":"Direct","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"SME","bookDemos":0,"sqos":2,"deals":0,"revNet":0}],"2026-03":[{"channel":"Email","bookDemos":3,"sqos":3,"deals":1,"revNet":21600},{"channel":"Event","bookDemos":13,"sqos":11,"deals":0,"revNet":0},{"channel":"Direct Mail","bookDemos":1,"sqos":0,"deals":0,"revNet":0},{"channel":"Other","bookDemos":2,"sqos":1,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":1,"deals":0,"revNet":0},{"channel":"Paid Social","bookDemos":2,"sqos":2,"deals":0,"revNet":0}]}},"winRate":18,"avgDealSize":17782,"sqoToSale":[20,23,6],"adSpend":{"hasData":true,"totalSpend":52517.98000000001,"totalImpressions":1300781,"totalClicks":10437,"cpl":1810.9648275862073,"costPerSqo":2283.390434782609,"costPerSale":13129.495000000003,"roas":"2.42","paidBookDemos":29,"paidSqos":23,"paidSales":4,"paidRevNet":127238,"monthlySpend":[21389,22235,8894],"monthlyPaidBookDemos":[14,13,2],"monthlyPaidSqos":[12,9,2],"monthlyPaidSales":[2,2,0],"monthlyPaidRevNet":[38238,89000,0],"monthlyCpl":[1528,1710,4447],"monthlyCostPerSale":[10695,11118,null],"monthlyROAS":["1.79","4.00","0.00"],"weeklySpendMap":{"2026-01-05":6469.08,"2026-01-12":5415.9800000000005,"2026-01-19":3414.6500000000005,"2026-01-26":3832.8099999999995,"2026-02-02":4691.67,"2026-02-09":5415.54,"2026-02-16":5237.4400000000005,"2026-02-23":6822.94,"2026-03-02":4852.9,"2026-03-09":3232.15,"2026-03-16":82.57},"weeklyPipelineMap":{"2026-02-24":{"bookDemos":6,"sqos":2,"sales":0},"2026-03-03":{"bookDemos":1,"sqos":1,"sales":0},"2026-02-17":{"bookDemos":3,"sqos":0,"sales":0},"2026-02-10":{"bookDemos":1,"sqos":4,"sales":0},"2026-02-03":{"bookDemos":4,"sqos":3,"sales":0},"2026-01-20":{"bookDemos":5,"sqos":6,"sales":0},"2026-01-27":{"bookDemos":1,"sqos":2,"sales":0},"2026-01-13":{"bookDemos":4,"sqos":0,"sales":0},"2026-01-06":{"bookDemos":4,"sqos":4,"sales":0},"2026-03-10":{"bookDemos":0,"sqos":1,"sales":0}},"campaignAttribution":[{"name":"Testimonial","spend":31416,"bookDemos":19,"sqos":14,"deals":1,"revenue":24000,"roas":"0.76","cpl":1653,"costPerSqo":2244,"costPerSale":31416},{"name":"AI Checklist","spend":13858,"bookDemos":10,"sqos":7,"deals":1,"revenue":65000,"roas":"4.69","cpl":1386,"costPerSqo":1980,"costPerSale":13858},{"name":"PT Marketing System","spend":4395,"bookDemos":9,"sqos":7,"deals":3,"revenue":15964,"roas":"3.63","cpl":488,"costPerSqo":628,"costPerSale":1465},{"name":"Cash Pay","spend":2848,"bookDemos":5,"sqos":5,"deals":0,"revenue":0,"roas":null,"cpl":570,"costPerSqo":570,"costPerSale":null}],"campaignByMonth":{"AI Checklist":[{"spend":7136,"bookDemos":4,"sqos":2,"deals":0},{"spend":4025,"bookDemos":4,"sqos":3,"deals":1},{"spend":2697,"bookDemos":2,"sqos":2,"deals":0}],"Cash Pay":[{"spend":2848,"bookDemos":4,"sqos":5,"deals":0},{"spend":0,"bookDemos":1,"sqos":0,"deals":0},{"spend":0,"bookDemos":0,"sqos":0,"deals":0}],"PT Marketing System":[{"spend":3744,"bookDemos":3,"sqos":2,"deals":1},{"spend":651,"bookDemos":2,"sqos":2,"deals":1},{"spend":0,"bookDemos":0,"sqos":0,"deals":0}],"Testimonial":[{"spend":7661,"bookDemos":1,"sqos":0,"deals":0},{"spend":17559,"bookDemos":8,"sqos":5,"deals":1},{"spend":6197,"bookDemos":0,"sqos":0,"deals":0}]},"campaignByMonthFull":{"AI Checklist":[{"spend":7136,"bookDemos":4,"sqos":2,"deals":0,"revenue":0,"cpl":1784,"costPerSqo":3568,"costPerSale":null,"roas":null},{"spend":4025,"bookDemos":4,"sqos":3,"deals":1,"revenue":65000,"cpl":1006,"costPerSqo":1342,"costPerSale":4025,"roas":"16.15"},{"spend":2697,"bookDemos":2,"sqos":2,"deals":0,"revenue":0,"cpl":1349,"costPerSqo":1349,"costPerSale":null,"roas":null}],"Cash Pay":[{"spend":2848,"bookDemos":4,"sqos":5,"deals":0,"revenue":0,"cpl":712,"costPerSqo":570,"costPerSale":null,"roas":null},{"spend":0,"bookDemos":1,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null},{"spend":0,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}],"PT Marketing System":[{"spend":3744,"bookDemos":3,"sqos":2,"deals":1,"revenue":6388,"cpl":1248,"costPerSqo":1872,"costPerSale":3744,"roas":"1.71"},{"spend":651,"bookDemos":2,"sqos":2,"deals":1,"revenue":4788,"cpl":326,"costPerSqo":326,"costPerSale":651,"roas":"7.35"},{"spend":0,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}],"Testimonial":[{"spend":7661,"bookDemos":1,"sqos":0,"deals":0,"revenue":0,"cpl":7661,"costPerSqo":null,"costPerSale":null,"roas":null},{"spend":17559,"bookDemos":8,"sqos":5,"deals":1,"revenue":24000,"cpl":2195,"costPerSqo":3512,"costPerSale":17559,"roas":"1.37"},{"spend":6197,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}]}},"googlePpc":{"hasData":true,"totalSpend":6097.46,"totalClicks":563,"totalImpressions":5491,"avgCpc":10.83,"monthlySpend":[2797.81,2474.52,825.13],"monthlyClicks":[247,239,77]},"dealsDetail":[{"account":"Optimum Physio Therapies","locationCount":1,"revNet":12003,"channel":"Other","campaign":"Unknown","sqoDate":"2026-01-17","closeDate":"2026-01-22","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Active Physical Therapy","locationCount":1,"revNet":9600,"channel":"Partner / Referral","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-01-20","closeDate":"2026-01-20","rep":"Kaleb Gebrewold","product":"Pro"},{"account":"ChiroCare Rehabilitation Center","locationCount":1,"revNet":599,"channel":"Direct","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-29","closeDate":"2026-02-13","rep":"James Nasworthy","product":"Core"},{"account":"AIM Physical Therapy","locationCount":2,"revNet":65000,"channel":"Paid Social","campaign":"AI Checklist","sqoDate":"2026-02-25","closeDate":"2026-03-09","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Humphries Physical Therapy","locationCount":2,"revNet":31850,"channel":"Paid Social","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-22","closeDate":"2026-02-17","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Therapy Retreat","locationCount":1,"revNet":6388,"channel":"Paid Social","campaign":"PT Marketing System","sqoDate":"2026-01-09","closeDate":"2026-01-17","rep":"James Nasworthy","product":"Pro"},{"account":"Moffett Physical Therapy","locationCount":3,"revNet":24000,"channel":"Paid Social","campaign":"Testimonial","sqoDate":"2026-02-10","closeDate":"2026-02-24","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Trust Physical Therapy","locationCount":1,"revNet":399,"channel":"PPC","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-02-25","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"Beyond Therapy & Wellness, PLLC","locationCount":1,"revNet":14400,"channel":"PPC","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-02-05","closeDate":"2026-02-05","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Peak Motion Physical Therapy","locationCount":1,"revNet":4788,"channel":"Email","campaign":"PT Marketing System","sqoDate":"2026-02-06","closeDate":"2026-02-10","rep":"James Nasworthy","product":"Core"},{"account":"Precision Performance Physical Therapy","locationCount":2,"revNet":21600,"channel":"Email","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-03-04","closeDate":"2026-03-04","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Desert Hand and Physical Therapy","locationCount":1,"revNet":4788,"channel":"Other","campaign":"Webinar","sqoDate":"","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"Core Physical Therapy and Sports Performance","locationCount":2,"revNet":35750,"channel":"Partner / Referral","campaign":"Partner Referral","sqoDate":"2026-02-05","closeDate":"2026-02-26","rep":"Kaleb Gebrewold","product":"GrowthX"}]};
+const D = {"meta":{"generated":"2026-03-18T16:24:56.187Z","totalBookDemos":90,"totalSqos":75,"totalRevNet":417515,"totalDeals":19,"totalSpend":59147.46},"monthly":{"labels":["Jan","Feb","Mar MTD"],"fullLabels":["January","February","Mar (MTD)"],"bookDemos":[37,31,22],"sqos":[25,31,19],"revNet":[184878,173537,59100],"deals":[8,8,3],"spend":[24186.81,24709.52,10251.13],"byChannel":{"Event":{"bookDemos":[0,0,13],"sqos":[0,0,11],"deals":[0,0,2],"revNet":[0,0,36000],"spend":[0,0,0]},"Direct Mail":{"bookDemos":[6,3,1],"sqos":[3,6,0],"deals":[1,2,0],"revNet":[67600,23300,0],"spend":[0,0,0]},"Outbound":{"bookDemos":[2,2,2],"sqos":[2,1,0],"deals":[1,0,0],"revNet":[40800,0,0],"spend":[0,0,0]},"Email":{"bookDemos":[3,7,3],"sqos":[2,6,4],"deals":[1,1,1],"revNet":[11088,5288,23100],"spend":[0,0,0]},"PPC":{"bookDemos":[1,1,1],"sqos":[0,2,1],"deals":[0,2,0],"revNet":[0,14799,0],"spend":[0,0,0]},"Paid Social":{"bookDemos":[14,13,2],"sqos":[12,9,2],"deals":[2,2,0],"revNet":[41188,92950,0],"spend":[21389,22235,9426]},"Partner / Referral":{"bookDemos":[5,1,0],"sqos":[1,5,0],"deals":[1,1,0],"revNet":[10600,37200,0],"spend":[0,0,0]},"Direct":{"bookDemos":[1,2,0],"sqos":[1,2,0],"deals":[1,0,0],"revNet":[1599,0,0],"spend":[0,0,0]},"Other":{"bookDemos":[1,2,0],"sqos":[1,0,1],"deals":[1,0,0],"revNet":[12003,0,0],"spend":[0,0,0]},"Organic":{"bookDemos":[4,0,0],"sqos":[3,0,0],"deals":[0,0,0],"revNet":[0,0,0],"spend":[0,0,0]}}},"mom":{"book":-16,"sqo":24,"rev":-6,"deals":0,"spend":2},"weeks":{"labels":["Jan 6","Jan 13","Jan 20","Jan 27","Feb 3","Feb 10","Feb 17","Feb 24","Mar 3","Mar 10","Mar 17"],"keys":["2026-01-06","2026-01-13","2026-01-20","2026-01-27","2026-02-03","2026-02-10","2026-02-17","2026-02-24","2026-03-03","2026-03-10","2026-03-17"],"bookDemos":[8,7,12,10,5,5,12,10,17,4,0],"sqos":[4,1,13,8,11,5,4,10,15,3,1],"deals":[0,1,3,0,3,2,1,3,5,1,0],"byChannel":{"Event":{"bookDemos":[0,0,0,0,0,0,0,0,12,1,0],"sqos":[0,0,0,0,0,0,0,0,11,0,0],"deals":[0,0,0,0,0,0,0,0,2,0,0]},"Direct Mail":{"bookDemos":[2,0,0,4,1,1,0,1,0,1,0],"sqos":[0,0,3,0,2,1,2,1,0,0,0],"deals":[0,0,0,0,1,0,0,0,1,1,0]},"Outbound":{"bookDemos":[0,0,1,1,0,0,2,0,1,1,0],"sqos":[0,0,1,1,0,0,0,1,0,0,0],"deals":[0,0,0,0,1,0,0,0,0,0,0]},"Email":{"bookDemos":[0,1,2,0,0,2,4,1,3,0,0],"sqos":[0,0,1,1,1,0,2,3,2,1,1],"deals":[0,0,1,0,0,1,0,0,1,0,0]},"PPC":{"bookDemos":[0,1,0,0,0,0,1,0,0,1,0],"sqos":[0,0,0,0,1,0,0,1,0,1,0],"deals":[0,0,0,0,1,0,0,1,0,0,0]},"Paid Social":{"bookDemos":[4,4,5,1,4,1,3,6,1,0,0],"sqos":[4,0,6,2,3,4,0,2,1,1,0],"deals":[0,1,0,0,0,0,1,1,1,0,0]},"Partner / Referral":{"bookDemos":[1,0,1,3,0,0,0,1,0,0,0],"sqos":[0,0,1,1,4,0,0,0,0,0,0],"deals":[0,0,1,0,0,0,0,1,0,0,0]},"Direct":{"bookDemos":[0,0,0,1,0,1,0,1,0,0,0],"sqos":[0,0,0,1,0,0,0,2,0,0,0],"deals":[0,0,0,0,0,1,0,0,0,0,0]},"Other":{"bookDemos":[0,0,1,0,0,0,2,0,0,0,0],"sqos":[0,1,0,0,0,0,0,0,1,0,0],"deals":[0,0,1,0,0,0,0,0,0,0,0]},"Organic":{"bookDemos":[1,1,2,0,0,0,0,0,0,0,0],"sqos":[0,0,1,2,0,0,0,0,0,0,0],"deals":[0,0,0,0,0,0,0,0,0,0,0]}}},"channels":{"all":[{"channel":"Paid Social","bookDemos":29,"sqos":23,"deals":4,"revNet":134138},{"channel":"Direct Mail","bookDemos":10,"sqos":9,"deals":3,"revNet":90900},{"channel":"Partner / Referral","bookDemos":6,"sqos":6,"deals":2,"revNet":47800},{"channel":"Outbound","bookDemos":6,"sqos":3,"deals":1,"revNet":40800},{"channel":"Email","bookDemos":13,"sqos":12,"deals":3,"revNet":39476},{"channel":"Event","bookDemos":13,"sqos":11,"deals":2,"revNet":36000},{"channel":"PPC","bookDemos":3,"sqos":3,"deals":2,"revNet":14799},{"channel":"Other","bookDemos":3,"sqos":2,"deals":1,"revNet":12003},{"channel":"Direct","bookDemos":3,"sqos":3,"deals":1,"revNet":1599},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0}],"byMonth":{"2026-01":[{"channel":"Direct Mail","bookDemos":6,"sqos":3,"deals":1,"revNet":67600},{"channel":"Paid Social","bookDemos":14,"sqos":12,"deals":2,"revNet":41188},{"channel":"Outbound","bookDemos":2,"sqos":2,"deals":1,"revNet":40800},{"channel":"Other","bookDemos":1,"sqos":1,"deals":1,"revNet":12003},{"channel":"Email","bookDemos":3,"sqos":2,"deals":1,"revNet":11088},{"channel":"Partner / Referral","bookDemos":5,"sqos":1,"deals":1,"revNet":10600},{"channel":"Direct","bookDemos":1,"sqos":1,"deals":1,"revNet":1599},{"channel":"Organic","bookDemos":4,"sqos":3,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":0,"deals":0,"revNet":0}],"2026-02":[{"channel":"Paid Social","bookDemos":13,"sqos":9,"deals":2,"revNet":92950},{"channel":"Partner / Referral","bookDemos":1,"sqos":5,"deals":1,"revNet":37200},{"channel":"Direct Mail","bookDemos":3,"sqos":6,"deals":2,"revNet":23300},{"channel":"PPC","bookDemos":1,"sqos":2,"deals":2,"revNet":14799},{"channel":"Email","bookDemos":7,"sqos":6,"deals":1,"revNet":5288},{"channel":"Direct","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"Outbound","bookDemos":2,"sqos":1,"deals":0,"revNet":0},{"channel":"Other","bookDemos":2,"sqos":0,"deals":0,"revNet":0}],"2026-03":[{"channel":"Event","bookDemos":13,"sqos":11,"deals":2,"revNet":36000},{"channel":"Email","bookDemos":3,"sqos":4,"deals":1,"revNet":23100},{"channel":"Direct Mail","bookDemos":1,"sqos":0,"deals":0,"revNet":0},{"channel":"Outbound","bookDemos":2,"sqos":0,"deals":0,"revNet":0},{"channel":"PPC","bookDemos":1,"sqos":1,"deals":0,"revNet":0},{"channel":"Paid Social","bookDemos":2,"sqos":2,"deals":0,"revNet":0},{"channel":"Other","bookDemos":0,"sqos":1,"deals":0,"revNet":0}]}},"winRate":25,"avgDealSize":21974,"sqoToSale":[32,26,16],"adSpend":{"hasData":true,"totalSpend":53050.70000000001,"totalImpressions":1309576,"totalClicks":10523,"cpl":1829.334482758621,"costPerSqo":2306.552173913044,"costPerSale":13262.675000000003,"roas":"2.53","paidBookDemos":29,"paidSqos":23,"paidSales":4,"paidRevNet":134138,"monthlySpend":[21389,22235,9426],"monthlyPaidBookDemos":[14,13,2],"monthlyPaidSqos":[12,9,2],"monthlyPaidSales":[2,2,0],"monthlyPaidRevNet":[41188,92950,0],"monthlyCpl":[1528,1710,4713],"monthlyCostPerSale":[10695,11118,null],"monthlyROAS":["1.93","4.18","0.00"],"weeklySpendMap":{"2026-01-05":6469.08,"2026-01-12":5415.9800000000005,"2026-01-19":3414.6500000000005,"2026-01-26":3832.8099999999995,"2026-02-02":4691.67,"2026-02-09":5415.54,"2026-02-16":5237.4400000000005,"2026-02-23":6822.94,"2026-03-02":4852.9,"2026-03-09":3232.81,"2026-03-16":614.63},"weeklyPipelineMap":{"2026-02-24":{"bookDemos":6,"sqos":2,"sales":0},"2026-03-03":{"bookDemos":1,"sqos":1,"sales":0},"2026-02-17":{"bookDemos":3,"sqos":0,"sales":0},"2026-02-10":{"bookDemos":1,"sqos":4,"sales":0},"2026-02-03":{"bookDemos":4,"sqos":3,"sales":0},"2026-01-20":{"bookDemos":5,"sqos":6,"sales":0},"2026-01-27":{"bookDemos":1,"sqos":2,"sales":0},"2026-01-13":{"bookDemos":4,"sqos":0,"sales":0},"2026-01-06":{"bookDemos":4,"sqos":4,"sales":0},"2026-03-10":{"bookDemos":0,"sqos":1,"sales":0}},"campaignAttribution":[{"name":"Testimonial","spend":31416,"bookDemos":19,"sqos":14,"deals":3,"revenue":103900,"roas":"3.31","cpl":1653,"costPerSqo":2244,"costPerSale":10472},{"name":"AI Checklist","spend":14391,"bookDemos":10,"sqos":7,"deals":1,"revenue":67450,"roas":"4.69","cpl":1439,"costPerSqo":2056,"costPerSale":14391},{"name":"PT Marketing System","spend":4395,"bookDemos":9,"sqos":7,"deals":3,"revenue":23264,"roas":"5.29","cpl":488,"costPerSqo":628,"costPerSale":1465},{"name":"Cash Pay","spend":2848,"bookDemos":5,"sqos":5,"deals":0,"revenue":0,"roas":null,"cpl":570,"costPerSqo":570,"costPerSale":null}],"campaignByMonth":{"AI Checklist":[{"spend":7136,"bookDemos":4,"sqos":2,"deals":0},{"spend":4025,"bookDemos":4,"sqos":3,"deals":1},{"spend":3230,"bookDemos":2,"sqos":2,"deals":0}],"Cash Pay":[{"spend":2848,"bookDemos":4,"sqos":5,"deals":0},{"spend":0,"bookDemos":1,"sqos":0,"deals":0},{"spend":0,"bookDemos":0,"sqos":0,"deals":0}],"PT Marketing System":[{"spend":3744,"bookDemos":3,"sqos":2,"deals":1},{"spend":651,"bookDemos":2,"sqos":2,"deals":1},{"spend":0,"bookDemos":0,"sqos":0,"deals":0}],"Testimonial":[{"spend":7661,"bookDemos":1,"sqos":0,"deals":0},{"spend":17559,"bookDemos":8,"sqos":5,"deals":1},{"spend":6197,"bookDemos":0,"sqos":0,"deals":0}]},"campaignByMonthFull":{"AI Checklist":[{"spend":7136,"bookDemos":4,"sqos":2,"deals":0,"revenue":0,"cpl":1784,"costPerSqo":3568,"costPerSale":null,"roas":null},{"spend":4025,"bookDemos":4,"sqos":3,"deals":1,"revenue":67450,"cpl":1006,"costPerSqo":1342,"costPerSale":4025,"roas":"16.76"},{"spend":3230,"bookDemos":2,"sqos":2,"deals":0,"revenue":0,"cpl":1615,"costPerSqo":1615,"costPerSale":null,"roas":null}],"Cash Pay":[{"spend":2848,"bookDemos":4,"sqos":5,"deals":0,"revenue":0,"cpl":712,"costPerSqo":570,"costPerSale":null,"roas":null},{"spend":0,"bookDemos":1,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null},{"spend":0,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}],"PT Marketing System":[{"spend":3744,"bookDemos":3,"sqos":2,"deals":1,"revenue":6888,"cpl":1248,"costPerSqo":1872,"costPerSale":3744,"roas":"1.84"},{"spend":651,"bookDemos":2,"sqos":2,"deals":1,"revenue":5288,"cpl":326,"costPerSqo":326,"costPerSale":651,"roas":"8.12"},{"spend":0,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}],"Testimonial":[{"spend":7661,"bookDemos":1,"sqos":0,"deals":0,"revenue":0,"cpl":7661,"costPerSqo":null,"costPerSale":null,"roas":null},{"spend":17559,"bookDemos":8,"sqos":5,"deals":1,"revenue":25500,"cpl":2195,"costPerSqo":3512,"costPerSale":17559,"roas":"1.45"},{"spend":6197,"bookDemos":0,"sqos":0,"deals":0,"revenue":0,"cpl":null,"costPerSqo":null,"costPerSale":null,"roas":null}]}},"googlePpc":{"hasData":true,"totalSpend":6097.46,"totalClicks":563,"totalImpressions":5491,"avgCpc":10.83,"monthlySpend":[2797.81,2474.52,825.13],"monthlyClicks":[247,239,77]},"dealsDetail":[{"account":"Therapy Retreat","locationCount":1,"revNet":6888,"channel":"Paid Social","campaign":"PT Marketing System","sqoDate":"2026-01-09","closeDate":"2026-01-17","rep":"James Nasworthy","product":"Pro"},{"account":"Optimum Physio Therapies","locationCount":1,"revNet":12003,"channel":"Other","campaign":"Unknown","sqoDate":"2026-01-17","closeDate":"2026-01-22","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Humphries Physical Therapy","locationCount":2,"revNet":34300,"channel":"Paid Social","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-22","closeDate":"2026-02-17","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Active Physical Therapy","locationCount":1,"revNet":10600,"channel":"Partner / Referral","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-01-20","closeDate":"2026-01-20","rep":"Kaleb Gebrewold","product":"Pro"},{"account":"Physical Achievement Center","locationCount":1,"revNet":11088,"channel":"Email","campaign":"Webinar","sqoDate":"2026-01-22","closeDate":"2026-01-23","rep":"James Nasworthy","product":"Pro"},{"account":"Precision Sports Physical Therapy","locationCount":2,"revNet":67600,"channel":"Direct Mail","campaign":"DM Cookie Campaign","sqoDate":"2026-01-21","closeDate":"2026-02-04","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"ChiroCare Rehabilitation Center","locationCount":1,"revNet":1599,"channel":"Direct","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-01-29","closeDate":"2026-02-13","rep":"James Nasworthy","product":"Core"},{"account":"New York Therapy & Wellness","locationCount":1,"revNet":40800,"channel":"Outbound","campaign":"Cold Outbound","sqoDate":"2026-01-30","closeDate":"2026-02-06","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Beyond Therapy & Wellness, PLLC","locationCount":1,"revNet":14400,"channel":"PPC","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-02-05","closeDate":"2026-02-05","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Brunswick Physical Therapy","locationCount":1,"revNet":10800,"channel":"Direct Mail","campaign":"DM Cookie Campaign","sqoDate":"2026-02-05","closeDate":"2026-03-14","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Core Physical Therapy and Sports Performance","locationCount":2,"revNet":37200,"channel":"Partner / Referral","campaign":"Partner Referral","sqoDate":"2026-02-05","closeDate":"2026-02-26","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Peak Motion Physical Therapy","locationCount":1,"revNet":5288,"channel":"Email","campaign":"PT Marketing System","sqoDate":"2026-02-06","closeDate":"2026-02-10","rep":"James Nasworthy","product":"Core"},{"account":"Moffett Physical Therapy","locationCount":3,"revNet":25500,"channel":"Paid Social","campaign":"Testimonial","sqoDate":"2026-02-10","closeDate":"2026-02-24","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Edgewater Orthopedic Physical Therapy","locationCount":2,"revNet":12500,"channel":"Direct Mail","campaign":"DM Cookie Campaign","sqoDate":"2026-02-27","closeDate":"2026-03-05","rep":"Kaleb Gebrewold","product":"Pro"},{"account":"Trust Physical Therapy","locationCount":1,"revNet":399,"channel":"PPC","campaign":"Demo-Main Website-Strategy Form","sqoDate":"2026-02-25","closeDate":"2026-02-27","rep":"James Nasworthy","product":"Core"},{"account":"AIM Physical Therapy","locationCount":2,"revNet":67450,"channel":"Paid Social","campaign":"AI Checklist","sqoDate":"2026-02-25","closeDate":"2026-03-09","rep":"Kaleb Gebrewold","product":"GrowthX"},{"account":"Precision Performance Physical Therapy","locationCount":2,"revNet":23100,"channel":"Email","campaign":"Marketing - Main Contact Form - Website","sqoDate":"2026-03-04","closeDate":"2026-03-04","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Petersen Physical Therapy","locationCount":2,"revNet":21600,"channel":"Event","campaign":"Virtual Rockstar Event","sqoDate":"2026-03-07","closeDate":"2026-03-09","rep":"Kaleb Gebrewold","product":"Premium"},{"account":"Reactive Physical Therapy","locationCount":2,"revNet":14400,"channel":"Event","campaign":"Virtual Rockstar Event","sqoDate":"2026-03-07","closeDate":"2026-03-09","rep":"Kaleb Gebrewold","product":"Pro"}]};
 
 // ── Chart helpers ──
 const chartInstances = {};
@@ -794,6 +862,7 @@ function initSection(id) {
   if (id === 'channels') initChannels();
   if (id === 'paid') initPaid();
   if (id === 'campaigns') initCampaigns();
+  if (id === 'deals') renderDeals(window._activeMonth || 'all');
 }
 
 // ── GLOBAL MONTH FILTER ──
@@ -811,7 +880,7 @@ function setGlobalMonth(m, btn) {
   if (id === 'channels') renderChannels(m === 'all' ? 'all' : ['2026-01','2026-02','2026-03'][m]);
   if (id === 'paid') renderPaid(m === 'all' ? 'all' : ['2026-01','2026-02','2026-03'][m]);
   if (id === 'campaigns') { initCampaigns(); }
-  if (id === 'deals') { /* deals table is static */ }
+  if (id === 'deals') { renderDeals(m); }
 }
 
 // ── OVERVIEW ──
@@ -877,9 +946,12 @@ function renderTrendChart() {
   } else {
     // Weekly view: line chart for pipeline metrics + bar for spend on right axis
     const weekLabels = D.weeks.labels;
-    const allWeekKeys = Object.keys(D.adSpend.weeklySpendMap || {}).sort().filter(k => k >= '2026-01-01' && k <= '2026-03-31');
+    // Respect channel filter in weekly view
+    const chWeekData = (currentTrendChannel !== 'all' && D.weeks.byChannel && D.weeks.byChannel[currentTrendChannel]) ? D.weeks.byChannel[currentTrendChannel] : null;
+    const wkBD = chWeekData ? chWeekData.bookDemos : D.weeks.bookDemos;
+    const wkSQ = chWeekData ? chWeekData.sqos : D.weeks.sqos;
+    const wkDL = chWeekData ? chWeekData.deals : D.weeks.deals;
     // Map weekly spend to the same labels order as D.weeks.labels
-    // We need the week keys in the same order used to build D.weeks.labels
     const spendByLabel = {};
     if (D.adSpend.hasData && D.adSpend.weeklySpendMap) {
       Object.entries(D.adSpend.weeklySpendMap).forEach(([wk, amt]) => {
@@ -889,21 +961,23 @@ function renderTrendChart() {
         spendByLabel[lbl] = (spendByLabel[lbl] || 0) + amt;
       });
     }
+    // Only show spend bar for 'all' or 'Paid Social' channel
+    const showSpend = currentTrendChannel === 'all' || currentTrendChannel === 'Paid Social';
     const weeklySpendData = weekLabels.map(lbl => Math.round(spendByLabel[lbl] || 0));
+    const datasets = [
+      { type: 'line', label: 'Booked Demos', data: wkBD, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y', order: 1 },
+      { type: 'line', label: 'SQOs', data: wkSQ, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y', order: 1 },
+      { type: 'line', label: 'Deals', data: wkDL, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y', order: 1 },
+    ];
+    if (showSpend) {
+      datasets.push({ type: 'bar', label: 'Spend ($)', data: weeklySpendData, backgroundColor: PALETTE[4]+'60', borderColor: PALETTE[4], borderWidth: 1, yAxisID: 'y1', order: 2 });
+    }
     destroyChart('trendChart');
     const ctx = document.getElementById('trendChart');
     if (!ctx) return;
     chartInstances['trendChart'] = new Chart(ctx, {
       type: 'bar',
-      data: {
-        labels: weekLabels,
-        datasets: [
-          { type: 'line', label: 'Booked Demos', data: D.weeks.bookDemos, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y', order: 1 },
-          { type: 'line', label: 'SQOs', data: D.weeks.sqos, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y', order: 1 },
-          { type: 'line', label: 'Deals', data: D.weeks.deals, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y', order: 1 },
-          { type: 'bar', label: 'Spend ($)', data: weeklySpendData, backgroundColor: PALETTE[4]+'60', borderColor: PALETTE[4], borderWidth: 1, yAxisID: 'y1', order: 2 },
-        ]
-      },
+      data: { labels: weekLabels, datasets },
       options: {
         responsive: true, maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
@@ -939,18 +1013,19 @@ function setChanTrendMetric(metric, btn) {
 
 function renderChanTrendChart() {
   const metric = currentChanTrendMetric || 'revNet';
-  const topCh = D.channels.all.slice(0, 5).map(c => c.channel);
+  // Show ALL channels that have any activity, not just top 5 by revenue
+  const allCh = D.channels.all.filter(c => c.bookDemos > 0 || c.sqos > 0 || c.deals > 0 || c.revNet > 0).map(c => c.channel);
   const months = ['2026-01','2026-02','2026-03'];
   const isMoney = metric === 'revNet';
-  const datasets = topCh.map((ch, i) => ({
+  const datasets = allCh.map((ch, i) => ({
     label: ch,
     data: months.map(mo => {
       const chData = D.channels.byMonth[mo] || [];
       const found = chData.find(c => c.channel === ch);
       return found ? (found[metric] || 0) : 0;
     }),
-    borderColor: PALETTE[i],
-    backgroundColor: PALETTE[i] + '20',
+    borderColor: PALETTE[i % PALETTE.length],
+    backgroundColor: PALETTE[i % PALETTE.length] + '20',
     tension: .3,
   }));
   destroyChart('chTrendChart');
@@ -973,15 +1048,105 @@ function renderChanTrendChart() {
 
 function renderChannels(m) {
   const rows = m === 'all' ? D.channels.all : (D.channels.byMonth[m] || []);
-  // Update table
+  // Update table — rows are clickable for deep dive
   const tbody = document.getElementById('chTableBody');
   tbody.innerHTML = rows.map(c =>
-    '<tr><td class="ch-name">'+c.channel+'</td><td>'+c.bookDemos+'</td><td>'+c.sqos+'</td><td>'+c.deals+'</td><td>'+fmt$(c.revNet)+'</td></tr>'
+    '<tr style="cursor:pointer" data-channel="'+c.channel+'"><td class="ch-name">'+c.channel+' <span style="font-size:10px;color:var(--blue);opacity:.6;">click to drill down</span></td><td>'+c.bookDemos+'</td><td>'+c.sqos+'</td><td>'+c.deals+'</td><td>'+fmt$(c.revNet)+'</td></tr>'
   ).join('');
+  // Attach click handlers via data attribute
+  tbody.querySelectorAll('tr[data-channel]').forEach(function(tr) {
+    tr.addEventListener('click', function() { openDeepDive(this.dataset.channel); });
+  });
   // Revenue bar chart
   hbarChart('chRevChart', rows.map(c=>c.channel), rows.map(c=>c.revNet), PALETTE[0]);
   // Trend chart
   renderChanTrendChart();
+}
+
+let deepDiveView = 'weekly';
+function openDeepDive(channel) {
+  const wrap = document.getElementById('channelDeepDive');
+  wrap.style.display = 'block';
+  document.getElementById('deepDiveTitle').textContent = channel + ' — Deep Dive';
+  window._deepDiveChannel = channel;
+  renderDeepDiveChart(channel, deepDiveView);
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function setDeepDiveView(view, btn) {
+  deepDiveView = view;
+  if (btn) {
+    btn.closest('.view-toggle').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  if (window._deepDiveChannel) renderDeepDiveChart(window._deepDiveChannel, view);
+}
+
+function renderDeepDiveChart(channel, view) {
+  if (view === 'weekly') {
+    const chWeekData = D.weeks.byChannel[channel];
+    if (!chWeekData) return;
+    // Build weekly revenue from dealsDetail
+    const weekRevenue = D.weeks.keys.map(function(wk) {
+      return D.dealsDetail.filter(function(d) {
+        if (d.channel !== channel) return false;
+        // Match deal to week by close date
+        var cd = new Date(d.closeDate + 'T00:00:00Z');
+        var day = cd.getUTCDay();
+        var mon = new Date(cd);
+        mon.setUTCDate(cd.getUTCDate() - ((day + 6) % 7));
+        return mon.toISOString().split('T')[0] === wk;
+      }).reduce(function(s, d) { return s + d.revNet; }, 0);
+    });
+    // Spend only for Paid Social
+    var showSpend = channel === 'Paid Social' && D.adSpend.hasData && D.adSpend.weeklySpendMap;
+    var weeklySpend = showSpend ? D.weeks.keys.map(function(wk) { return Math.round(D.adSpend.weeklySpendMap[wk] || 0); }) : null;
+    var datasets = [
+      { type: 'line', label: 'Booked Demos', data: chWeekData.bookDemos, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y', order: 1 },
+      { type: 'line', label: 'SQOs', data: chWeekData.sqos, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y', order: 1 },
+      { type: 'line', label: 'Deals', data: chWeekData.deals, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y', order: 1 },
+      { type: 'line', label: 'Revenue ($)', data: weekRevenue, borderColor: PALETTE[2], backgroundColor: PALETTE[2]+'20', tension: .3, yAxisID: 'y1', order: 1 },
+    ];
+    if (weeklySpend) {
+      datasets.push({ type: 'bar', label: 'Spend ($)', data: weeklySpend, backgroundColor: PALETTE[4]+'60', borderColor: PALETTE[4], borderWidth: 1, yAxisID: 'y1', order: 2 });
+    }
+    destroyChart('deepDiveChart');
+    var ctx = document.getElementById('deepDiveChart');
+    if (!ctx) return;
+    chartInstances['deepDiveChart'] = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: D.weeks.labels, datasets: datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          y:  { beginAtZero: true, grid: { color: gridColor() }, ticks: { color: tickColor() } },
+          y1: { position: 'right', beginAtZero: true, grid: { display: false }, ticks: { color: tickColor(), callback: function(v) { return '$'+v.toLocaleString(); } } },
+          x:  { grid: { display: false }, ticks: { color: tickColor() } }
+        },
+        plugins: { legend: { labels: { color: legendColor(), usePointStyle: true, pointStyle: 'circle' } } }
+      }
+    });
+  } else {
+    // Monthly view
+    var chData = D.monthly.byChannel[channel];
+    if (!chData) return;
+    var hasSpend = chData.spend && chData.spend.some(function(v) { return v > 0; });
+    var datasets = [
+      { label: 'Booked Demos', data: chData.bookDemos, borderColor: PALETTE[0], backgroundColor: PALETTE[0]+'20', tension: .3, yAxisID: 'y' },
+      { label: 'SQOs', data: chData.sqos, borderColor: PALETTE[1], backgroundColor: PALETTE[1]+'20', tension: .3, yAxisID: 'y' },
+      { label: 'Deals', data: chData.deals, borderColor: PALETTE[3], backgroundColor: PALETTE[3]+'20', tension: .3, yAxisID: 'y' },
+      { label: 'Revenue ($)', data: chData.revNet, borderColor: PALETTE[2], backgroundColor: PALETTE[2]+'20', tension: .3, yAxisID: 'y1' },
+    ];
+    if (hasSpend) {
+      datasets.push({ label: 'Spend ($)', data: chData.spend, borderColor: PALETTE[4], backgroundColor: PALETTE[4]+'20', tension: .3, borderDash: [5,5], yAxisID: 'y1' });
+    }
+    lineChart('deepDiveChart', D.monthly.labels, datasets, { y1: {} });
+  }
+}
+
+function closeDeepDive() {
+  document.getElementById('channelDeepDive').style.display = 'none';
 }
 
 function initChannels() {
@@ -1137,7 +1302,33 @@ function sortTable(tableId, colIdx) {
   rows.forEach(r => tbody.appendChild(r));
 }
 
-// ── DEALS SEARCH ──
+// ── DEALS ──
+function renderDeals(m) {
+  const MONTH_MAP = ['2026-01','2026-02','2026-03'];
+  const monthKey = m === 'all' ? null : MONTH_MAP[m];
+  const filtered = monthKey ? D.dealsDetail.filter(function(d) {
+    // Match by SQO-attributed month (check sqoDate first, fall back to closeDate)
+    var attrDate = d.sqoDate || d.closeDate;
+    return attrDate && attrDate.substring(0,7) === monthKey;
+  }) : D.dealsDetail;
+  var totalRev = filtered.reduce(function(s,d){ return s + d.revNet; }, 0);
+  var avgDeal = filtered.length > 0 ? Math.round(totalRev / filtered.length) : 0;
+  // Update summary
+  var summary = document.querySelector('.deals-summary');
+  if (summary) {
+    var items = summary.querySelectorAll('.ds-item');
+    if (items[0]) items[0].querySelector('.ds-val').textContent = filtered.length;
+    if (items[1]) items[1].querySelector('.ds-val').textContent = fmt$(totalRev);
+    if (items[2]) items[2].querySelector('.ds-val').textContent = fmt$(avgDeal);
+  }
+  // Update table
+  var tbody = document.getElementById('dealTableBody');
+  tbody.innerHTML = filtered.map(function(s) {
+    var locBadge = s.locationCount > 1 ? '<span class="loc-badge">'+s.locationCount+' locations</span>' : '';
+    return '<tr><td>'+s.account+' '+locBadge+'</td><td>'+fmt$(s.revNet)+'</td><td>'+s.channel+'</td><td>'+s.campaign+'</td><td>'+(s.sqoDate||'—')+'</td><td>'+s.closeDate+'</td><td>'+s.rep+'</td><td>'+s.product+'</td></tr>';
+  }).join('');
+}
+
 function filterDeals(q) {
   const rows = document.querySelectorAll('#dealTableBody tr');
   const lower = q.toLowerCase();
